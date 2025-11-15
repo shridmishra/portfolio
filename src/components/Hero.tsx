@@ -26,7 +26,7 @@ export const Hero = () => {
           <div className="group flex items-start">
             <BorderFrame className="w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0 ">
               <Image
-                src="/assets/pfp.webp"
+                src="/assets/me.jpg"
                 width={128}
                 height={128}
                 alt="Shrid Mishra"

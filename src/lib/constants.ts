@@ -27,14 +27,14 @@ export const experienceData: I_Experience[] = [
 
 export const projects = [
   {
-    title: "Grocery Store",
-    description: "Shopping app with cart and payments.",
-    tech: ["React", "Stripe", "MongoDB"],
+    title: "Practice JS",
+    description: "JavaScript learning platform with challenges.",
+    tech: ["Next.js", "TypeScript", "Quiz"],
     status: "Live",
     year: "2025",
-    link: "https://grocery.shrid.in",
-    code: "https://github.com/shridmishra/grocery-store",
-    imageSrc: "/projects/grocery.png",
+    link: "https://practicejs.shrid.in",
+    code: "https://github.com/shridmishra/practicejs",
+    imageSrc: "/projects/practicejs.png",
   },
   {
     title: "AnimeFlix",
@@ -47,6 +47,17 @@ export const projects = [
     imageSrc: "/projects/animeflix.png",
   },
   {
+    title: "Grocery Store",
+    description: "Shopping app with cart and payments.",
+    tech: ["React", "Stripe", "MongoDB"],
+    status: "Live",
+    year: "2025",
+    link: "https://grocery.shrid.in",
+    code: "https://github.com/shridmishra/grocery-store",
+    imageSrc: "/projects/grocery.png",
+  },
+  
+  {
     title: "MediChain",
     description: "Solana platform for secure health data.",
     tech: ["Next.js", "TypeScript", "Solana", "Anchor", "PostgreSQL"],
@@ -56,7 +67,16 @@ export const projects = [
     code: "https://github.com/shridmishra/medichain",
     imageSrc: "/projects/medichain.png",
   },
-
+{
+    title: "Blogs",
+    description: "Solana platform for secure health data.",
+    tech: ["TipTap", "MDX", "TypeScript"],
+    status: "In Development",
+    year: "2025",
+    link: "https://blogs.shrid.in",
+    code: "https://github.com/shridmishra/blogs",
+    imageSrc: "/projects/blogs.png",
+  },
   {
     title: "Crypto Explorer",
     description: "Real-time cryptocurrency data visualization.",
