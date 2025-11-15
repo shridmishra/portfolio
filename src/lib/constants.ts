@@ -94,8 +94,7 @@ export const projects = [
     code: "https://github.com/shridmishra/crypto-explorer",
     imageSrc: "/projects/crypto.png",
   },
-
-  ,
+  
   {
     title: "Notes",
     description: "Note app with collaboration features.",
