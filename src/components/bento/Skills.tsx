@@ -48,8 +48,8 @@ export const SkillsCarousel = () => {
   const secondRow = repeatedIcons.slice(half);
 
   return (
-    <div className="bg-card rounded-xl p-4 overflow-hidden shadow-md   w-full h-full">
-      <h2 className="text-lg font-light  mb-3">Skills</h2>
+    <div className="w-full h-full p-4 overflow-hidden">
+      <h2 className="text-lg font-light mb-3">Skills</h2>
       <div className="space-y-4">
         <motion.div
           className="flex gap-6"

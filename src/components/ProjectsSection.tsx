@@ -5,17 +5,19 @@ import Link from "next/link";
 import { ProjectCard } from "@/src/components/ui/project-card";
 import { projects } from "../lib/constants";
 import Title from "./ui/title";
+import { SeparatorLine } from "./ui/separator-line";
 
 export const ProjectsSection = () => {
   // Limit to 6 projects
   const displayedProjects = projects.slice(0, 6);
 
   return (
-    <section className="pt-8 lg:pt-16 px-6 lg:px-8">
+    <section>
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <Title title="Proof Of Work" subtitle="A showcase of my work in full-stack & blockchain applications." />
         
+   <SeparatorLine />
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-8">
@@ -43,6 +45,8 @@ export const ProjectsSection = () => {
 
         {/* Footer CTA */}
         <footer >
+             <SeparatorLine />
+
           <div className="text-end">
             <Link
               href="/projects"
@@ -66,6 +70,8 @@ export const ProjectsSection = () => {
               </div>
             </Link>
           </div>
+             <SeparatorLine />
+
         </footer>
       </div>
     </section>

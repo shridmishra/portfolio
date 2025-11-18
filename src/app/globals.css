@@ -1,24 +1,59 @@
-@import url("https://db.onlinewebfonts.com/c/102353a74d2e0700af3e11ef8a917b26?family=Bricolage+Grotesque"); /* Sans */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"); /* Serif */
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"); /* Mono */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"); /* Display */
+/* Local Satoshi font (place WOFF2 files in /public/fonts) */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ClashDisplay Font */
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @import "tailwindcss";/* at the top of your global styles file */
 @source "./components/**/*.{js,jsx,ts,tsx}";
 
-/* 1. Import fonts */
 
-/* 2. Import Tailwind */
-
-
-/* 3. Define font variables */
 @theme {
-  --font-sans: "Bricolage Grotesque", sans-serif;
-  --font-serif: "Playfair Display", serif;
-  --font-mono: "Fira Code", monospace;
-  --font-display: "Space Grotesk", sans-serif;
-
+  --font-sans: "Satoshi", sans-serif;
    
 }
 
@@ -26,10 +61,21 @@
 @layer base {
   html,
   body {
-    font-family: var(--font-mono);
-    @apply font-mono bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    @apply font-sans bg-background text-foreground antialiased overflow-x-hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+  
+  /* Improved readability for body text */
+  p {
+    line-height: 1.7;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-weight: 600;
   }
 }
 
@@ -45,6 +91,15 @@ html {
 /* Focus styles */
 *:focus-visible {
   @apply outline-2 outline-offset-2 outline-primary/50;
+}
+
+/* Screen line utilities for full-width borders */
+@utility screen-line-before {
+  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-border;
+}
+
+@utility screen-line-after {
+  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-border;
 }
 
 /* 4. Dark mode support using `class="dark"` */
@@ -66,12 +121,13 @@ html {
 
   /* Utility colors */
   --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
+  --muted-foreground: oklch(0.40 0 0);
   --accent: oklch(0.96 0 0);
   --accent-foreground: oklch(0.09 0 0);
 
   /* Borders and separators */
   --border: oklch(0.91 0 0);
+  --edge: oklch(0.88 0 0);
   --background-border: oklch(0.922 0 0);
   --input: oklch(0.91 0 0);
   --ring: oklch(0.6 0.18 250);
@@ -109,12 +165,13 @@ html {
 
     /* Utility colors */
     --muted: oklch(0.15 0 0);
-    --muted-foreground: oklch(0.65 0 0);
+    --muted-foreground: oklch(0.70 0 0);
     --accent: oklch(0.15 0 0);
     --accent-foreground: oklch(0.98 0 0);
 
     /* Borders and separators */
     --border: oklch(0.28 0 0);
+    --edge: oklch(0.22 0 0);
     --background-border: oklch(1 0 0 / 5%);
     --input: oklch(0.28 0 0);
     --ring: oklch(0.75 0.2 250);
@@ -158,6 +215,7 @@ html {
 
   /* Borders */
   --color-border: var(--border);
+  --color-edge: var(--edge);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
@@ -290,25 +348,49 @@ html {
 @layer components {
   /* Magic card enhancements */
   .magic-card {
-    @apply relative overflow-hidden rounded-xl border border-border/20 bg-card/30 backdrop-blur-sm transition-all duration-300;
+    @apply relative overflow-hidden rounded-xl border border-edge bg-card/30 backdrop-blur-sm transition-all duration-300;
   }
 
   .magic-card:hover {
-    @apply border-border/40 bg-card/50;
+    @apply border-border bg-card/50;
   }
 
   /* Enhanced link styles */
   .link-hover {
-    @apply transition-colors duration-200 hover:text-primary;
+    @apply transition-colors duration-200 hover:text-muted-foreground;
   }
 
   /* Status badge */
   .status-badge {
-    @apply inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-full border border-border/30;
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-full border border-edge;
   }
 
   /* Tech stack badge */
   .tech-badge {
-    @apply px-2.5 py-1 text-xs font-medium bg-secondary/50 text-secondary-foreground rounded-md border border-border/30;
+    @apply px-2.5 py-1 text-xs font-medium bg-secondary/50 text-secondary-foreground rounded-md border border-edge;
+  }
+  
+  /* Separator with diagonal pattern */
+  .separator-pattern {
+    @apply relative border-t border-b border-edge;
+  }
+  
+  .separator-pattern::before {
+    content: "";
+    @apply absolute -left-[100vw] -z-1 h-full w-[200vw];
+    background: repeating-linear-gradient(
+      315deg,
+      var(--color-edge) 0,
+      var(--color-edge) 1px,
+      transparent 0,
+      transparent 50%
+    );
+    background-size: 10px 10px;
+    opacity: 0.56;
+  }
+
+  /* Simple thin line separator */
+  .separator-line {
+    @apply relative border-t border-edge;
   }
 }

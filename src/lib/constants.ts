@@ -2,7 +2,7 @@ import { I_Experience } from "@/src/types/type";
 
 export const words = [
   "Design Engineer",
-  "Open Source Contributor",
+  "FullStack Developer",
   "Solana Developer",
 ];
 
@@ -69,11 +69,11 @@ export const projects = [
   },
 {
     title: "Blogs",
-    description: "Solana platform for secure health data.",
+    description: "Personal blogging platform with rich text editor.",
     tech: ["TipTap", "MDX", "TypeScript"],
     status: "In Development",
     year: "2025",
-    link: "https://blogs.shrid.in",
+    link: "https://blogs.shrid.in/post/new",
     code: "https://github.com/shridmishra/blogs",
     imageSrc: "/projects/blogs.png",
   },

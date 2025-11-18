@@ -3,7 +3,6 @@
 import React from "react";
 import { ProjectCard } from "@/src/components/ui/project-card";
 import { projects } from "@/src/lib/constants";
-import DockBar from "@/src/components/Dock";
 import Title from "@/src/components/ui/title";
 
 
@@ -44,7 +43,6 @@ import Title from "@/src/components/ui/title";
 
        
       </div>
-       <DockBar />
     </div>
   );
 };

@@ -10,14 +10,14 @@ import { experienceData } from "../lib/constants";
 
 export const ExperienceSection = () => {
   return (
-    <section className="py-18 lg:py-24 px-6 lg:px-8">
+    <section>
       <div className="max-w-4xl mx-auto">
         {/* Section Header */}
-        <header className="text-center mb-14 lg:mb-12">
-          <div className="text-2xl sm:text-3xl lg:text-4xl font-normal text-foreground mb-2 tracking-tight">
+        <header className="text-center mb-12 lg:mb-16">
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-normal text-foreground mb-3 tracking-tight" style={{ fontFamily: 'ClashDisplay, sans-serif' }}>
             Experience
           </div>
-          <p className="text-md lg:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             My professional journey building innovative solutions.
           </p>
         </header>
@@ -58,7 +58,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
             rel="noopener noreferrer"
             className="flex-shrink-0 transition-transform hover:scale-105"
           >
-            <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-sm overflow-hidden border border-border/30 bg-background shadow-sm">
+            <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-sm overflow-hidden border border-edge bg-background shadow-sm">
               <Image
                 src={experience.company_logo}
                 alt={`${experience.company_name} logo`}
@@ -71,16 +71,16 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
 
           {/* Experience Details */}
           <div className="flex-1 ">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
               <div>
-                <h3 className="text-lg lg:text-xl font-medium text-foreground/80 leading-tight mb-1">
+                <h3 className="text-lg lg:text-xl font-normal text-foreground leading-tight mb-2">
                   {experience.job_title}
                 </h3>
                 <p className="text-base text-muted-foreground font-medium">
                   {experience.company_name}
                 </p>
               </div>
-              <span className="flex items-center text-center px-4 text-sm text-muted-foreground bg-muted/50  py-1.5 rounded-full border border-border/30 max-w-32 mt-2">
+              <span className="flex items-center text-center px-4 text-sm text-foreground bg-muted py-1.5 rounded-full border border-edge max-w-32">
                 
                 <span className="whitespace-nowrap font-medium">
                   {experience.duration}
@@ -89,7 +89,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
             </div>
 
             {/* Description */}
-            <p className="text-base text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
               {experience.description}
             </p>
           </div>

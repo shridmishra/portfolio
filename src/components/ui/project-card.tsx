@@ -21,13 +21,16 @@ export const ProjectCard = ({
   source,
   imageSrc,
 }: ProjectCardProps) => {
+  // Apply left alignment specifically for Practice JS
+  const imageObjectPosition = title === "Practice JS" ? "object-left" : "";
+  
   return (
     <BorderFrame className="">
       <div
       className="
-        group relative flex flex-col border border-white/10 
+        group relative flex flex-col border border-edge 
          overflow-hidden bg-background 
-        hover:border-none transition-colors
+        hover:border-border transition-colors
       "
     >
       {/* Image */}
@@ -45,7 +48,7 @@ export const ProjectCard = ({
                 alt={title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover lg:group-hover:filter-none lg:filter lg:grayscale"
+                className={`object-cover ${imageObjectPosition} lg:group-hover:filter-none lg:filter lg:grayscale`}
               />
             </div>
           </a>
@@ -56,21 +59,21 @@ export const ProjectCard = ({
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover "
+              className={`object-cover ${imageObjectPosition}`}
             />
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1">
-        <header className="mb-1">
-          <h3 className="text-md font-medium tracking-tight text-primary">
+      <div className="p-5 flex flex-col flex-1">
+        <header className="mb-2">
+          <h3 className="text-lg font-normal tracking-tight text-foreground">
             {title}
           </h3>
         </header>
 
-        <p className="text-sm text-muted-foreground mb-4 leading-snug">
+        <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
           {description}
         </p>
 
