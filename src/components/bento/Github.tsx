@@ -1,5 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 
 interface ContributionDay {
   date: string;
@@ -14,7 +19,6 @@ interface ContributionWeek {
 export default function GitHubContributionGraph() {
   const [contributionData, setContributionData] = useState<ContributionWeek[]>([]);
   const [totalContributions, setTotalContributions] = useState(0);
-  const [hoveredDay, setHoveredDay] = useState<{ x: number; y: number; content: string } | null>(null);
 
   // Generate mock data
   const generateMockData = () => {
@@ -88,22 +92,6 @@ export default function GitHubContributionGraph() {
       day: "numeric",
     });
 
-  // Tooltip handlers
-  const handleMouseEnter = (event: React.MouseEvent, day: ContributionDay) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const content =
-      day.contributionCount === 0
-        ? `No contributions on ${formatDate(day.date)}`
-        : `${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""} on ${formatDate(day.date)}`;
-    setHoveredDay({
-      x: rect.left + rect.width / 2,
-      y: rect.top - 8,
-      content,
-    });
-  };
-
-  const handleMouseLeave = () => setHoveredDay(null);
-
   // Generate month labels above the graph
   // We'll show month abbreviations above weeks where the first day of the week is in that month
   const getMonthLabels = () => {
@@ -161,32 +149,26 @@ export default function GitHubContributionGraph() {
         {contributionData.map((week, weekIndex) => (
           <div key={weekIndex} className="flex flex-col gap-1">
             {week.contributionDays.map((day, dayIndex) => (
-              <div
-                key={dayIndex}
-                className={`w-2.5 h-2.5 border rounded-xs cursor-pointer transition-all duration-150 hover:border-gray-400 ${getContributionIntensity(
-                  day.contributionCount
-                )}`}
-                onMouseEnter={(e) => handleMouseEnter(e, day)}
-                onMouseLeave={handleMouseLeave}
-              />
+              <Tooltip key={dayIndex}>
+                <TooltipTrigger asChild>
+                  <div
+                    className={`w-2.5 h-2.5 border rounded-xs cursor-pointer transition-all duration-150 hover:border-gray-400 ${getContributionIntensity(
+                      day.contributionCount
+                    )}`}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>
+                    {day.contributionCount === 0
+                      ? `No contributions on ${formatDate(day.date)}`
+                      : `${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""} on ${formatDate(day.date)}`}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
             ))}
           </div>
         ))}
       </div>
-
-      {/* Tooltip */}
-      {hoveredDay && (
-        <div
-          className="fixed z-50 px-2 py-1 text-xs text-white bg-gray-900 border border-gray-700 rounded shadow-lg pointer-events-none"
-          style={{
-            left: `${hoveredDay.x}px`,
-            top: `${hoveredDay.y}px`,
-            transform: "translateX(-50%) translateY(-100%)",
-          }}
-        >
-          {hoveredDay.content}
-        </div>
-      )}
 
       {/* Footer */}
       <div className="flex justify-between items-center mt-4">

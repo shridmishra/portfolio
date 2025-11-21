@@ -13,6 +13,11 @@ import {
 import { FaLinkedin, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
 import Text from "@/src/components/ui/text";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 
 export const Hero = () => {
   return (
@@ -73,18 +78,46 @@ export const Hero = () => {
                   className="text-md sm:text-lg text-muted-foreground/80 font-medium"
                 />
                 <div className="flex items-center gap-3">
-                  <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground text-foreground transition-colors">
-                    <FaLinkedin className="w-5 h-5" />
-                  </Link>
-                  <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className=" hover:text-muted-foreground text-foreground transition-colors">
-                    <FaXTwitter className="w-5 h-5" />
-                  </Link>
-                  <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className=" hover:text-muted-foreground text-foreground transition-colors">
-                    <FaGithub className="w-5 h-5" />
-                  </Link>
-                  <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground text-foreground transition-colors">
-                    <FaPaperclip className="w-5 h-5" />
-                  </Link>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground text-foreground transition-colors">
+                        <FaLinkedin className="w-5 h-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>LinkedIn</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className=" hover:text-muted-foreground text-foreground transition-colors">
+                        <FaXTwitter className="w-5 h-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Twitter</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className=" hover:text-muted-foreground text-foreground transition-colors">
+                        <FaGithub className="w-5 h-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>GitHub</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground text-foreground transition-colors">
+                        <FaPaperclip className="w-5 h-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Resume</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
             </div>
