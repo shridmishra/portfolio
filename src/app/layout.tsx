@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ThemeProvider from "../context/provider";
-import { Header } from "@/src/components/Header";
+import { Header } from "@/src/components/layout";
 
 const info = {
   name: "Shrid Mishra",
@@ -83,6 +83,10 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, noimageindex: false },
   },
+};
+
+export const viewport: Viewport = {
+  initialScale: 0.9,
 };
 
 export default function RootLayout({

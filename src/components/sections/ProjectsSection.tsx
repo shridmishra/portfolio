@@ -3,9 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { ProjectCard } from "@/src/components/ui/project-card";
-import { projects } from "../lib/constants";
-import Title from "./ui/title";
-import { SeparatorLine } from "./ui/separator-line";
+import { projects } from "@/src/lib/constants";
+import Title from "@/src/components/ui/title";
+import { SeparatorLine } from "@/src/components/ui/separator-line";
 
 export const ProjectsSection = () => {
   // Limit to 6 projects

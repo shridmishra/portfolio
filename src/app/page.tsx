@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Hero } from "@/src/components/Hero";
-import { ExperienceSection } from "@/src/components/ExperienceSection";
-import { ProjectsSection } from "../components/ProjectsSection";
-import BentoGrid from "../components/BentoSection";
-import Footer from "../components/Footer";
-import OnekoCat from "../components/OnekoCat";
-import { Separator } from "../components/ui/separator";
+import { Hero, ExperienceSection, ProjectsSection, BentoGrid } from "@/src/components/sections";
+import { Footer } from "@/src/components/layout";
+import { OnekoCat } from "@/src/components/common";
+import { Separator } from "@/src/components/ui/separator";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
@@ -16,7 +13,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen min-w-full bg-background relative font-display antialiased selection:bg-pink-600 overflow-x-hidden selection:text-foreground">
-      <div className="relative z-10 max-w-xl sm:max-w-4xl mx-auto lg:mx-96">
+      <div className="relative z-10 max-w-xl sm:max-w-4xl mx-auto">
         <div className="border-x border-edge">
 
       

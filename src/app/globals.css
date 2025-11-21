@@ -95,11 +95,11 @@ html {
 
 /* Screen line utilities for full-width borders */
 @utility screen-line-before {
-  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-border;
+  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-border/30;
 }
 
 @utility screen-line-after {
-  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-border;
+  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-border/30;
 }
 
 /* 4. Dark mode support using `class="dark"` */
@@ -391,6 +391,6 @@ html {
 
   /* Simple thin line separator */
   .separator-line {
-    @apply relative border-t border-edge;
+    @apply relative border-t border-edge/30;
   }
 }

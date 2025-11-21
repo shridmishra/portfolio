@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FlipWords } from "./ui/flip-words";
-import { words } from "../lib/constants";
+import { FlipWords } from "@/src/components/ui/flip-words";
+import { words } from "@/src/lib/constants";
 import {
   MapPin,
   Mail,
@@ -11,8 +11,8 @@ import {
   BadgeCheck
 } from "lucide-react";
 import { FaLinkedin, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
-import Text from "./ui/text";
-import { SeparatorLine } from "./ui/separator-line";
+import Text from "@/src/components/ui/text";
+import { SeparatorLine } from "@/src/components/ui/separator-line";
 
 export const Hero = () => {
   return (
@@ -31,8 +31,8 @@ export const Hero = () => {
             priority
           />
           {/* Overlay gradient - darker at edges */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-background/40 dark:from-background/80 dark:via-background/40 dark:to-background/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/20 via-transparent to-background/20 dark:from-background/60 dark:via-transparent dark:to-background/60" />
         </div>
 
         {/* Profile Picture - Positioned at bottom */}

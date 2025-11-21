@@ -1,9 +1,9 @@
 "use client"
 
 import React from "react";
-import GitHubContributionGraph from "./bento/Github";
-import { SkillsCarousel } from "./bento/Skills";
-import { RecentBlogs } from "./bento/RecentBlogs";
+import GitHubContributionGraph from "@/src/components/bento/Github";
+import { SkillsCarousel } from "@/src/components/bento/Skills";
+import { RecentBlogs } from "@/src/components/bento/RecentBlogs";
 
 export default function BentoGrid() {
 
@@ -16,7 +16,7 @@ export default function BentoGrid() {
               href={"https://github.com/shridmishra"}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground font-medium hover:text-primary transition-colors"
+              className="text-foreground font-medium hover:text-muted-foreground transition-colors"
             >
               Github
             </a>

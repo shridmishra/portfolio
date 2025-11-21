@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/src/lib/utils";
-import { ThemeToggle } from "./ui/theme-toggle";
+import { ThemeToggle } from "@/src/components/ui/theme-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -20,9 +20,9 @@ export function Header() {
         "bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
       )}
     >
-      <div className="mx-auto max-w-xl sm:max-w-4xl flex items-center justify-end sm:justify-between px-4 sm:px-8 lg:px-4 py-4 border-l-2 border-r-2 border-edge ">
+      <div className="mx-auto max-w-xl sm:max-w-4xl flex items-center justify-end sm:justify-between px-4 sm:px-8 lg:px-4 py-4 border-l-2 border-r-2 border-edge">
         {/* Logo */}
-        <div className="hidden sm:flex items-center ">
+        <div className="hidden sm:flex items-center">
           <Image
           src="/assets/logo.png"
           alt="Logo"
