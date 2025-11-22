@@ -21,7 +21,7 @@ import {
 
 export const Hero = () => {
   return (
-    <section className="relative border-x border-edge screen-line-before before:-top-px">
+    <section className="relative border-x border-edge screen-line-before before:-top-px group/hero">
 
 
       {/* Banner Section with Background Image */}
@@ -52,7 +52,7 @@ export const Hero = () => {
                 className="
         w-full h-full object-cover 
         transition-all duration-300
-       lg:group-hover:filter-none lg:filter lg:grayscale
+        lg:group-hover/hero:filter-none lg:filter lg:grayscale
         
       "
                 priority

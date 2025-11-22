@@ -6,11 +6,12 @@ import { Footer } from "@/src/components/layout";
 import { OnekoCat } from "@/src/components/common";
 import { Separator } from "@/src/components/ui/separator";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
+import { PageSkeleton } from "@/src/components/ui/loading-skeleton";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  if (!mounted) return <PageSkeleton />;
 
   return (
     <div className="min-h-screen min-w-full bg-background relative font-display antialiased selection:bg-pink-600 overflow-x-hidden selection:text-foreground">

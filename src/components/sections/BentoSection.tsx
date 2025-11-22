@@ -3,7 +3,7 @@
 import React from "react";
 import GitHubContributionGraph from "@/src/components/bento/Github";
 import { SkillsCarousel } from "@/src/components/bento/Skills";
-import { RecentBlogs } from "@/src/components/bento/RecentBlogs";
+import { Spotify } from "@/src/components/bento/Spotify";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
 import { Separator } from "../ui/separator";
 
@@ -31,8 +31,8 @@ export default function BentoGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-8">
         {/* Top Left */}
-        <div className="bg-card rounded-xl shadow-md border border-edge flex items-center justify-center min-h-[120px] md:min-h-[180px]">
-          <RecentBlogs/>
+        <div className="bg-card rounded-xl shadow-md border border-edge flex items-center justify-center min-h-[120px] md:min-h-[180px] overflow-hidden">
+          <Spotify/>
         </div>
 
         {/* Top Right */}

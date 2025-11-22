@@ -5,6 +5,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/src/components/ui/tooltip";
+import { Skeleton } from "@/src/components/ui/skeleton";
 
 interface ContributionDay {
   date: string;
@@ -19,6 +20,7 @@ interface ContributionWeek {
 export default function GitHubContributionGraph() {
   const [contributionData, setContributionData] = useState<ContributionWeek[]>([]);
   const [totalContributions, setTotalContributions] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   // Generate mock data
   const generateMockData = () => {
@@ -72,6 +74,9 @@ export default function GitHubContributionGraph() {
   useEffect(() => {
     generateMockData();
     fetchContributionData();
+    // Set loading to false after a short delay to show skeleton
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
   }, []);
 
   // Get contribution intensity CSS class
@@ -141,11 +146,34 @@ export default function GitHubContributionGraph() {
 
   return (
     <div className="bg-background p-4 rounded-lg " style={{ width: "fit-content" }}>
-      {/* Month labels */}
-      {getMonthLabels()}
+      {loading ? (
+        <div className="space-y-2">
+          <div className="flex gap-1 mb-1">
+            {[...Array(12)].map((_, i) => (
+              <Skeleton key={i} className="h-3 w-8" />
+            ))}
+          </div>
+          <div className="flex gap-1">
+            {[...Array(39)].map((_, weekIndex) => (
+              <div key={weekIndex} className="flex flex-col gap-1">
+                {[...Array(7)].map((_, dayIndex) => (
+                  <Skeleton key={dayIndex} className="w-2.5 h-2.5 rounded-xs" />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-between items-center mt-4">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-4 w-24" />
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Month labels */}
+          {getMonthLabels()}
 
-      {/* Contribution grid */}
-      <div className="flex gap-1">
+          {/* Contribution grid */}
+          <div className="flex gap-1">
         {contributionData.map((week, weekIndex) => (
           <div key={weekIndex} className="flex flex-col gap-1">
             {week.contributionDays.map((day, dayIndex) => (
@@ -187,6 +215,8 @@ export default function GitHubContributionGraph() {
           <span>More</span>
         </div>
       </div>
+    </>
+      )}
     </div>
   );
 }
