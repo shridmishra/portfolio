@@ -6,6 +6,7 @@ import { ProjectCard } from "@/src/components/ui/project-card";
 import { projects } from "@/src/lib/constants";
 import Title from "@/src/components/ui/title";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
+import { Separator } from "../ui/separator";
 
 export const ProjectsSection = () => {
   // Limit to 6 projects
@@ -20,7 +21,7 @@ export const ProjectsSection = () => {
    <SeparatorLine />
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-8 mt-8">
           {displayedProjects.map((project, index) => (
             <div
               key={project.title}
@@ -74,6 +75,7 @@ export const ProjectsSection = () => {
 
         </footer>
       </div>
+
     </section>
   );
 };

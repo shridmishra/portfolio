@@ -20,16 +20,18 @@ export function Header() {
         "bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
       )}
     >
-      <div className="mx-auto max-w-xl sm:max-w-4xl flex items-center justify-end sm:justify-between px-4 sm:px-8 lg:px-4 py-4 border-l-2 border-r-2 border-edge">
+      <div className="mx-auto max-w-xl sm:max-w-4xl flex items-center justify-between px-4 sm:px-8 lg:px-4 py-4 border-l-2 border-r-2 border-edge">
         {/* Logo */}
-        <div className="hidden sm:flex items-center">
-          <Image
-          src="/assets/logo.png"
-          alt="Logo"
-          className="h-8 w-auto dark:invert-0 invert"
-          height={50}
-          width={50}
-          />
+        <div className="">
+          <Link href="/">
+            <Image
+              src="/assets/logo.svg"
+              alt="Logo"
+              className="h-8 w-auto invert-0 dark:invert"
+              height={50}
+              width={50}
+            />
+          </Link>
         </div>
 
         {/* Center Navigation */}

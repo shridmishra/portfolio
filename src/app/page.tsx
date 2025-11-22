@@ -5,6 +5,7 @@ import { Hero, ExperienceSection, ProjectsSection, BentoGrid } from "@/src/compo
 import { Footer } from "@/src/components/layout";
 import { OnekoCat } from "@/src/components/common";
 import { Separator } from "@/src/components/ui/separator";
+import { SeparatorLine } from "@/src/components/ui/separator-line";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
@@ -13,6 +14,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen min-w-full bg-background relative font-display antialiased selection:bg-pink-600 overflow-x-hidden selection:text-foreground">
+      <OnekoCat />
       <div className="relative z-10 max-w-xl sm:max-w-4xl mx-auto">
         <div className="border-x border-edge">
 
@@ -22,26 +24,29 @@ const Home = () => {
           
           <Separator />
           
-          <div className="px-4 sm:px-10 py-16 sm:py-20">
-            <OnekoCat />
+          <div className="px-6 sm:px-8 py-12 sm:py-16">
+            <SeparatorLine />
             <ProjectsSection />
           </div>
           
-          <Separator />
+        
           
-          <div className="px-4 sm:px-10 py-16 sm:py-20">
+          <div className="px-6 sm:px-8 py-12 sm:py-16">
+           
             <BentoGrid />
           </div>
           
           <Separator />
           
-          <div className="px-4 sm:px-10 py-16 sm:py-20">
+          <div className="px-6 sm:px-8 py-12 sm:py-16">
+            <SeparatorLine />
             <ExperienceSection />
           </div>
           
           <Separator />
           
-          <div className="px-4 sm:px-10 py-12 sm:py-16">
+          <div className="px-6 sm:px-8 py-10 sm:py-14">
+            <SeparatorLine />
             <Footer />
           </div>
           

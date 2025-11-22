@@ -56,7 +56,16 @@ export const projects = [
     code: "https://github.com/shridmishra/grocery-store",
     imageSrc: "/projects/grocery.png",
   },
-  
+  {
+    title: "Paths",
+    description: "Structured learning journeys.",
+    tech: ["Monorepo","Next.js","FrontEnd"],
+    status: "In Development",
+    year: "2025",
+    link: "https://paths.shrid.in",
+    code: "https://github.com/shridmishra/paths",
+    imageSrc: "/projects/paths.png",
+  },
   {
     title: "MediChain",
     description: "Solana platform for secure health data.",

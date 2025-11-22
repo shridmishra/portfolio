@@ -21,8 +21,8 @@ export const ProjectCard = ({
   source,
   imageSrc,
 }: ProjectCardProps) => {
-  // Apply left alignment specifically for Practice JS
-  const imageObjectPosition = title === "Practice JS" ? "object-left" : "";
+  // Apply left alignment specifically for Practice JS and Paths
+  const imageObjectPosition = (title === "Practice JS" || title === "Paths") ? "object-left" : "";
   
   return (
     <BorderFrame className="">

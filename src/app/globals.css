@@ -77,6 +77,13 @@
     line-height: 1.2;
     font-weight: 600;
   }
+
+  /* View Transition API */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
 }
 
 * {

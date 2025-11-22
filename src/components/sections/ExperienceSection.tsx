@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { MagicCard } from "@/src/components/ui/magic-card";
 import { I_Experience } from "@/src/types/type";
 import { experienceData } from "@/src/lib/constants";
+import { SeparatorLine } from "@/src/components/ui/separator-line";
 
 
 export const ExperienceSection = () => {
@@ -13,7 +14,7 @@ export const ExperienceSection = () => {
     <section>
       <div className="max-w-4xl mx-auto">
         {/* Section Header */}
-        <header className="text-center mb-12 lg:mb-16">
+        <header className="text-center my-4 lg:my-6">
           <div className="text-2xl sm:text-3xl lg:text-4xl font-normal text-foreground mb-3 tracking-tight" style={{ fontFamily: 'ClashDisplay, sans-serif' }}>
             Experience
           </div>
@@ -21,9 +22,11 @@ export const ExperienceSection = () => {
             My professional journey building innovative solutions.
           </p>
         </header>
+        
+        <SeparatorLine />
 
         {/* Experience Cards */}
-        <div className="space-y-6">
+        <div className="space-y-6 mt-8">
           {experienceData.map((exp: I_Experience, idx) => (
             <motion.div
               key={`${exp.company_name}-${idx}`}

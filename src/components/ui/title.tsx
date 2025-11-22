@@ -7,7 +7,7 @@ interface Title {
 
 const Title = ({ title, subtitle }: Title) => {
     return (
-        <header className="text-center mb-8 lg:mb-14">
+        <header className="text-center my-4 lg:my-8">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-foreground mb-3" style={{ fontFamily: 'ClashDisplay, sans-serif' }}>
                 {title}
             </h2>
