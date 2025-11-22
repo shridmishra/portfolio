@@ -6,7 +6,6 @@ import { ProjectCard } from "@/src/components/ui/project-card";
 import { projects } from "@/src/lib/constants";
 import Title from "@/src/components/ui/title";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
-import { Separator } from "../ui/separator";
 
 export const ProjectsSection = () => {
   // Limit to 6 projects

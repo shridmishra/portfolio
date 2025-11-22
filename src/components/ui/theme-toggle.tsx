@@ -22,13 +22,11 @@ export function ThemeToggle() {
     
     const newTheme = theme === "light" ? "dark" : "light"
 
-    // @ts-ignore - View Transitions API is not yet in all TS definitions
     if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setTheme(newTheme)
       return
     }
 
-    // @ts-ignore
     const transition = document.startViewTransition(() => {
       flushSync(() => {
         setTheme(newTheme)
@@ -42,7 +40,6 @@ export function ThemeToggle() {
       Math.max(y, innerHeight - y)
     )
 
-    // @ts-ignore
     transition.ready.then(() => {
       document.documentElement.animate(
         {

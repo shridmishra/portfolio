@@ -1,5 +1,4 @@
 import React from 'react'
-import { SeparatorLine } from '../ui/separator-line';
 
 const Footer = () => {
     const year = new Date().getFullYear();
