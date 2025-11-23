@@ -15,7 +15,7 @@ export default function BentoGrid() {
   
 
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4  pt-4 lg:pt-8">
         {/* Top Left */}
         <div className="bg-card rounded-xl shadow-md border border-edge flex items-center justify-center min-h-[120px] md:min-h-[180px] overflow-hidden">
           <Spotify/>

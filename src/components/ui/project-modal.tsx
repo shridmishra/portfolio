@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Github, ExternalLink } from "lucide-react";
+import { X, Github, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "./button";
 import Image from "next/image";
 
@@ -23,6 +23,7 @@ interface ProjectModalProps {
 
 export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
   const [mounted, setMounted] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -31,6 +32,7 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
     };
     
     if (isOpen) {
+      setIsVideoLoading(true);
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleEsc);
     }
@@ -72,14 +74,22 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
               {/* Header / Video Area */}
               <div className="relative w-full aspect-video bg-muted overflow-hidden rounded-t-xl">
                 {project.video ? (
-                  <video
-                    src={project.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
+                  <>
+                    {isVideoLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-muted z-10">
+                        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                      </div>
+                    )}
+                    <video
+                      src={project.video}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      onLoadedData={() => setIsVideoLoading(false)}
+                      className="w-full h-full object-cover"
+                    />
+                  </>
                 ) : (
                   <div className="relative w-full h-full">
                     <Image
@@ -98,58 +108,66 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                 
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                  className="
+                    absolute top-4 right-4 p-2.5 
+                    rounded-full bg-black/20 backdrop-blur-md border border-white/10
+                    text-white/90 hover:bg-black/40 hover:text-white hover:scale-105
+                    transition-all duration-200 z-20
+                  "
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Content */}
-              <div className="p-6 space-y-6">
-                <div className="space-y-0">
-                  <h2 className="text-2xl font-bold tracking-tight">{project.title}</h2>
-                  <p className="text-muted-foreground leading-relaxed">
+              <div className="p-6 sm:p-8 space-y-8">
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">{project.title}</h2>
+                    <div className="flex flex-wrap gap-3">
+                      {project.link && (
+                        <Button asChild size="sm" className="gap-2 h-9 px-4 bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="w-4 h-4" />
+                            Visit Live Site
+                          </a>
+                        </Button>
+                      )}
+                      {project.code && (
+                        <Button asChild variant="outline" size="sm" className="gap-2 h-9 px-4 hover:bg-muted">
+                          <a href={project.code} target="_blank" rel="noopener noreferrer">
+                            <Github className="w-4 h-4" />
+                            View Source
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-base text-muted-foreground leading-relaxed max-w-prose">
                     {project.description}
                   </p>
                 </div>
 
+                <div className="h-px w-full bg-border/50" />
+
                 {/* Tech Stack */}
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold  text-foreground/90">Tech Stack</h3>
+                <div className="space-y-4">
+                  <h3 className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">Technologies</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
                         className="
-                          px-2.5 py-1 text-xs font-medium 
-                          bg-background/10 text-foreground/90
-                          border border-border rounded-md
+                          px-3 py-1.5 text-xs font-medium 
+                          bg-muted/50 text-foreground/80
+                          border border-border/50 rounded-full
+                          hover:bg-muted hover:border-border transition-colors
                         "
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
-                  {project.link && (
-                    <Button asChild className="gap-2 bg-foreground hover:bg-muted-foreground/80 hover:text-background">
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4" />
-                        Visit Live Site
-                      </a>
-                    </Button>
-                  )}
-                  {project.code && (
-                    <Button asChild variant="outline" className="gap-2">
-                      <a href={project.code} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4" />
-                        View Source
-                      </a>
-                    </Button>
-                  )}
                 </div>
               </div>
             </motion.div>

@@ -44,6 +44,7 @@ const ProjectsPageSkeleton = () => (
 const ProjectsPage = () => {
   const [mounted, setMounted] = useState(false);
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [preloadVideo, setPreloadVideo] = useState<string | null>(null);
 
   useEffect(() => setMounted(true), []);
   
@@ -73,6 +74,11 @@ const ProjectsPage = () => {
                   animationDelay: `${index * 120}ms`,
                   animationFillMode: "both",
                 }}
+                onMouseEnter={() => {
+                  if (project.video) {
+                    setPreloadVideo(project.video);
+                  }
+                }}
               >
                 <ProjectCard
                   title={project.title}
@@ -90,6 +96,17 @@ const ProjectsPage = () => {
       
       </div>
       
+      {/* Hidden Video Preloader */}
+      {preloadVideo && (
+        <video
+          src={preloadVideo}
+          preload="auto"
+          className="hidden"
+          muted
+          playsInline
+        />
+      )}
+
       <ProjectModal 
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}

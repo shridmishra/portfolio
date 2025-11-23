@@ -14,6 +14,7 @@ export const ProjectsSection = () => {
   // Limit to 6 projects
   const displayedProjects = projects.slice(0, 4);
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [preloadVideo, setPreloadVideo] = useState<string | null>(null);
 
   return (
     <section>
@@ -33,6 +34,11 @@ export const ProjectsSection = () => {
                 animationDelay: `${index * 120}ms`,
                 animationFillMode: "both",
               }}
+              onMouseEnter={() => {
+                if (project.video) {
+                  setPreloadVideo(project.video);
+                }
+              }}
             >
               <ProjectCard
                 title={project.title}
@@ -46,6 +52,17 @@ export const ProjectsSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Hidden Video Preloader */}
+        {preloadVideo && (
+          <video
+            src={preloadVideo}
+            preload="auto"
+            className="hidden"
+            muted
+            playsInline
+          />
+        )}
 
         <ProjectModal 
           isOpen={!!selectedProject}

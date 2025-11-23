@@ -44,7 +44,7 @@ const Home = () => {
           <Hero />
 
           {/* Bento Grid Section */}
-          <div className="px-6 sm:px-8 pb-4 sm:pb-8">
+          <div className="px-6 sm:px-8 ">
             <SeparatorLine />
             <BentoGrid />
           </div>
