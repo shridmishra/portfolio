@@ -4,7 +4,7 @@ import ThemeProvider from "../context/provider";
 import { Header } from "@/src/components/layout";
 
 const info = {
-  name: "Shrid Mishra",
+  name: "Shrid",
   twitter: "@ShridMishra",
   description:
     "Full-Stack Developer specializing in Next.js, TypeScript, and Solana. Crafting modern, scalable, and high-performance web experiences.",
@@ -101,7 +101,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className="pt-16">{children}</div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

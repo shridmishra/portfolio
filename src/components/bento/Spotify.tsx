@@ -64,7 +64,7 @@ export const Spotify = () => {
   useEffect(() => {
     const fetchArijitSongs = async () => {
       try {
-        const response = await fetch('/api/spotify/search?q=punjabi&type=track&limit=10');
+        const response = await fetch('/api/spotify/search?q=latest&type=track&limit=10');
         const data = await response.json();
         
         if (data.tracks) {
@@ -275,7 +275,7 @@ export const Spotify = () => {
   const totalSeconds = duration / 1000;
 
   return (
-    <div className="w-full h-full bg-card rounded-xl p-5 flex flex-col relative overflow-hidden group grayscale hover:grayscale-0 transition-all duration-300">
+    <div className="w-full h-full bg-card rounded-xl p-5 flex flex-col relative overflow-hidden group md:grayscale md:hover:grayscale-0 transition-all duration-300">
       {/* Background Gradient Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-50 pointer-events-none" />
       
@@ -359,21 +359,9 @@ export const Spotify = () => {
                   )}
                 </div>
                 
-                {/* Pulse Animation */}
-                {isPlaying && (
-                  <>
-                    <motion.div
-                      className="absolute inset-0 rounded-md bg-green-500/30 -z-10"
-                      animate={{ scale: [1, 1.4], opacity: [0.6, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 rounded-md bg-green-500/20 -z-10"
-                      animate={{ scale: [1, 1.6], opacity: [0.4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
-                    />
-                  </>
-                )}
+                
+                {/* Pulse Animation Removed */}
+
               </div>
 
               {/* Track Info */}

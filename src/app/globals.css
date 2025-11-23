@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 /* Local Satoshi font (place WOFF2 files in /public/fonts) */
 @font-face {
   font-family: 'Satoshi';
@@ -102,11 +104,11 @@ html {
 
 /* Screen line utilities for full-width borders */
 @utility screen-line-before {
-  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-border/30;
+  @apply relative before:absolute before:top-0 before:left-0 before:-z-1 before:h-px before:w-full before:bg-border/30 lg:before:hidden;
 }
 
 @utility screen-line-after {
-  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-border/30;
+  @apply relative after:absolute after:bottom-0 after:left-0 after:-z-1 after:h-px after:w-full after:bg-border/30 lg:after:hidden;
 }
 
 /* 4. Dark mode support using `class="dark"` */

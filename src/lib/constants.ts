@@ -29,12 +29,13 @@ export const projects = [
   {
     title: "Practice JS",
     description: "JavaScript learning platform with challenges.",
-    tech: ["Next.js", "TypeScript", "Quiz"],
+    tech: ["Next.js", "TypeScript", "MongoDB"],
     status: "Live",
     year: "2025",
     link: "https://practicejs.shrid.in",
     code: "https://github.com/shridmishra/practicejs",
     imageSrc: "/projects/practicejs.png",
+    video: "/projects/video/practicejs.mp4",
   },
   {
     title: "AnimeFlix",
@@ -45,6 +46,8 @@ export const projects = [
     link: "https://animeflix.shrid.in",
     code: "https://github.com/shridmishra/animeflix",
     imageSrc: "/projects/animeflix.png",
+    video: "/projects/video/animeflix.mp4",
+
   },
   {
     title: "Grocery Store",
@@ -55,6 +58,9 @@ export const projects = [
     link: "https://grocery.shrid.in",
     code: "https://github.com/shridmishra/grocery-store",
     imageSrc: "/projects/grocery.png",
+    video: "/projects/video/grocery.mp4",
+
+
   },
   {
     title: "Paths",

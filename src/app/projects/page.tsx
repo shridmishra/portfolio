@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ProjectCard } from "@/src/components/ui/project-card";
+import { ProjectModal } from "@/src/components/ui/project-modal";
 import { projects } from "@/src/lib/constants";
 import Title from "@/src/components/ui/title";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
@@ -10,8 +11,10 @@ import { Skeleton } from "@/src/components/ui/skeleton";
 
 const ProjectsPageSkeleton = () => (
   <div className="min-h-screen min-w-full bg-background relative overflow-hidden">
-    <div className="relative z-10 max-w-xl sm:max-w-4xl mx-auto">
-      <div className="border-x border-edge min-h-screen px-6 sm:px-8 py-12 sm:py-16">
+    <div className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">
+      <div className="relative min-h-screen px-6 sm:px-8 py-12 sm:py-16">
+        <Separator orientation="vertical" className="absolute left-0 top-0 bottom-0 -translate-x-1/2 z-50" />
+        <Separator orientation="vertical" className="absolute right-0 top-0 bottom-0 translate-x-1/2 z-50" />
         <Skeleton className="h-1 w-full mb-8" />
         <div className="space-y-4 mb-8">
           <Skeleton className="h-10 w-64" />
@@ -40,6 +43,8 @@ const ProjectsPageSkeleton = () => (
 
 const ProjectsPage = () => {
   const [mounted, setMounted] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+
   useEffect(() => setMounted(true), []);
   
   if (!mounted) return <ProjectsPageSkeleton />;
@@ -48,8 +53,10 @@ const ProjectsPage = () => {
 
   return (
     <div className="min-h-screen min-w-full bg-background relative overflow-hidden font-display antialiased selection:bg-pink-600 selection:text-foreground">
-      <div className="relative z-10 max-w-xl sm:max-w-4xl mx-auto">
-        <div className="border-x border-edge min-h-screen px-6 sm:px-8 py-12 sm:py-16">
+      <div className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">
+        <div className="relative min-h-screen px-6 sm:px-8 py-12 sm:py-16">
+          <Separator orientation="vertical" className="absolute left-0 top-0 bottom-0 -translate-x-1/2 z-50" />
+          <Separator orientation="vertical" className="absolute right-0 top-0 bottom-0 translate-x-1/2 z-50" />
           <SeparatorLine />
           {/* Section Header */}
           <Title title="My Projects" subtitle="A showcase of my work in full-stack & blockchain applications."/>
@@ -74,6 +81,7 @@ const ProjectsPage = () => {
                   imageSrc={project.imageSrc}
                   link={project.link}
                   source={project.code}
+                  onClick={() => setSelectedProject(project)}
                 />
               </div>
             ))}
@@ -82,6 +90,11 @@ const ProjectsPage = () => {
       
       </div>
       
+      <ProjectModal 
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        project={selectedProject}
+      />
     </div>
   );
 };

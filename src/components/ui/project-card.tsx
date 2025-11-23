@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import BorderFrame from "./BorderFrame";
+import { Play } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -11,6 +12,7 @@ interface ProjectCardProps {
   link?: string;
   source?: string;
   imageSrc: string;
+  onClick?: () => void;
 }
 
 export const ProjectCard = ({
@@ -20,6 +22,7 @@ export const ProjectCard = ({
   link,
   source,
   imageSrc,
+  onClick,
 }: ProjectCardProps) => {
   // Apply left alignment specifically for Practice JS and Paths
   const imageObjectPosition = (title === "Practice JS" || title === "Paths") ? "object-left" : "";
@@ -35,42 +38,48 @@ export const ProjectCard = ({
     >
       {/* Image */}
       <div className="p-2 pb-0"> {/* padding around image */}
-        {link ? (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block  overflow-hidden"
-          >
-            <div className="relative w-full aspect-[16/9]">
+        <div 
+          onClick={onClick}
+          className="cursor-pointer block overflow-hidden"
+        >
+            <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden">
               <Image
                 src={imageSrc}
                 alt={title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className={`object-cover ${imageObjectPosition} lg:group-hover:filter-none lg:filter lg:grayscale`}
+                className={`object-cover ${imageObjectPosition} lg:group-hover:filter-none lg:filter lg:grayscale transition-all duration-300`}
               />
+              
+              {/* Overlay with play icon or view text could go here */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                <div className="bg-background/80 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-lg">
+                  <Play className="w-6 h-6 text-foreground fill-foreground" />
+                </div>
+              </div>
             </div>
-          </a>
-        ) : (
-          <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden">
-            <Image
-              src={imageSrc}
-              alt={title}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className={`object-cover ${imageObjectPosition}`}
-            />
-          </div>
-        )}
+        </div>
       </div>
 
       {/* Content */}
       <div className="p-5 flex flex-col flex-1">
         <header className="mb-2">
-          <h3 className="text-lg font-normal tracking-tight text-foreground">
-            {title}
-          </h3>
+          {link ? (
+            <a 
+              href={link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:underline decoration-border underline-offset-4"
+            >
+              <h3 className="text-lg font-normal tracking-tight text-foreground">
+                {title}
+              </h3>
+            </a>
+          ) : (
+            <h3 className="text-lg font-normal tracking-tight text-foreground">
+              {title}
+            </h3>
+          )}
         </header>
 
         <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">

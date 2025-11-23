@@ -8,7 +8,6 @@ import {
   Mail,
   CodeXml,
   UserPen,
-  BadgeCheck
 } from "lucide-react";
 import { FaLinkedin, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
 import Text from "@/src/components/ui/text";
@@ -21,18 +20,18 @@ import {
 
 export const Hero = () => {
   return (
-    <section className="relative border-x border-edge screen-line-before before:-top-px group/hero">
+    <section className="relative  screen-line-before before:-top-px pt-12 group/hero">
 
 
       {/* Banner Section with Background Image */}
       <div className="relative h-48 sm:h-56 md:h-64 overflow-visible">
         {/* Background Image */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 ">
           <Image
             src="/assets/banner.jpeg"
             alt="Banner"
             fill
-            className="object-cover"
+            className="object-cover  lg:group-hover/hero:filter-none lg:filter lg:grayscale"
             priority
           />
           {/* Overlay gradient - darker at edges */}
@@ -68,14 +67,13 @@ export const Hero = () => {
           <div className="flex flex-col gap-6 mb-6">
             {/* Name and Title */}
             <div>
-              <div className="text-xl sm:text-2xl lg:text-3xl font-medium mb-1 leading-tight flex items-center gap-2" style={{ fontFamily: 'ClashDisplay, sans-serif' }}>
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-1 leading-tight flex items-center gap-2" style={{ fontFamily: '"Instrument Serif", serif' }}>
                 Shrid Mishra
-                <BadgeCheck className="text-foreground/80" />
               </div>
               <div className="flex items-center justify-between gap-4">
                 <FlipWords
                   words={words}
-                  className="text-md sm:text-lg text-muted-foreground/80 font-medium"
+                  className="text-md sm:text-lg text-muted-foreground/80 font-thin"
                 />
                 <div className="flex items-center gap-3">
                   <Tooltip>
@@ -134,7 +132,7 @@ export const Hero = () => {
             <div className="my-4">
               <div className="flex items-start lg:items-center gap-3 ">
                 <CodeXml className="w-5 h-5 text-muted-foreground flex-shrink-0 " />
-                <Text text="Full Stack & Blockchain Engineer" />
+                <Text text="Full Stack & Design Engineer" />
 
               </div>
 

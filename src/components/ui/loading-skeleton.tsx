@@ -1,4 +1,6 @@
 import { Skeleton } from "./skeleton";
+import { Separator } from "./separator";
+import { SeparatorLine } from "./separator-line";
 
 export const HeroSkeleton = () => (
   <div className="px-6 sm:px-8 py-12 sm:py-16 space-y-6">
@@ -70,11 +72,15 @@ export const ExperienceSkeleton = () => (
 
 export const PageSkeleton = () => (
   <div className="min-h-screen min-w-full bg-background relative">
-    <div className="relative z-10 max-w-xl sm:max-w-4xl mx-auto">
-      <div className="border-x border-edge">
+    <div className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">
+      <div className="relative">
+        <Separator orientation="vertical" className="absolute left-0 top-0 bottom-0 -translate-x-1/2 z-50" />
+        <Separator orientation="vertical" className="absolute right-0 top-0 bottom-0 translate-x-1/2 z-50" />
         <HeroSkeleton />
         
-        <div className="border-t border-edge" />
+        <div className="px-6 sm:px-8">
+          <SeparatorLine />
+        </div>
         
         <div className="px-6 sm:px-8 py-12 sm:py-16">
           <ProjectsSkeleton />
