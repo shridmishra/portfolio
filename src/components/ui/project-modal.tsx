@@ -122,8 +122,8 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
               {/* Content */}
               <div className="p-6 sm:p-8 space-y-8">
                 <div className="space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">{project.title}</h2>
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                    <h2 className="text-xl font-medium tracking-tight text-foreground">{project.title}</h2>
                     <div className="flex flex-wrap gap-3">
                       {project.link && (
                         <Button asChild size="sm" className="gap-2 h-9 px-4 bg-foreground text-background hover:bg-foreground/90 shadow-sm">
