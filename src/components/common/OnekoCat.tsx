@@ -11,6 +11,13 @@ interface SpriteSet {
   [key: string]: [number, number][];
 }
 
+interface Heart {
+  id: number;
+  x: number;
+  y: number;
+  size: 'small' | 'large';
+}
+
 const SPRITE_SETS: SpriteSet = {
   idle: [[-3, -3]],
   alert: [[-7, -3]],
@@ -41,6 +48,7 @@ export default function OnekoCat() {
   const [idleTime, setIdleTime] = useState(0);
   const [idleAnimation, setIdleAnimation] = useState<string | null>(null);
   const [idleAnimationFrame, setIdleAnimationFrame] = useState(0);
+  const [hearts, setHearts] = useState<Heart[]>([]);
   const lastFrameTimestamp = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
 
@@ -130,6 +138,33 @@ export default function OnekoCat() {
     });
   };
 
+  const handleNekoClick = () => {
+    const timestamp = Date.now();
+    const largeHeart: Heart = {
+      id: timestamp,
+      x: nekoPos.x - 10,
+      y: nekoPos.y - 30,
+      size: 'large'
+    };
+    const smallHeart: Heart = {
+      id: timestamp + 1,
+      x: nekoPos.x + 15,
+      y: nekoPos.y - 45,
+      size: 'small'
+    };
+
+    setHearts(prev => [...prev, largeHeart, smallHeart]);
+
+    // Play meow sound
+    const audio = new Audio('/meow.wav');
+    audio.volume = 0.5;
+    audio.play().catch(e => console.error("Audio play failed:", e));
+
+    setTimeout(() => {
+      setHearts(prev => prev.filter(h => h.id !== timestamp && h.id !== timestamp + 1));
+    }, 1000);
+  };
+
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       setMousePos({ x: event.clientX, y: event.clientY });
@@ -161,24 +196,59 @@ export default function OnekoCat() {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nekoPos, mousePos, frameCount, idleTime, idleAnimation, idleAnimationFrame]);
 
   return (
-    <div
-      ref={nekoRef}
-      aria-hidden="true"
-      style={{
-        width: '32px',
-        height: '32px',
-        position: 'fixed',
-        pointerEvents: 'none',
-        imageRendering: 'pixelated',
-        left: `${nekoPos.x - 16}px`,
-        top: `${nekoPos.y - 16}px`,
-        zIndex: 2147483647,
-        backgroundImage: 'url(/oneko.gif)',
-      }}
-    />
+    <>
+      {hearts.map(heart => (
+        <div
+          key={heart.id}
+          className="heart-animation"
+          style={{
+            position: 'fixed',
+            left: `${heart.x}px`,
+            top: `${heart.y}px`,
+            pointerEvents: 'none',
+            zIndex: 2147483646,
+            transform: 'translate(-50%, -50%)',
+            width: heart.size === 'large' ? '24px' : '12px',
+            height: heart.size === 'large' ? '24px' : '12px',
+          }}
+        >
+          <div
+            className="w-full h-full bg-pink-200/80 backdrop-blur-md shadow-lg"
+            style={{
+              maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E")`,
+              maskSize: 'contain',
+              maskRepeat: 'no-repeat',
+              maskPosition: 'center',
+              WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E")`,
+              WebkitMaskSize: 'contain',
+              WebkitMaskRepeat: 'no-repeat',
+              WebkitMaskPosition: 'center',
+            }}
+          />
+        </div>
+      ))}
+      <div
+        ref={nekoRef}
+        onClick={handleNekoClick}
+        aria-hidden="true"
+        style={{
+          width: '32px',
+          height: '32px',
+          position: 'fixed',
+          pointerEvents: 'auto',
+          imageRendering: 'pixelated',
+          left: `${nekoPos.x - 16}px`,
+          top: `${nekoPos.y - 16}px`,
+          zIndex: 2147483647,
+          backgroundImage: 'url(/oneko.gif)',
+          cursor: 'pointer',
+          filter: 'contrast(0.7) brightness(1) sepia(1) hue-rotate(290deg) saturate(3)',
+        }}
+      />
+    </>
   );
 }

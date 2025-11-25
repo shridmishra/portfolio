@@ -420,3 +420,18 @@ html {
     @apply relative border-t border-edge/30;
   }
 }
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.heart-animation {
+  animation: floatUp 1s ease-out forwards;
+}
