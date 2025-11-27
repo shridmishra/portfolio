@@ -81,11 +81,11 @@ export default function GitHubContributionGraph() {
 
   // Get contribution intensity CSS class
   const getContributionIntensity = (count: number) => {
-    if (count === 0) return "bg-foreground/10 border-none";
-    if (count <= 2) return "bg-foreground/40 border-none";
-    if (count <= 5) return "bg-foreground/65 border-none";
-    if (count <= 8) return "bg-foreground/90 border-none";
-    return "bg-foreground border-none";
+    if (count === 0) return "bg-secondary border-none";
+    if (count <= 2) return "bg-green-400 dark:bg-green-900 border-none";
+    if (count <= 5) return "bg-green-500 dark:bg-green-700 border-none";
+    if (count <= 8) return "bg-green-600 dark:bg-green-500 border-none";
+    return "bg-green-800 dark:bg-green-300 border-none";
   };
 
   // Format date for tooltip
@@ -145,78 +145,80 @@ export default function GitHubContributionGraph() {
   };
 
   return (
-    <div className="bg-background p-4 rounded-lg " style={{ width: "fit-content" }}>
-      {loading ? (
-        <div className="space-y-2">
-          <div className="flex gap-1 mb-1">
-            {[...Array(12)].map((_, i) => (
-              <Skeleton key={i} className="h-3 w-8" />
-            ))}
+    <div className="bg-background p-4 rounded-lg group w-full h-full flex items-center justify-center">
+      <div className="w-fit">
+        {loading ? (
+          <div className="space-y-2">
+            <div className="flex gap-1 mb-1">
+              {[...Array(12)].map((_, i) => (
+                <Skeleton key={i} className="h-3 w-8" />
+              ))}
+            </div>
+            <div className="flex gap-1">
+              {[...Array(39)].map((_, weekIndex) => (
+                <div key={weekIndex} className="flex flex-col gap-1">
+                  {[...Array(7)].map((_, dayIndex) => (
+                    <Skeleton key={dayIndex} className="w-2.5 h-2.5 rounded-xs" />
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between items-center mt-4">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-4 w-24" />
+            </div>
           </div>
-          <div className="flex gap-1">
-            {[...Array(39)].map((_, weekIndex) => (
-              <div key={weekIndex} className="flex flex-col gap-1">
-                {[...Array(7)].map((_, dayIndex) => (
-                  <Skeleton key={dayIndex} className="w-2.5 h-2.5 rounded-xs" />
-                ))}
+        ) : (
+          <>
+            {/* Month labels */}
+            {getMonthLabels()}
+
+            {/* Contribution grid */}
+            <div className="flex gap-1">
+              {contributionData.map((week, weekIndex) => (
+                <div key={weekIndex} className="flex flex-col gap-1">
+                  {week.contributionDays.map((day, dayIndex) => (
+                    <Tooltip key={dayIndex}>
+                      <TooltipTrigger asChild>
+                        <div
+                          className={`w-2.5 h-2.5 border rounded-xs cursor-pointer transition-all duration-150 hover:border-gray-400 grayscale group-hover:grayscale-0 ${getContributionIntensity(
+                            day.contributionCount
+                          )}`}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          {day.contributionCount === 0
+                            ? `No contributions on ${formatDate(day.date)}`
+                            : `${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""} on ${formatDate(day.date)}`}
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div className="flex justify-between items-center mt-4">
+              <div className="text-xs text-secondary">
+                <span className="font-medium text-secondary">{totalContributions.toLocaleString()}</span> contributions
               </div>
-            ))}
-          </div>
-          <div className="flex justify-between items-center mt-4">
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-4 w-24" />
-          </div>
-        </div>
-      ) : (
-        <>
-          {/* Month labels */}
-          {getMonthLabels()}
-
-          {/* Contribution grid */}
-          <div className="flex gap-1">
-        {contributionData.map((week, weekIndex) => (
-          <div key={weekIndex} className="flex flex-col gap-1">
-            {week.contributionDays.map((day, dayIndex) => (
-              <Tooltip key={dayIndex}>
-                <TooltipTrigger asChild>
-                  <div
-                    className={`w-2.5 h-2.5 border rounded-xs cursor-pointer transition-all duration-150 hover:border-gray-400 ${getContributionIntensity(
-                      day.contributionCount
-                    )}`}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>
-                    {day.contributionCount === 0
-                      ? `No contributions on ${formatDate(day.date)}`
-                      : `${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""} on ${formatDate(day.date)}`}
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </div>
-        ))}
+              <div className="flex items-center gap-2 text-xs text-secondary">
+                <span>Less</span>
+                <div className="flex gap-1">
+                  <div className="w-2.5 h-2.5 bg-secondary rounded-sm grayscale group-hover:grayscale-0"></div>
+                  <div className="w-2.5 h-2.5 bg-green-200 dark:bg-green-900 rounded-sm grayscale group-hover:grayscale-0"></div>
+                  <div className="w-2.5 h-2.5 bg-green-400 dark:bg-green-700 rounded-sm grayscale group-hover:grayscale-0"></div>
+                  <div className="w-2.5 h-2.5 bg-green-600 dark:bg-green-500 rounded-sm grayscale group-hover:grayscale-0"></div>
+                  <div className="w-2.5 h-2.5 bg-green-800 dark:bg-green-300 rounded-sm grayscale group-hover:grayscale-0"></div>
+                </div>
+                <span>More</span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
-
-      {/* Footer */}
-      <div className="flex justify-between items-center mt-4">
-        <div className="text-xs text-secondary">
-          <span className="font-medium text-secondary">{totalContributions.toLocaleString()}</span> contributions
-        </div>
-        <div className="flex items-center gap-2 text-xs text-secondary">
-          <span>Less</span>
-          <div className="flex gap-1">
-            <div className="w-2.5 h-2.5 bg-zinc-800 border border-zinc-700 rounded-sm"></div>
-            <div className="w-2.5 h-2.5 bg-zinc-700 border border-zinc-600 rounded-sm"></div>
-            <div className="w-2.5 h-2.5 bg-zinc-600 border border-zinc-500 rounded-sm"></div>
-            <div className="w-2.5 h-2.5 bg-zinc-500 border border-zinc-400 rounded-sm"></div>
-            <div className="w-2.5 h-2.5 bg-zinc-400 border border-zinc-300 rounded-sm"></div>
-          </div>
-          <span>More</span>
-        </div>
-      </div>
-    </>
-      )}
     </div>
   );
 }

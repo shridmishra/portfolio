@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -20,65 +19,58 @@ import {
   SiSolidity,
   SiEthereum,
 } from "react-icons/si";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
+import { cn } from "@/src/lib/utils";
 
-const baseIcons = [
-  SiNextdotjs,
-  SiTypescript,
-  SiPostgresql,
-  SiPrisma,
-  SiTailwindcss,
-  SiSolana,
-  SiRust,
-  SiNodedotjs,
-  SiReact,
-  SiJavascript,
-  SiExpress,
-  SiGit,
-  SiDocker,
-  SiKubernetes,
-  SiMongodb,
-  SiSolidity,
-  SiEthereum
+const skills = [
+  { icon: SiNextdotjs, name: "Next.js", color: "text-foreground" },
+  { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
+  { icon: SiPrisma, name: "Prisma", color: "text-foreground" },
+  { icon: SiRust, name: "Rust", color: "#DEA584" },
+  { icon: SiReact, name: "React", color: "#61DAFB" },
+  { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+  { icon: SiExpress, name: "Express", color: "text-foreground" },
+  { icon: SiDocker, name: "Docker", color: "#2496ED" },
+  { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
+
 ];
 
 export const SkillsCarousel = () => {
-  const repeatedIcons = [...baseIcons, ...baseIcons, ...baseIcons]; 
-  const half = Math.ceil(repeatedIcons.length / 2);
-  const firstRow = repeatedIcons.slice(0, half);
-  const secondRow = repeatedIcons.slice(half);
-
   return (
-    <div className="w-full h-full p-4 overflow-hidden">
-      <h2 className="text-lg font-light mb-3">Skills</h2>
-      <div className="space-y-4">
-        <motion.div
-          className="flex gap-6"
-          animate={{ x: ["0%", "-50%"] }} 
-          transition={{
-            repeat: Infinity,
-            duration: 7,
-            ease: "linear",
-          }}
-        >
-          {[...firstRow, ...firstRow].map((Icon, idx) => (
-            <Icon key={`row1-${idx}`} size={32} className="text-secondary flex-shrink-0" />
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="flex gap-6 mt-8"
-          animate={{ x: ["-50%", "0%"] }} // opposite direction
-          transition={{
-            repeat: Infinity,
-            duration: 7,
-            ease: "linear",
-          }}
-        >
-          {[...secondRow, ...secondRow].map((Icon, idx) => (
-            <Icon key={`row2-${idx}`} size={32} className="text-secondary flex-shrink-0" />
-          ))}
-        </motion.div>
+    <div className="w-full h-full p-4 flex flex-col group">
+      <h2 className="text-lg font-light mb-4">Skills</h2>
+      <div className="flex flex-wrap gap-6 justify-center items-center flex-1 content-center">
+        {skills.map((skill, idx) => (
+          <SkillItem key={`skill-${idx}`} skill={skill} />
+        ))}
       </div>
     </div>
+  );
+};
+
+const SkillItem = ({ skill }: { skill: typeof skills[0] }) => {
+  const Icon = skill.icon;
+  const isHexColor = skill.color.startsWith("#");
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className="cursor-pointer hover:scale-110 transition-all duration-200 grayscale group-hover:grayscale-0">
+          <Icon
+            size={32}
+            className={cn("flex-shrink-0", !isHexColor && skill.color)}
+            style={isHexColor ? { color: skill.color } : undefined}
+          />
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{skill.name}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
