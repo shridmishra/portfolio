@@ -9,8 +9,10 @@ import { cn } from "@/src/lib/utils";
 
 export function Header() {
   const navItems = [
+    { title: "Components", href: "/components" }, 
     { title: "Projects", href: "/projects" },
-    
+
+
   ];
 
   const [hovered, setHovered] = useState<number | null>(null);
@@ -39,7 +41,7 @@ export function Header() {
         animate={{
           width: isDesktop ? (scrolled ? "45%" : "55%") : "95%",
           y: scrolled ? 10 : 0,
-          borderRadius: scrolled ? "2.5rem" : "0rem", 
+          borderRadius: scrolled ? "2.5rem" : "0rem",
         }}
         transition={{
           duration: 0.3,
@@ -52,7 +54,7 @@ export function Header() {
           scrolled ? "border-border/40 shadow-md" : "border-transparent sm:border-transparent"
         )}
         style={{
-            maxWidth: "46rem"
+          maxWidth: "46rem"
         }}
       >
         <Link href="/" className="hover:opacity-75 transition-opacity duration-300">
@@ -91,7 +93,7 @@ export function Header() {
               <span className="relative z-10">{item.title}</span>
             </Link>
           ))}
-          
+
           <div className="pl-2 border-l bg-background/10 border-border/50">
             <motion.div
               animate={{ scale: 1 }}

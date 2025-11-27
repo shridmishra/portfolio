@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ThemeProvider from "../context/provider";
-import { Header } from "@/src/components/layout";
+import { ConditionalHeader } from "@/src/components/layout";
 
 const info = {
   name: "Shrid",
@@ -100,7 +100,7 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <Header />
+          <ConditionalHeader />
           {children}
         </ThemeProvider>
       </body>
