@@ -1,5 +1,4 @@
-export { MagneticButton, magneticButtonCode } from "./magnetic-button";
-export { ShimmerButton, shimmerButtonCode } from "./shimmer-button";
-export { GradientText, gradientTextCode } from "./gradient-text";
+export { WaveButton } from "./wave-button";
+// Removed MagneticButton and ShimmerButton
 export { TypewriterText, typewriterCode } from "./typewriter";
-export { GlassCard, glassCardCode } from "./glass-card";
+export { BorderFrameDemo, borderFrameCode } from "./border-frame";

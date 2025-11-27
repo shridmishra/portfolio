@@ -1,45 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Check } from "lucide-react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Separator } from "@/src/components/ui/separator";
 import { componentRegistry, componentMap, codeMap } from "@/src/app/components/_registry";
 
 interface PreviewAreaProps {
   activeComponent: string;
+  sidebarOpen: boolean;
 }
 
-// Simple syntax highlighting for JSX/TSX
-const highlightCode = (code: string) => {
-  // Keywords
-  const keywords = /(\b(const|let|var|function|return|import|export|from|if|else|for|while|class|extends|new|this|typeof|instanceof)\b)/g;
-  // Strings
-  const strings = /("[^"]*"|'[^']*'|`[^`]*`)/g;
-  // Comments
-  const comments = /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm;
-  // Numbers
-  const numbers = /(\b\d+\.?\d*\b)/g;
-
-  const highlighted = code
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(comments, '<span class="text-gray-500">$1</span>')
-    .replace(strings, '<span class="text-green-400">$1</span>')
-    .replace(keywords, '<span class="text-purple-400">$1</span>')
-    .replace(/&lt;\/?([a-zA-Z][a-zA-Z0-9.]*)/g, '<span class="text-pink-400">&lt;$1</span>')
-    .replace(numbers, '<span class="text-orange-400">$1</span>')
-    .replace(/className=/g, '<span class="text-cyan-400">className</span>=')
-    .replace(/onClick=/g, '<span class="text-cyan-400">onClick</span>=')
-    .replace(/onMouseMove=/g, '<span class="text-cyan-400">onMouseMove</span>=')
-    .replace(/onMouseLeave=/g, '<span class="text-cyan-400">onMouseLeave</span>=');
-
-  return highlighted;
-};
-
-export const PreviewArea = ({ activeComponent }: PreviewAreaProps) => {
+export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) => {
   const [copied, setCopied] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(codeMap[activeComponent] || "");
@@ -53,10 +36,13 @@ export const PreviewArea = ({ activeComponent }: PreviewAreaProps) => {
     .find((item) => item.id === activeComponent);
 
   return (
-    <div className="p-8">
+    <div 
+      className="p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8 transition-all duration-300 ease-out"
+      style={{ marginLeft: sidebarOpen && isDesktop ? 300 : 0 }}
+    >
       <div className="max-w-5xl mx-auto">
         {/* Component Preview */}
-        <div className="relative rounded-2xl border border-border bg-foreground/[0.02] min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div className="relative rounded-xl sm:rounded-2xl border border-border bg-foreground/[0.02] min-h-[250px] sm:min-h-[300px] lg:min-h-[400px] flex items-center justify-center overflow-hidden">
           {/* Grid Background */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -84,10 +70,10 @@ export const PreviewArea = ({ activeComponent }: PreviewAreaProps) => {
         {/* Component Info */}
         <div className="mt-8 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2">
               {activeItem?.name || "Component"}
             </h1>
-            <p className="text-foreground/60">
+            <p className="text-sm sm:text-base text-foreground/60">
               A beautiful {activeItem?.name.toLowerCase()} component with smooth
               animations.
             </p>
@@ -98,50 +84,69 @@ export const PreviewArea = ({ activeComponent }: PreviewAreaProps) => {
           {/* Code Block */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Source Code</h2>
-            <div className="relative rounded-xl bg-[#0d0d0d] border border-border overflow-hidden group">
-              <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
+            <div className="relative rounded-xl bg-zinc-950 border border-zinc-800 overflow-hidden">
+              {/* Header */}
+              <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 bg-zinc-900/50 border-b border-zinc-800">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
                   </div>
-                  <span className="text-sm text-white/50 ml-2">component.tsx</span>
+                  <span className="text-[10px] sm:text-xs text-zinc-500 font-mono hidden sm:inline">{activeItem?.id || "component"}.tsx</span>
                 </div>
                 <button
                   onClick={handleCopy}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-all text-sm"
+                  className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-200 transition-all text-[10px] sm:text-xs font-medium"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span>Copied!</span>
+                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
+                      <span className="text-emerald-400 hidden sm:inline">Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-4 h-4" />
-                      <span>Copy</span>
+                      <Copy className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <span className="hidden sm:inline">Copy code</span>
                     </>
                   )}
                 </button>
               </div>
-              <pre className="p-4 overflow-x-auto text-sm font-mono leading-relaxed">
-                <code 
-                  className="text-white/90"
-                  dangerouslySetInnerHTML={{ __html: highlightCode(codeMap[activeComponent] || "") }}
-                />
-              </pre>
+              {/* Code Content */}
+              <div className="relative">
+                <SyntaxHighlighter
+                  language="tsx"
+                  style={oneDark}
+                  customStyle={{
+                    margin: 0,
+                    padding: "0.75rem",
+                    background: "transparent",
+                    fontSize: "0.75rem",
+                    lineHeight: "1.5",
+                    maxHeight: "350px",
+                    overflow: "auto",
+                  }}
+                  codeTagProps={{
+                    style: {
+                      background: "transparent",
+                    },
+                  }}
+                  showLineNumbers={false}
+                >
+                  {codeMap[activeComponent] || "// No code available"}
+                </SyntaxHighlighter>
+              </div>
             </div>
           </div>
 
           {/* Dependencies */}
           <div>
-            <h2 className="text-lg font-semibold mb-4">Dependencies</h2>
-            <div className="flex gap-2">
-              <span className="px-3 py-1 rounded-full bg-foreground/5 text-sm text-foreground/70">
+            <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Dependencies</h2>
+            <div className="flex flex-wrap gap-2">
+              <span className="px-2.5 sm:px-3 py-1 rounded-full bg-foreground/5 text-xs sm:text-sm text-foreground/70">
                 framer-motion
               </span>
-              <span className="px-3 py-1 rounded-full bg-foreground/5 text-sm text-foreground/70">
+              <span className="px-2.5 sm:px-3 py-1 rounded-full bg-foreground/5 text-xs sm:text-sm text-foreground/70">
                 tailwindcss
               </span>
             </div>

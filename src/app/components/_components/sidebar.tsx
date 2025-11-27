@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/src/lib/utils";
 import { componentRegistry } from "@/src/app/components/_registry";
 
@@ -9,33 +9,61 @@ interface SidebarProps {
   activeComponent: string;
   setActiveComponent: (id: string) => void;
   isOpen: boolean;
+  onToggle: () => void;
 }
 
 export const Sidebar = ({
   activeComponent,
   setActiveComponent,
   isOpen,
+  onToggle,
 }: SidebarProps) => {
   return (
-    <motion.aside
-      initial={{ width: 280 }}
-      animate={{ width: isOpen ? 280 : 0 }}
-      className="h-screen border-r border-border overflow-hidden flex-shrink-0 sticky top-0"
-    >
-      <div className="w-[280px] h-full overflow-y-auto py-6 px-4">
-        {/* Logo */}
-        <div className="flex items-center gap-2 mb-8 px-2">
-          <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
-            <span className="text-background font-bold text-sm">S</span>
-          </div>
-          <span className="font-semibold text-lg">Components</span>
-        </div>
-
-        {/* Navigation */}
+    <AnimatePresence>
+      {isOpen && (
+        <motion.aside
+          initial={{ x: -300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className={cn(
+            "fixed z-40",
+            "bg-background/95 lg:bg-background/80 backdrop-blur-xl",
+            "border-r lg:border border-border lg:rounded-2xl shadow-2xl",
+            "overflow-hidden",
+            // Mobile: full screen overlay
+            "inset-0 w-full h-full",
+            // Desktop: floating centered sidebar
+            "lg:inset-auto lg:left-4 lg:top-1/2 lg:-translate-y-1/2 lg:w-[280px] lg:min-h-[calc(100vh-10rem)] lg:h-auto"
+          )}
+        >
+          <div className="w-full h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
+            {/* Mobile Close Button */}
+            <button
+              onClick={onToggle}
+              className="lg:hidden absolute top-6 right-4 p-2 rounded-lg hover:bg-foreground/10 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+        
+            {/* Navigation */}
         <nav className="space-y-6">
           {componentRegistry.map((category) => (
             <div key={category.category}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50 mb-3 px-2">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/80 mb-3 px-2">
                 {category.category}
               </h3>
               <ul className="space-y-1">
@@ -59,11 +87,11 @@ export const Sidebar = ({
                         )}
                         {item.name}
                       </span>
-                      {item.isFree && (
+                      {/* {item.isFree && (
                         <span className="text-[10px] text-foreground/40">
                           free
                         </span>
-                      )}
+                      )} */}
                     </button>
                   </li>
                 ))}
@@ -73,5 +101,7 @@ export const Sidebar = ({
         </nav>
       </div>
     </motion.aside>
+      )}
+    </AnimatePresence>
   );
 };
