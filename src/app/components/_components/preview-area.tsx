@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { Skeleton } from "@/src/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Check, Expand, Minimize } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -18,6 +19,15 @@ export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) 
   const [copied, setCopied] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  // Show skeleton when activeComponent changes
+  useEffect(() => {
+    // Show skeleton instantly on component change
+    setLoading(true);
+    const timeout = setTimeout(() => setLoading(false), 400);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeComponent]);
 
   useEffect(() => {
     const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
@@ -42,9 +52,9 @@ export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) 
       className="p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8 transition-all duration-300 ease-out"
       style={{ marginLeft: sidebarOpen && isDesktop ? 300 : 0 }}
     >
-      <div className={cn("max-w-5xl mx-auto transition-all duration-300", isFullscreen ? "max-w-full" : "")}>
+      <div className={cn("max-w-5xl mx-auto transition-all duration-300", isFullscreen ? "max-w-full" : "")}> 
         {/* Component Preview */}
-        <div className={cn("relative rounded-xl sm:rounded-2xl border border-border bg-foreground/[0.02] flex items-center justify-center overflow-hidden transition-all duration-300", isFullscreen ? "h-screen" : "h-[250px] sm:h-[300px] lg:h-[400px]")}>
+        <div className={cn("relative rounded-xl sm:rounded-2xl border border-border bg-foreground/[0.02] flex items-center justify-center overflow-hidden transition-all duration-300", isFullscreen ? "h-screen" : "h-[250px] sm:h-[300px] lg:h-[400px]")}> 
           {/* Grid Background */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -54,25 +64,31 @@ export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) 
               backgroundSize: "40px 40px",
             }}
           />
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeComponent}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="relative z-10"
-            >
-              {ActiveComponentRender && <ActiveComponentRender />}
-            </motion.div>
-          </AnimatePresence>
-            <button
-                onClick={() => setIsFullscreen(!isFullscreen)}
-                className="absolute top-2 right-2 p-2 rounded-full bg-black/20 text-white/80 hover:bg-black/40 transition-colors"
-                >
-                {isFullscreen ? <Minimize size={18} /> : <Expand size={18} />}
-            </button>
+          {loading ? (
+            <div className="w-full h-full flex flex-col items-center justify-center gap-6">
+              <Skeleton className="h-10 w-1/2 rounded-lg" />
+              <Skeleton className="h-32 w-full rounded-xl" />
+            </div>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeComponent}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="relative z-10"
+              >
+                {ActiveComponentRender && <ActiveComponentRender />}
+              </motion.div>
+            </AnimatePresence>
+          )}
+          <button
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            className="absolute top-2 right-2 p-2 rounded-full bg-black/20 text-white/80 hover:bg-black/40 transition-colors"
+          >
+            {isFullscreen ? <Minimize size={18} /> : <Expand size={18} />}
+          </button>
         </div>
 
         {/* Component Info */}
