@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Expand, Minimize } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Separator } from "@/src/components/ui/separator";
 import { componentRegistry, componentMap, codeMap } from "@/src/app/components/_registry";
+import { cn } from "@/src/lib/utils";
 
 interface PreviewAreaProps {
   activeComponent: string;
@@ -16,6 +17,7 @@ interface PreviewAreaProps {
 export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) => {
   const [copied, setCopied] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
@@ -40,9 +42,9 @@ export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) 
       className="p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8 transition-all duration-300 ease-out"
       style={{ marginLeft: sidebarOpen && isDesktop ? 300 : 0 }}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className={cn("max-w-5xl mx-auto transition-all duration-300", isFullscreen ? "max-w-full" : "")}>
         {/* Component Preview */}
-        <div className="relative rounded-xl sm:rounded-2xl border border-border bg-foreground/[0.02] min-h-[250px] sm:min-h-[300px] lg:min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div className={cn("relative rounded-xl sm:rounded-2xl border border-border bg-foreground/[0.02] flex items-center justify-center overflow-hidden transition-all duration-300", isFullscreen ? "h-screen" : "h-[250px] sm:h-[300px] lg:h-[400px]")}>
           {/* Grid Background */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -65,6 +67,12 @@ export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) 
               {ActiveComponentRender && <ActiveComponentRender />}
             </motion.div>
           </AnimatePresence>
+            <button
+                onClick={() => setIsFullscreen(!isFullscreen)}
+                className="absolute top-2 right-2 p-2 rounded-full bg-black/20 text-white/80 hover:bg-black/40 transition-colors"
+                >
+                {isFullscreen ? <Minimize size={18} /> : <Expand size={18} />}
+            </button>
         </div>
 
         {/* Component Info */}
@@ -148,6 +156,9 @@ export const PreviewArea = ({ activeComponent, sidebarOpen }: PreviewAreaProps) 
               </span>
               <span className="px-2.5 sm:px-3 py-1 rounded-full bg-foreground/5 text-xs sm:text-sm text-foreground/70">
                 tailwindcss
+              </span>
+              <span className="px-2.5 sm:px-3 py-1 rounded-full bg-foreground/5 text-xs sm:text-sm text-foreground/70">
+                gsap
               </span>
             </div>
           </div>

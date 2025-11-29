@@ -9,7 +9,7 @@ import { cn } from "@/src/lib/utils";
 
 export function Header() {
   const navItems = [
-    { title: "Components", href: "/components" }, 
+    { title: "Components", href: "/components" },
     { title: "Projects", href: "/projects" },
 
 
