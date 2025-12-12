@@ -71,6 +71,7 @@ export const projects = [
     link: "https://paths.shrid.in",
     code: "https://github.com/shridmishra/paths",
     imageSrc: "/projects/paths.png",
+    video:"/projects/video/paths.mp4"
   },
   {
     title: "MediChain",
