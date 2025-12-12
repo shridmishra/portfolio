@@ -9,10 +9,8 @@ import { cn } from "@/src/lib/utils";
 
 export function Header() {
   const navItems = [
-    { title: "Components", href: "/components" },
+    { title: "Components", href: "https://ui.shrid.in", external: true },
     { title: "Projects", href: "/projects" },
-
-
   ];
 
   const [hovered, setHovered] = useState<number | null>(null);
@@ -77,21 +75,41 @@ export function Header() {
         {/* Navigation links on the right */}
         <div className="ml-auto flex flex-wrap items-center justify-end ">
           {navItems.map((item, idx) => (
-            <Link
-              className="text-sm relative px-3 py-1.5 text-muted-foreground font-medium transition-colors duration-300 hover:text-foreground"
-              href={item.href}
-              key={idx}
-              onMouseEnter={() => setHovered(idx)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              {hovered === idx && (
-                <motion.span
-                  layoutId="hovered-span"
-                  className="h-full w-full absolute inset-0 rounded-md bg-muted"
-                />
-              )}
-              <span className="relative z-10">{item.title}</span>
-            </Link>
+            item.external ? (
+              <a
+                className="text-sm relative px-3 py-1.5 text-muted-foreground font-medium transition-colors duration-300 hover:text-foreground"
+                href={item.href}
+                key={idx}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setHovered(idx)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                {hovered === idx && (
+                  <motion.span
+                    layoutId="hovered-span"
+                    className="h-full w-full absolute inset-0 rounded-md bg-muted"
+                  />
+                )}
+                <span className="relative z-10">{item.title}</span>
+              </a>
+            ) : (
+              <Link
+                className="text-sm relative px-3 py-1.5 text-muted-foreground font-medium transition-colors duration-300 hover:text-foreground"
+                href={item.href}
+                key={idx}
+                onMouseEnter={() => setHovered(idx)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                {hovered === idx && (
+                  <motion.span
+                    layoutId="hovered-span"
+                    className="h-full w-full absolute inset-0 rounded-md bg-muted"
+                  />
+                )}
+                <span className="relative z-10">{item.title}</span>
+              </Link>
+            )
           ))}
 
           <div className="pl-2 border-l bg-background/10 border-border/50">
