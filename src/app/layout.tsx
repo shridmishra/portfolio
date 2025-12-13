@@ -7,7 +7,7 @@ const info = {
   name: "Shrid",
   twitter: "@ShridMishra",
   description:
-    "Full-Stack Developer specializing in Next.js, TypeScript, and Solana. Crafting modern, scalable, and high-performance web experiences.",
+    "Design Engineer specializing in creating captivating digital experiences with a focus on aesthetics and functionality.",
   url: "https://shrid.in",
   image: "https://shrid.in/assets/preview.png", 
 };
@@ -21,10 +21,12 @@ export const metadata: Metadata = {
   description: info.description,
   keywords: [
     "Shrid Mishra",
+    "Design Engineer",
+    "Frontend Engineer",
+    "LinkedIn shridmishra",
     "Full-Stack Developer",
     "Next.js",
     "TypeScript",
-    "Solana Developer",
     "Portfolio",
     "Web Development",
     "Frontend Developer",

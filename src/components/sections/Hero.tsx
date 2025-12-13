@@ -3,24 +3,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { FlipWords } from "@/src/components/ui/flip-words";
 import { words } from "@/src/lib/constants";
-import {
-  MapPin,
-  Mail,
-  CodeXml,
-  UserPen,
-} from "lucide-react";
+import { Mail, Calendar, ArrowRight } from "lucide-react";
 import { FaLinkedin, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
-import Text from "@/src/components/ui/text";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/src/components/ui/tooltip";
+import { HoverBorderGradient } from "@/src/components/ui/hover-border-gradient";
+import { motion } from "motion/react";
 
 export const Hero = () => {
   return (
-    <section className="relative  screen-line-before before:-top-px pt-12 group/hero">
+    <section className="relative screen-line-before before:-top-px pt-12 group/hero">
 
 
       {/* Banner Section with Background Image */}
@@ -31,7 +27,7 @@ export const Hero = () => {
             src="/assets/banner.jpeg"
             alt="Banner"
             fill
-            className="object-cover  lg:group-hover/hero:filter-none lg:filter lg:grayscale"
+            className="object-cover lg:group-hover/hero:filter-none lg:filter lg:grayscale transition-all duration-500"
             priority
           />
           {/* Overlay gradient - darker at edges */}
@@ -41,44 +37,49 @@ export const Hero = () => {
 
         {/* Profile Picture - Positioned at bottom */}
         <div className="absolute bottom-0 left-4 sm:left-6 lg:left-8 translate-y-1/2 z-10">
-          <div className="group">
-            <div className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-2 ring-edge">
+          <motion.div 
+            className="group"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <div className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-2 ring-edge hover:ring-4 hover:ring-foreground/20 transition-all duration-300">
               <Image
                 src="/assets/me.jpg"
                 width={144}
                 height={144}
                 alt="Shrid Mishra"
-                className="
-        w-full h-full object-cover 
-        transition-all duration-300
-        lg:group-hover/hero:filter-none lg:filter lg:grayscale
-        
-      "
+                className="w-full h-full object-cover transition-all duration-300 lg:group-hover/hero:filter-none lg:filter lg:grayscale"
                 priority
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       <div className="px-6 sm:px-8 pt-20">
         <div className="max-w-4xl mx-auto">
           {/* Profile Header */}
-          <div className="flex flex-col gap-6 mb-6">
+          <motion.div 
+            className="flex flex-col gap-4 mb-6"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             {/* Name and Title */}
             <div>
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-1 leading-tight flex items-center gap-2" style={{ fontFamily: '"Instrument Serif", serif' }}>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-2 leading-tight flex items-center gap-2" style={{ fontFamily: '"Instrument Serif", serif' }}>
                 Shrid Mishra
-              </div>
+              </h1>
               <div className="flex items-center justify-between gap-4">
                 <FlipWords
                   words={words}
                   className="text-md sm:text-lg text-muted-foreground/80 font-thin"
                 />
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground text-foreground transition-colors">
+                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
                         <FaLinkedin className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -88,7 +89,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className=" hover:text-muted-foreground text-foreground transition-colors">
+                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
                         <FaXTwitter className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -98,7 +99,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className=" hover:text-muted-foreground text-foreground transition-colors">
+                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
                         <FaGithub className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -108,7 +109,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground text-foreground transition-colors">
+                      <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
                         <FaPaperclip className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -119,61 +120,56 @@ export const Hero = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
+          
           <SeparatorLine />
 
-
           {/* Professional Info */}
-          <div className="space-y-1 max-w-2xl mx-auto sm:mx-0 ">
-            <div className="text-muted my-6 text-md lg:text-lg">I love both <span className="text-foreground">Design</span> & <span className="text-foreground">Development</span>. so, That means I can create beautiful and functional websites. I&apos;m always looking for new opportunities to learn and grow.</div>
+          <motion.div 
+            className="space-y-1"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <p className="text-muted-foreground my-6 text-md lg:text-lg max-w-2xl leading-relaxed">
+              I love both <span className="text-foreground font-medium">Design</span> & <span className="text-foreground font-medium">Development</span>. That means I can create beautiful and functional websites. I&apos;m always looking for new opportunities to learn and grow.
+            </p>
 
             <SeparatorLine />
 
-            <div className="my-4">
-              <div className="flex items-start lg:items-center gap-3 ">
-                <CodeXml className="w-5 h-5 text-muted-foreground flex-shrink-0 " />
-                <Text text="Full Stack & Design Engineer" />
+            {/* CTA Section */}
+            <div className="py-6 flex flex-col lg:flex-row items-center justify-center gap-6 ">
+              <h2 className="text-muted-foreground text-xl font-thin sm:text-2xl " style={{ fontFamily: '"Instrument Serif", serif' }}>
+                Let&apos;s build something great together
+              </h2>
+              
+              <div className="flex flex-wrap flex-col lg:flex-row items-center gap-3 sm:gap-4">
+                <Link href="mailto:shridmishra00@gmail.com" className="group/btn">
+                  <HoverBorderGradient
+                    containerClassName="rounded-full"
+                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Email Me</span>
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
+                  </HoverBorderGradient>
+                </Link>
 
-              </div>
+                <span className="text-muted-foreground text-lg" style={{ fontFamily: '"Instrument Serif", serif' }}>or</span>
 
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                <Text text="Mumbai, IN" />
-
-
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                <Link
-                  href="mailto:shridmishra00@gmail.com"
-                  className="text-base sm:text-lg text-foreground/80 hover:text-foreground transition-colors duration-200"
-                >
-                  <Text text="shridmishra00@gmail.com" />
-
+                <Link href="https://cal.com/shridmishra" target="_blank" rel="noopener noreferrer" className="group/btn">
+                  <HoverBorderGradient
+                    containerClassName="rounded-full"
+                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Book a Call</span>
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
+                  </HoverBorderGradient>
                 </Link>
               </div>
-
-              <div className="flex items-center gap-3 text-foreground/80 text-base sm:text-lg">
-                <UserPen className="w-5 h-5 text-foreground/60 flex-shrink-0" />
-                <Text text="21, He/Him" />
-
-
-              </div>
-
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0 pr-1">
-                  <div className="w-2 h-2 bg-accent-foreground rounded-full animate-pulse shadow-sm"></div>
-                </div>
-                <div className="text-lg text-foreground/80 font-medium">
-                  <Text text="Available for Hire" />
-
-                </div>
-              </div>
             </div>
-
-
-          </div>
+          </motion.div>
         </div>
       </div>
 
