@@ -27,7 +27,7 @@ export const Hero = () => {
             src="/assets/banner.jpeg"
             alt="Banner"
             fill
-            className="object-cover lg:group-hover/hero:filter-none lg:filter lg:grayscale transition-all duration-500"
+            className="object-cover transition-all duration-500"
             priority
           />
           {/* Overlay gradient - darker at edges */}
@@ -37,7 +37,7 @@ export const Hero = () => {
 
         {/* Profile Picture - Positioned at bottom */}
         <div className="absolute bottom-0 left-4 sm:left-6 lg:left-8 translate-y-1/2 z-10">
-          <motion.div 
+          <motion.div
             className="group"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -49,7 +49,7 @@ export const Hero = () => {
                 width={144}
                 height={144}
                 alt="Shrid Mishra"
-                className="w-full h-full object-cover transition-all duration-300 lg:group-hover/hero:filter-none lg:filter lg:grayscale"
+                className="w-full h-full object-cover transition-all duration-300"
                 priority
               />
             </div>
@@ -60,7 +60,7 @@ export const Hero = () => {
       <div className="px-6 sm:px-8 pt-20">
         <div className="max-w-4xl mx-auto">
           {/* Profile Header */}
-          <motion.div 
+          <motion.div
             className="flex flex-col gap-4 mb-6"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -79,7 +79,7 @@ export const Hero = () => {
                 <div className="flex items-center gap-2 sm:gap-3">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
+                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
                         <FaLinkedin className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -89,7 +89,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
+                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
                         <FaXTwitter className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -99,7 +99,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
+                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
                         <FaGithub className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -109,7 +109,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-foreground text-muted-foreground transition-all duration-200">
+                      <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
                         <FaPaperclip className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -121,11 +121,11 @@ export const Hero = () => {
               </div>
             </div>
           </motion.div>
-          
+
           <SeparatorLine />
 
           {/* Professional Info */}
-          <motion.div 
+          <motion.div
             className="space-y-1"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -135,40 +135,7 @@ export const Hero = () => {
               I love both <span className="text-foreground font-medium">Design</span> & <span className="text-foreground font-medium">Development</span>. That means I can create beautiful and functional websites. I&apos;m always looking for new opportunities to learn and grow.
             </p>
 
-            <SeparatorLine />
-
-            {/* CTA Section */}
-            <div className="py-6 flex flex-col lg:flex-row items-center justify-center gap-6 ">
-              <h2 className="text-muted-foreground text-xl font-thin sm:text-2xl " style={{ fontFamily: '"Instrument Serif", serif' }}>
-                Let&apos;s build something great together
-              </h2>
-              
-              <div className="flex flex-wrap flex-col lg:flex-row items-center gap-3 sm:gap-4">
-                <Link href="mailto:shridmishra00@gmail.com" className="group/btn">
-                  <HoverBorderGradient
-                    containerClassName="rounded-full"
-                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>Email Me</span>
-                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
-                  </HoverBorderGradient>
-                </Link>
-
-                <span className="text-muted-foreground text-lg" style={{ fontFamily: '"Instrument Serif", serif' }}>or</span>
-
-                <Link href="https://cal.com/shridmishra" target="_blank" rel="noopener noreferrer" className="group/btn">
-                  <HoverBorderGradient
-                    containerClassName="rounded-full"
-                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
-                  >
-                    <Calendar className="w-4 h-4" />
-                    <span>Book a Call</span>
-                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
-                  </HoverBorderGradient>
-                </Link>
-              </div>
-            </div>
+           
           </motion.div>
         </div>
       </div>

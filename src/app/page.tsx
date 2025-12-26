@@ -9,6 +9,9 @@ import { SeparatorLine } from "@/src/components/ui/separator-line";
 import { PageSkeleton } from "@/src/components/ui/loading-skeleton";
 import { Separator } from "../components/ui/separator";
 import DisplacementText from "../components/ui/displacement-text";
+import Link from "next/link";
+import { HoverBorderGradient } from "../components/ui/hover-border-gradient";
+import { ArrowRight, Calendar, Mail } from "lucide-react";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
@@ -56,21 +59,54 @@ const Home = () => {
           </div>
 
           {/* Experience Section */}
-          <div className="px-6 sm:px-8 ">
+          <div className="px-6 sm:px-8 mb-12 ">
             <SeparatorLine />
             <ExperienceSection />
           </div>
 
+ <SeparatorLine />
+
+            {/* CTA Section */}
+            <div className="pt-6 flex flex-col lg:flex-row items-center justify-center gap-6 ">
+              <h2 className="text-foreground text-xl font-thin sm:text-2xl " style={{ fontFamily: '"Instrument Serif", serif' }}>
+                Let&apos;s build something great together
+              </h2>
+
+              <div className="flex flex-wrap flex-col lg:flex-row items-center gap-3 sm:gap-4">
+                <Link href="mailto:shridmishra00@gmail.com" className="group/btn">
+                  <HoverBorderGradient
+                    containerClassName="rounded-full"
+                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Email Me</span>
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
+                  </HoverBorderGradient>
+                </Link>
+
+                <span className="text-muted-foreground text-lg" style={{ fontFamily: '"Instrument Serif", serif' }}>or</span>
+
+                <Link href="https://cal.com/shridmishra" target="_blank" rel="noopener noreferrer" className="group/btn">
+                  <HoverBorderGradient
+                    containerClassName="rounded-full"
+                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Book a Call</span>
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
+                  </HoverBorderGradient>
+                </Link>
+              </div>
+            </div>
           {/* Footer Section */}
           <div
-            className="px-6 sm:px-8 py-10 sm:py-14 relative"
+            className="px-6 sm:px-8 py-10 sm:py-8 relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             <motion.div
               animate={{
                 opacity: isAtBottom ? 1 : 0,
-                filter: isHovered ? "grayscale(0%)" : "grayscale(100%)",
               }}
               transition={{ duration: 1, ease: "easeOut" }}
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-gradient-to-t from-indigo-500/30 via-purple-500/10 to-transparent blur-3xl -z-10 pointer-events-none"

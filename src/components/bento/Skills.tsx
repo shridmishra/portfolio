@@ -5,65 +5,74 @@ import {
   SiTypescript,
   SiPostgresql,
   SiPrisma,
-  SiRust,
   SiReact,
   SiJavascript,
-  SiDocker,
   SiExpress,
   SiMongodb,
+  SiDrizzle,
+  SiTailwindcss,
+  SiFramer,
+  SiRust,
 } from "react-icons/si";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/src/components/ui/tooltip";
+
 import { cn } from "@/src/lib/utils";
+import { TechBadge } from "@/src/components/ui/tech-badge";
 
 const skills = [
   { icon: SiNextdotjs, name: "Next.js", color: "text-foreground" },
   { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
   { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
-  { icon: SiPrisma, name: "Prisma", color: "text-foreground" },
-  { icon: SiRust, name: "Rust", color: "#DEA584" },
-  { icon: SiReact, name: "React", color: "#61DAFB" },
+ { icon: SiRust, name: "Rust", color: "red" },  { icon: SiReact, name: "React", color: "#61DAFB" },
   { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
   { icon: SiExpress, name: "Express", color: "text-foreground" },
-  { icon: SiDocker, name: "Docker", color: "#2496ED" },
   { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
-
+  { icon: SiDrizzle, name: "Drizzle", color: "text-foreground" },
+  { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+  { icon: SiFramer, name: "Framer Motion", color: "text-foreground" },
+  { icon: SiPrisma, name: "Prisma", color: "text-foreground" },
+ 
 ];
 
 export const SkillsCarousel = () => {
+  const row1 = skills.slice(0, 4);
+  const row2 = skills.slice(4, 8);
+  const row3 = skills.slice(8, 12);
+
   return (
     <div className="w-full h-full p-4 flex flex-col group">
-      <h2 className="text-lg font-light mb-4">Skills</h2>
-      <div className="flex flex-wrap gap-6 justify-center items-center flex-1 content-center">
-        {skills.map((skill, idx) => (
-          <SkillItem key={`skill-${idx}`} skill={skill} />
-        ))}
+      <div className="text-lg font-normal flex justify-start items-start px-4 -mt-2">Tech Stack</div>
+      <div className="flex flex-col gap-3 px-4 justify-center items-center flex-1 content-center">
+        <div className="flex flex-nowrap gap-2 justify-start items-center w-full">
+          {row1.map((skill, idx) => (
+            <TechBadge
+              key={`skill-r1-${idx}`}
+              name={skill.name}
+              icon={skill.icon}
+              color={skill.color}
+            />
+          ))}
+        </div>
+        <div className="flex flex-nowrap gap-2 justify-start items-center w-full">
+          {row2.map((skill, idx) => (
+            <TechBadge
+              key={`skill-r2-${idx}`}
+              name={skill.name}
+              icon={skill.icon}
+              color={skill.color}
+            />
+          ))}
+        </div>
+        <div className="flex flex-nowrap gap-2 justify-start items-center w-full">
+          {row3.map((skill, idx) => (
+            <TechBadge
+              key={`skill-r3-${idx}`}
+              name={skill.name}
+              icon={skill.icon}
+              color={skill.color}
+            />
+          ))}
+        </div>
       </div>
     </div>
-  );
-};
-
-const SkillItem = ({ skill }: { skill: typeof skills[0] }) => {
-  const Icon = skill.icon;
-  const isHexColor = skill.color.startsWith("#");
-
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <div className="cursor-pointer hover:scale-110 transition-all duration-200 grayscale group-hover:grayscale-0">
-          <Icon
-            size={32}
-            className={cn("flex-shrink-0", !isHexColor && skill.color)}
-            style={isHexColor ? { color: skill.color } : undefined}
-          />
-        </div>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>{skill.name}</p>
-      </TooltipContent>
-    </Tooltip>
   );
 };

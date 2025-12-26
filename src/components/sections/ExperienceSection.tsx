@@ -22,7 +22,7 @@ export const ExperienceSection = () => {
             My professional journey building innovative solutions.
           </p>
         </header>
-        
+
         <SeparatorLine />
 
         {/* Experience Cards */}
@@ -51,57 +51,57 @@ interface ExperienceCardProps {
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
   return (
     <div>
-        <MagicCard  className="bg-card/30 backdrop-blur-sm rounded-sm">
-      <div className="p-4 lg:p-8  flex flex-col gap-6">
-        <div className="flex items-start gap-6">
-          {/* Company Logo */}
-          <Link
-            href={experience.company_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-shrink-0 transition-transform hover:scale-105"
-          >
-            <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-sm overflow-hidden border border-edge bg-background shadow-sm">
-              <Image
-                src={experience.company_logo}
-                alt={`${experience.company_name} logo`}
-                width={80}
-                height={80}
-                className="w-full h-full object-cover lg:group-hover:filter-none lg:filter lg:grayscale"
-              />
-            </div>
-          </Link>
-
-          {/* Experience Details */}
-          <div className="flex-1 ">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-              <div>
-                <h3 className="text-lg lg:text-xl font-normal text-foreground leading-tight mb-2">
-                  {experience.job_title}
-                </h3>
-                <p className="text-base text-muted-foreground font-medium">
-                  {experience.company_name}
-                </p>
+      <MagicCard className="bg-card/30 backdrop-blur-sm rounded-sm">
+        <div className="p-4 lg:p-8  flex flex-col gap-6">
+          <div className="flex items-start gap-6">
+            {/* Company Logo */}
+            <Link
+              href={experience.company_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 transition-transform hover:scale-105"
+            >
+              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-sm overflow-hidden border border-edge bg-background shadow-sm">
+                <Image
+                  src={experience.company_logo}
+                  alt={`${experience.company_name} logo`}
+                  width={80}
+                  height={80}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="flex items-center text-center px-4 text-sm text-foreground bg-muted py-1.5 rounded-full border border-edge max-w-32">
-                
-                <span className="whitespace-nowrap font-medium">
-                  {experience.duration}
-                </span>
-              </span>
-            </div>
+            </Link>
 
-            {/* Description */}
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-              {experience.description}
-            </p>
+            {/* Experience Details */}
+            <div className="flex-1 ">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                <div>
+                  <h3 className="text-lg lg:text-xl font-normal text-foreground leading-tight mb-2">
+                    {experience.job_title}
+                  </h3>
+                  <p className="text-base text-muted-foreground font-medium">
+                    {experience.company_name}
+                  </p>
+                </div>
+                <span className="flex items-center text-center px-4 text-sm text-foreground bg-muted py-1.5 rounded-full border border-edge max-w-32">
+
+                  <span className="whitespace-nowrap font-medium">
+                    {experience.duration}
+                  </span>
+                </span>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                {experience.description}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </MagicCard>
-    
+      </MagicCard>
+
     </div>
 
-  
+
   );
 };

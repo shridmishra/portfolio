@@ -3,26 +3,26 @@ import { ArrowUpRight } from "lucide-react";
 
 export const FolderIcon = () => {
     return (
-        <a 
-            href="https://ui.shrid.in" 
-            target="_blank" 
+        <a
+            href="https://ui.shrid.in"
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-4 group cursor-pointer relative"
         >
             {/* URL on hover - top left */}
-            <div className="absolute -bottom-8 -left-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">ui.shrid.in</span>
-            </div>
-            
-            {/* Arrow on hover - top right */}
-            <div className="absolute -top-8 -right-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ArrowUpRight className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
+            <div className="absolute -top-12 -left-12  opacity-100 transition-opacity duration-300">
+                <span className="text-md text-foreground truncate">UI Library</span>
             </div>
 
-            <div className="relative w-20 h-16 perspective-1000">
+            {/* Arrow on hover - top right */}
+            <div className="absolute -top-12 -right-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ArrowUpRight className="w-4 h-4 text-foreground" />
+            </div>
+
+            <div className="relative top-6 w-20 h-16 perspective-1000">
                 {/* Folder Back */}
                 <div
-                    className="absolute bottom-0 w-full h-6/6 bg-neutral-400 dark:bg-neutral-800 shadow-lg transform transition-transform duration-300 origin-bottom"
+                    className="absolute bottom-0 w-full h-6/6 bg-foreground dark:bg-neutral-800 shadow-lg transform transition-transform duration-300 origin-bottom"
                     style={{
                         clipPath: "path('M 0 6 Q 0 0 6 0 L 25 0 Q 35 0 40 10 L 74 10 Q 80 10 80 16 L 80 47 Q 80 53 74 53 L 6 53 Q 0 53 0 47 Z')",
                     }}
@@ -65,11 +65,7 @@ export const FolderIcon = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-1 ml-8 text-md text-neutral-600 dark:text-neutral-400">
-                <p className="relative hover:text-neutral-900 dark:hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Landing Pages</p>
-                <p className="relative hover:text-neutral-900 dark:hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Components</p>
-                <p className="relative hover:text-neutral-900 dark:hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Hero Sections</p>
-            </div>
+
         </a>
     );
 };

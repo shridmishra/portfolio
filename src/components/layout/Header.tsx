@@ -9,6 +9,7 @@ import { cn } from "@/src/lib/utils";
 
 export function Header() {
   const navItems = [
+    { title: "Resume", href: "/resume.pdf", external: true, download: true },
     { title: "Components", href: "https://ui.shrid.in", external: true },
     { title: "Projects", href: "/projects" },
   ];
@@ -77,11 +78,21 @@ export function Header() {
           {navItems.map((item, idx) => (
             item.external ? (
               <a
-                className="text-sm relative px-3 py-1.5 text-muted-foreground font-medium transition-colors duration-300 hover:text-foreground"
+                className="text-sm relative px-3 py-1.5 text-foreground font-medium transition-colors duration-300 hover:text-muted-foreground"
                 href={item.href}
                 key={idx}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  if (item.download) {
+                    const link = document.createElement("a");
+                    link.href = item.href;
+                    link.download = "Resume.pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }
+                }}
                 onMouseEnter={() => setHovered(idx)}
                 onMouseLeave={() => setHovered(null)}
               >
@@ -95,7 +106,7 @@ export function Header() {
               </a>
             ) : (
               <Link
-                className="text-sm relative px-3 py-1.5 text-muted-foreground font-medium transition-colors duration-300 hover:text-foreground"
+                className="text-sm relative px-3 py-1.5 text-foreground font-medium transition-colors duration-300 hover:text-muted-foreground"
                 href={item.href}
                 key={idx}
                 onMouseEnter={() => setHovered(idx)}

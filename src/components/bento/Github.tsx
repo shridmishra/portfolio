@@ -181,7 +181,7 @@ export default function GitHubContributionGraph() {
                     <Tooltip key={dayIndex}>
                       <TooltipTrigger asChild>
                         <div
-                          className={`w-2.5 h-2.5 border rounded-xs cursor-pointer transition-all duration-150 hover:border-gray-400 grayscale group-hover:grayscale-0 ${getContributionIntensity(
+                          className={`w-2.5 h-2.5 border rounded-xs cursor-pointer transition-all duration-150 hover:border-gray-400 ${getContributionIntensity(
                             day.contributionCount
                           )}`}
                         />
@@ -207,11 +207,11 @@ export default function GitHubContributionGraph() {
               <div className="flex items-center gap-2 text-xs text-secondary">
                 <span>Less</span>
                 <div className="flex gap-1">
-                  <div className="w-2.5 h-2.5 bg-secondary rounded-sm grayscale group-hover:grayscale-0"></div>
-                  <div className="w-2.5 h-2.5 bg-green-200 dark:bg-green-900 rounded-sm grayscale group-hover:grayscale-0"></div>
-                  <div className="w-2.5 h-2.5 bg-green-400 dark:bg-green-700 rounded-sm grayscale group-hover:grayscale-0"></div>
-                  <div className="w-2.5 h-2.5 bg-green-600 dark:bg-green-500 rounded-sm grayscale group-hover:grayscale-0"></div>
-                  <div className="w-2.5 h-2.5 bg-green-800 dark:bg-green-300 rounded-sm grayscale group-hover:grayscale-0"></div>
+                  <div className="w-2.5 h-2.5 bg-secondary rounded-sm"></div>
+                  <div className="w-2.5 h-2.5 bg-green-200 dark:bg-green-900 rounded-sm"></div>
+                  <div className="w-2.5 h-2.5 bg-green-400 dark:bg-green-700 rounded-sm"></div>
+                  <div className="w-2.5 h-2.5 bg-green-600 dark:bg-green-500 rounded-sm"></div>
+                  <div className="w-2.5 h-2.5 bg-green-800 dark:bg-green-300 rounded-sm"></div>
                 </div>
                 <span>More</span>
               </div>

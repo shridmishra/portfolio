@@ -4,6 +4,7 @@ export const words = [
   "Design Engineer",
   "FullStack Developer",
   "Solana Developer",
+  "Frontend Specialist",
 ];
 
 export const experienceData: I_Experience[] = [
@@ -12,12 +13,12 @@ export const experienceData: I_Experience[] = [
     company_logo: "/assets/beiyo.png",
     company_name: "Beiyo",
     duration: "2024 - 2025",
-    job_title: "Backend Developer",
+    job_title: "FullStack Developer",
     description: "",
   },
   {
     company_link: "#",
-    company_logo: "/assets/freelance-icon.webp",
+    company_logo: "/assets/upwork-icon.png",
     company_name: "Freelance",
     duration: "2023 - Present",
     job_title: "FullStack Developer",
@@ -26,9 +27,41 @@ export const experienceData: I_Experience[] = [
 ];
 
 export const projects = [
+   {
+    title: "Paths AI",
+    description: "Structured learning journeys created by AI.",
+    tech: ["AI","trpc","redis","Next.js"],
+    status: "In Development",
+    year: "2025",
+    link: "https://paths.shrid.in",
+    code: "https://github.com/shridmishra/paths",
+    imageSrc: "/projects/paths.png",
+    video:"/projects/video/paths.mp4"
+  },
+   {
+    title: "CRM",
+    description: "Customer Relationship Management app.",
+    tech: ["Next.js","TypeScript","Drizzle"],
+    status: "In Development",
+    year: "2025",
+    link: "https://crm.shrid.in",
+    code: "https://github.com/shridmishra",
+    imageSrc: "/projects/crm.png",
+    video:"/projects/video/crm.mp4"
+  },
   {
+    title: "Project Manager",
+    description: "Project Management app with clean UI dashboards.",
+    tech: ["Next.js","TypeScript","Drizzle"],
+    status: "In Development",
+    year: "2025",
+    link: "https://projects.shrid.in",
+    code: "https://github.com/shridmishra/project-management",
+    imageSrc: "/projects/projects.png",
+    video:"/projects/video/projects.mp4"
+  },{
     title: "Practice JS",
-    description: "JavaScript learning platform with challenges.",
+    description: "Leetcode like questions but for FullStack Development.",
     tech: ["Next.js", "TypeScript", "MongoDB"],
     status: "Live",
     year: "2025",
@@ -51,7 +84,7 @@ export const projects = [
   },
   {
     title: "Grocery Store",
-    description: "Shopping app with cart and payments.",
+    description: "Shopping app with cart, admin panel and payments.",
     tech: ["React", "Stripe", "MongoDB"],
     status: "Live",
     year: "2025",
@@ -62,17 +95,7 @@ export const projects = [
 
 
   },
-  {
-    title: "Paths",
-    description: "Structured learning journeys.",
-    tech: ["Monorepo","Next.js","FrontEnd"],
-    status: "In Development",
-    year: "2025",
-    link: "https://paths.shrid.in",
-    code: "https://github.com/shridmishra/paths",
-    imageSrc: "/projects/paths.png",
-    video:"/projects/video/paths.mp4"
-  },
+ 
   {
     title: "MediChain",
     description: "Solana platform for secure health data.",
