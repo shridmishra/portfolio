@@ -11,7 +11,7 @@ export default function BentoGrid() {
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <Separator />
+    
 
 
 
@@ -23,7 +23,7 @@ export default function BentoGrid() {
         </div>
 
         {/* Top Right - Skills */}
-        <div className="bg-card rounded-xl shadow-md border border-edge overflow-hidden flex items-center justify-center min-h-[120px] md:min-h-[180px] md:col-span-2">
+        <div className="bg-card rounded-xl shadow-md border border-edge overflow-hidden flex items-center justify-center min-h-[140px] md:min-h-[180px] md:col-span-2">
           <SkillsCarousel />
         </div>
 

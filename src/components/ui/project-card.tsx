@@ -30,18 +30,16 @@ export const ProjectCard = ({
   return (
     <BorderFrame className="">
       <div
+        onClick={onClick}
         className="
         group relative flex flex-col border border-edge 
-         overflow-hidden bg-background 
+         overflow-hidden bg-background cursor-pointer
         hover:border-border transition-colors
       "
       >
         {/* Image */}
         <div className="p-2 pb-0"> {/* padding around image */}
-          <div
-            onClick={onClick}
-            className="cursor-pointer block overflow-hidden"
-          >
+          <div className="block overflow-hidden">
             <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden">
               <Image
                 src={imageSrc}
@@ -64,22 +62,9 @@ export const ProjectCard = ({
         {/* Content */}
         <div className="p-5 flex flex-col flex-1">
           <header className="mb-2">
-            {link ? (
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline decoration-border underline-offset-4"
-              >
-                <h3 className="text-lg font-normal tracking-tight text-foreground">
-                  {title}
-                </h3>
-              </a>
-            ) : (
-              <h3 className="text-lg font-normal tracking-tight text-foreground">
-                {title}
-              </h3>
-            )}
+            <h3 className="text-lg font-normal tracking-tight text-foreground">
+              {title}
+            </h3>
           </header>
 
           <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
@@ -108,7 +93,8 @@ export const ProjectCard = ({
                 href={source}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted hover:text-primary transition-colors"
+                onClick={(e) => e.stopPropagation()}
+                className="text-foreground/80 hover:text-muted-foreground transition-colors"
               >
                 <svg
                   className="w-5 h-5"

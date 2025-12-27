@@ -1,9 +1,102 @@
 import { I_Experience } from "@/src/types/type";
+import { IconType } from "react-icons";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiReact,
+  SiTailwindcss,
+  SiPostgresql,
+  SiMongodb,
+  SiVercel,
+  SiSolana,
+  SiRust,
+  SiNodedotjs,
+  SiSocketdotio,
+  SiExpress,
+  SiStripe,
+  SiFramer,
+  SiJavascript,
+  SiDrizzle,
+  SiVite,
+} from "react-icons/si";
+import { DiRedis } from "react-icons/di";
+import {
+  TbBrandOpenai,
+  TbApi,
+  TbChartLine,
+  TbAnchor,
+  TbTestPipe,
+  TbLayoutGrid,
+  TbPalette,
+  TbFileTypography,
+} from "react-icons/tb";
+
+// Technology icons and colors mapping
+export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
+  // Frameworks
+  "Next.js": { icon: SiNextdotjs, color: "#ffffff" },
+  "React": { icon: SiReact, color: "#61DAFB" },
+  
+  // Languages
+  "TypeScript": { icon: SiTypescript, color: "#3178C6" },
+  "JavaScript": { icon: SiJavascript, color: "#F7DF1E" },
+  "Rust": { icon: SiRust, color: "#DEA584" },
+  
+  // Styling
+  "Tailwind CSS": { icon: SiTailwindcss, color: "#06B6D4" },
+  "Framer": { icon: SiFramer, color: "#0055FF" },
+  "Framer Motion": { icon: SiFramer, color: "#0055FF" },
+  "NeoBrutalism": { icon: TbPalette, color: "#FF6B6B" },
+  
+  // Databases
+  "PostgreSQL": { icon: SiPostgresql, color: "#4169E1" },
+  "MongoDB": { icon: SiMongodb, color: "#47A248" },
+  "Redis": { icon: DiRedis, color: "#DC382D" },
+  "Drizzle": { icon: SiDrizzle, color: "#C5F74F" },
+  
+  // Backend
+  "Node.js": { icon: SiNodedotjs, color: "#339933" },
+  "Express": { icon: SiExpress, color: "#ffffff" },
+  "Socket.io": { icon: SiSocketdotio, color: "#010101" },
+  "trpc": { icon: TbApi, color: "#2596BE" },
+  "TRPC": { icon: TbApi, color: "#2596BE" },
+  "BetterAuth": { icon: TbApi, color: "#10B981" },
+  "Vite": { icon: SiVite, color: "#10B981" },
+  
+  // Blockchain
+  "Solana": { icon: SiSolana, color: "#9945FF" },
+  "Anchor": { icon: TbAnchor, color: "#14F195" },
+  
+  // AI & APIs
+  "AI": { icon: TbBrandOpenai, color: "#10A37F" },
+  "YouTube API": { icon: TbApi, color: "#FF0000" },
+  "CoinGecko API": { icon: TbApi, color: "#8BC53F" },
+  "Axios": { icon: TbApi, color: "#5A29E4" },
+  
+  // Deployment
+  "Vercel": { icon: SiVercel, color: "#ffffff" },
+  
+  // Payments
+  "Stripe": { icon: SiStripe, color: "#635BFF" },
+  
+  // Charts & UI
+  "Chart.js": { icon: TbChartLine, color: "#FF6384" },
+  "ReCharts": { icon: TbChartLine, color: "#22C55E" },
+  "RGL": { icon: TbLayoutGrid, color: "#8B5CF6" },
+  "Zustland": { icon: TbLayoutGrid, color: "#453F39" },
+  
+  // Testing
+  "Mocha": { icon: TbTestPipe, color: "#8D6748" },
+  
+  // Editor & Content
+  "TipTap": { icon: TbFileTypography, color: "#68D391" },
+  "MDX": { icon: TbFileTypography, color: "#FCB32C" },
+  "Framer Motion  ": { icon: SiFramer, color: "#0055FF" },
+};
 
 export const words = [
   "Design Engineer",
   "FullStack Developer",
-  "Solana Developer",
   "Frontend Specialist",
 ];
 
@@ -30,18 +123,18 @@ export const projects = [
    {
     title: "Paths AI",
     description: "Structured learning journeys created by AI.",
-    tech: ["AI","trpc","redis","Next.js"],
+    tech: ["AI","TRPC","Redis","Next.js","React","TypeScript","PostgreSQL"],
     status: "In Development",
     year: "2025",
     link: "https://paths.shrid.in",
     code: "https://github.com/shridmishra/paths",
-    imageSrc: "/projects/paths.png",
+    imageSrc: "/projects/path.png",
     video:"/projects/video/paths.mp4"
   },
    {
     title: "CRM",
     description: "Customer Relationship Management app.",
-    tech: ["Next.js","TypeScript","Drizzle"],
+    tech: ["Next.js","TypeScript","React","Drizzle","PostgreSQL","BetterAuth",],
     status: "In Development",
     year: "2025",
     link: "https://crm.shrid.in",
@@ -52,7 +145,7 @@ export const projects = [
   {
     title: "Project Manager",
     description: "Project Management app with clean UI dashboards.",
-    tech: ["Next.js","TypeScript","Drizzle"],
+    tech: ["Next.js","TypeScript","PostgreSQL","Drizzle","React","Tailwind CSS"],
     status: "In Development",
     year: "2025",
     link: "https://projects.shrid.in",
@@ -62,12 +155,12 @@ export const projects = [
   },{
     title: "Practice JS",
     description: "Leetcode like questions but for FullStack Development.",
-    tech: ["Next.js", "TypeScript", "MongoDB"],
+    tech: ["Next.js", "TypeScript", "MongoDB","React","Tailwind CSS","Framer Motion"],
     status: "Live",
     year: "2025",
     link: "https://practicejs.shrid.in",
     code: "https://github.com/shridmishra/practicejs",
-    imageSrc: "/projects/practicejs.png",
+    imageSrc: "/projects/js.png",
     video: "/projects/video/practicejs.mp4",
   },
   {
@@ -85,7 +178,7 @@ export const projects = [
   {
     title: "Grocery Store",
     description: "Shopping app with cart, admin panel and payments.",
-    tech: ["React", "Stripe", "MongoDB"],
+    tech: ["React", "Stripe", "MongoDB","JavaScript","Tailwind CSS","Vite"],
     status: "Live",
     year: "2025",
     link: "https://grocery.shrid.in",

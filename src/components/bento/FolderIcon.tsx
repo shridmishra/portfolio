@@ -10,16 +10,16 @@ export const FolderIcon = () => {
             className="flex items-center gap-4 group cursor-pointer relative"
         >
             {/* URL on hover - top left */}
-            <div className="absolute -top-12 -left-12  opacity-100 transition-opacity duration-300">
-                <span className="text-md text-foreground truncate">UI Library</span>
+            <div className="absolute -top-8 -left-8 md:-top-12 md:-left-12 opacity-100 transition-opacity duration-300">
+                <span className="text-xs ml-10 md:ml-0 md:text-md text-foreground truncate">UI Library</span>
             </div>
 
             {/* Arrow on hover - top right */}
-            <div className="absolute -top-12 -right-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ArrowUpRight className="w-4 h-4 text-foreground" />
+            <div className="absolute -top-8 -right-8 md:-top-12 md:-right-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4 text-foreground" />
             </div>
 
-            <div className="relative top-6 w-20 h-16 perspective-1000">
+            <div className="relative top-4 md:top-6 w-16 h-12 md:w-20 md:h-16 perspective-1000 scale-75 md:scale-100">
                 {/* Folder Back */}
                 <div
                     className="absolute bottom-0 w-full h-6/6 bg-foreground dark:bg-neutral-800 shadow-lg transform transition-transform duration-300 origin-bottom"
@@ -59,7 +59,7 @@ export const FolderIcon = () => {
                     }}
                 >
                     <div
-                        className="w-full h-full bg-neutral-200 dark:bg-neutral-900 bg-gradient-to-b from-black/10 dark:from-white/20 to-transparent backdrop-blur-lg flex items-center justify-center overflow-hidden rounded-lg"
+                        className="w-full h-full bg-neutral-200 dark:bg-neutral-900 bg-gradient-to-b from-black/10 dark:from-white/20 to-transparent backdrop-blur-lg flex items-center justify-center overflow-hidden rounded-xs md:rounded-lg"
                     >
                     </div>
                 </div>

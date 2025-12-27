@@ -9,7 +9,6 @@ import { cn } from "@/src/lib/utils";
 
 export function Header() {
   const navItems = [
-    { title: "Resume", href: "/resume.pdf", external: true, download: true },
     { title: "Components", href: "https://ui.shrid.in", external: true },
     { title: "Projects", href: "/projects" },
   ];
@@ -83,16 +82,6 @@ export function Header() {
                 key={idx}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  if (item.download) {
-                    const link = document.createElement("a");
-                    link.href = item.href;
-                    link.download = "Resume.pdf";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }
-                }}
                 onMouseEnter={() => setHovered(idx)}
                 onMouseLeave={() => setHovered(null)}
               >

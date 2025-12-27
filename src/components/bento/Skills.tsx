@@ -22,7 +22,7 @@ const skills = [
   { icon: SiNextdotjs, name: "Next.js", color: "text-foreground" },
   { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
   { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
- { icon: SiRust, name: "Rust", color: "red" },  { icon: SiReact, name: "React", color: "#61DAFB" },
+  { icon: SiRust, name: "Rust", color: "red" }, { icon: SiReact, name: "React", color: "#61DAFB" },
   { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
   { icon: SiExpress, name: "Express", color: "text-foreground" },
   { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
@@ -30,7 +30,7 @@ const skills = [
   { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
   { icon: SiFramer, name: "Framer Motion", color: "text-foreground" },
   { icon: SiPrisma, name: "Prisma", color: "text-foreground" },
- 
+
 ];
 
 export const SkillsCarousel = () => {
@@ -39,10 +39,10 @@ export const SkillsCarousel = () => {
   const row3 = skills.slice(8, 12);
 
   return (
-    <div className="w-full h-full p-4 flex flex-col group">
-      <div className="text-lg font-normal flex justify-start items-start px-4 -mt-2">Tech Stack</div>
-      <div className="flex flex-col gap-3 px-4 justify-center items-center flex-1 content-center">
-        <div className="flex flex-nowrap gap-2 justify-start items-center w-full">
+    <div className="w-full h-full p-2 md:p-4 flex flex-col group">
+      <div className="text-sm md:text-lg font-normal flex justify-start items-start px-2 md:px-4 -mt-1 md:-mt-2">Tech Stack</div>
+      <div className="flex flex-col gap-1.5 md:gap-3 px-2 md:px-4 justify-center items-center flex-1 content-center">
+        <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
           {row1.map((skill, idx) => (
             <TechBadge
               key={`skill-r1-${idx}`}
@@ -52,7 +52,7 @@ export const SkillsCarousel = () => {
             />
           ))}
         </div>
-        <div className="flex flex-nowrap gap-2 justify-start items-center w-full">
+        <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
           {row2.map((skill, idx) => (
             <TechBadge
               key={`skill-r2-${idx}`}
@@ -62,7 +62,7 @@ export const SkillsCarousel = () => {
             />
           ))}
         </div>
-        <div className="flex flex-nowrap gap-2 justify-start items-center w-full">
+        <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
           {row3.map((skill, idx) => (
             <TechBadge
               key={`skill-r3-${idx}`}

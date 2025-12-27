@@ -20,7 +20,7 @@ export const Hero = () => {
 
 
       {/* Banner Section with Background Image */}
-      <div className="relative h-48 sm:h-56 md:h-64 overflow-visible">
+      <div className="relative h-28 sm:h-16 md:h-36 overflow-visible">
         {/* Background Image */}
         <div className="absolute inset-0 ">
           <Image
@@ -74,7 +74,7 @@ export const Hero = () => {
               <div className="flex items-center justify-between gap-4">
                 <FlipWords
                   words={words}
-                  className="text-md sm:text-lg text-muted-foreground/80 font-thin"
+                  className="text-md sm:text-lg hidden sm:block text-muted-foreground/80 font-thin"
                 />
                 <div className="flex items-center gap-2 sm:gap-3">
                   <Tooltip>
@@ -109,12 +109,12 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
-                        <FaPaperclip className="w-5 h-5" />
-                      </Link>
+                      <a href="/resume.pdf" download="Shrid_Mishra_Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-2 py-1 flex items-center justify-center border border-2 gap-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
+                        <FaPaperclip className="w-4 h-4" /> <div>Resume</div>
+                      </a>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Resume</p>
+                      <div>Click To Download</div>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -135,7 +135,7 @@ export const Hero = () => {
               I love both <span className="text-foreground font-medium">Design</span> & <span className="text-foreground font-medium">Development</span>. That means I can create beautiful and functional websites. I&apos;m always looking for new opportunities to learn and grow.
             </p>
 
-           
+
           </motion.div>
         </div>
       </div>

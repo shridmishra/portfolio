@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "./button";
 import Image from "next/image";
+import { TechBadge } from "@/src/components/ui/tech-badge";
+import { TECH_ICONS } from "@/src/lib/constants";
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -30,13 +32,13 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    
+
     if (isOpen) {
       setIsVideoLoading(true);
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleEsc);
     }
-    
+
     return () => {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleEsc);
@@ -99,18 +101,18 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                       className="object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                        <span className="text-white/80 text-sm font-medium px-3 py-1 bg-black/50 rounded-full backdrop-blur-md">
-                            No video preview available
-                        </span>
+                      <span className="text-white/80 text-sm font-medium px-3 py-1 bg-black/50 rounded-full backdrop-blur-md">
+                        No video preview available
+                      </span>
                     </div>
                   </div>
                 )}
-                
+
                 <button
                   onClick={onClose}
                   className="
                     absolute top-4 right-4 p-2.5 
-                    rounded-full bg-black/20 backdrop-blur-md border border-white/10
+                    rounded-full bg-black/20 backdrop-blur-md
                     text-white/90 hover:bg-black/40 hover:text-white hover:scale-105
                     transition-all duration-200 z-20
                   "
@@ -154,19 +156,17 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                 <div className="space-y-4">
                   <h3 className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">Technologies</h3>
                   <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="
-                          px-3 py-1.5 text-xs font-medium 
-                          bg-muted/50 text-foreground/80
-                          border border-border/50 rounded-full
-                          hover:bg-muted hover:border-border transition-colors
-                        "
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                    {project.tech.map((tech) => {
+                      const techIcon = TECH_ICONS[tech];
+                      return (
+                        <TechBadge
+                          key={tech}
+                          name={tech}
+                          icon={techIcon?.icon}
+                          color={techIcon?.color}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               </div>
