@@ -111,6 +111,11 @@ html {
   @apply relative after:absolute after:bottom-0 after:left-0 after:-z-1 after:h-px after:w-full after:bg-border/30 lg:after:hidden;
 }
 
+/* Custom reusable shadow utility for badges */
+@utility shadow-badge {
+  @apply shadow-[0_1px_1px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.05),0_2px_3px_rgba(0,0,0,0.04)] dark:bg-secondary/80 dark:border dark:border-white/[0.15] dark:shadow-[0_4px_12px_rgba(0,0,0,0.6),0_1px_3px_rgba(0,0,0,0.5)];
+}
+
 /* 4. Dark mode support using `class="dark"` */
 @custom-variant dark (&:where(.dark, .dark *));
 

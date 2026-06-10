@@ -20,7 +20,7 @@ export const ProjectsSection = () => {
     <section>
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <Title title="Proof Of Work" subtitle="A showcase of my work in full-stack & blockchain applications." />
+        <Title title="Proof Of Work" subtitle="A showcase of my work in full-stack applications." />
         
    <SeparatorLine />
 

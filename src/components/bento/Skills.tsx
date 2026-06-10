@@ -40,8 +40,7 @@ export const SkillsCarousel = () => {
 
   return (
     <div className="w-full h-full p-2 md:p-4 flex flex-col group">
-      <div className="text-sm md:text-lg font-normal flex justify-start items-start px-2 md:px-4 -mt-1 md:-mt-2">Tech Stack</div>
-      <div className="flex flex-col gap-1.5 md:gap-3 px-2 md:px-4 justify-center items-center flex-1 content-center">
+      <div className="flex flex-col gap-2 md:gap-4 px-2 md:px-4 justify-center items-center flex-1 content-center">
         <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
           {row1.map((skill, idx) => (
             <TechBadge

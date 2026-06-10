@@ -96,7 +96,7 @@ export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
 
 export const words = [
   "Design Engineer",
-  "FullStack Developer",
+  "Full-Stack Developer",
   "Frontend Specialist",
 ];
 

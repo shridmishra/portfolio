@@ -131,11 +131,11 @@ export const Hero = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="text-muted-foreground my-6 text-md lg:text-lg max-w-2xl leading-relaxed">
-              I love both <span className="text-foreground font-medium">Design</span> & <span className="text-foreground font-medium">Development</span>. That means I can create beautiful and functional websites. I&apos;m always looking for new opportunities to learn and grow.
+            <p className="text-foreground/80 my-6 text-md lg:text-lg max-w-2xl leading-relaxed">
+              I build full-stack web products end-to-end. I do both <span className="text-foreground/90 font-medium">Design</span> & <span className="text-foreground/90 font-medium">Development</span>.
+              <br />
+              That means I can create beautiful and functional websites.
             </p>
-
-
           </motion.div>
         </div>
       </div>
