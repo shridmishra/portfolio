@@ -50,13 +50,16 @@
   font-display: swap;
 }
 
-@import "tailwindcss";/* at the top of your global styles file */
-@source "./components/**/*.{js,jsx,ts,tsx}";
+@import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+
+/* at the top of your global styles file */
+@source "./components/**/*.{js,jsx,ts,tsx}";
 
 @theme {
   --font-sans: "Satoshi", sans-serif;
-   
+
 }
 
 /* 4. Global styles */
@@ -69,12 +72,12 @@
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
   }
-  
+
   /* Improved readability for body text */
   p {
     line-height: 1.7;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     font-weight: 600;
@@ -247,6 +250,7 @@ html {
   --color-text-muted: var(--text-muted);
   --color-text-inverted: var(--text-inverted);
   --color-text-on-primary: var(--text-on-primary);
+  --color-line: color-mix(in oklab, var(--border) 64%, var(--background));
 }
 
 /* 8. Semantic utility classes */
@@ -304,11 +308,11 @@ html {
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     @apply bg-muted rounded-full;
   }
@@ -400,12 +404,12 @@ html {
   .tech-badge {
     @apply px-2.5 py-1 text-xs font-medium bg-secondary/50 text-secondary-foreground rounded-md border border-edge;
   }
-  
+
   /* Separator with diagonal pattern */
   .separator-pattern {
     @apply relative border-t border-b border-edge;
   }
-  
+
   .separator-pattern::before {
     content: "";
     @apply absolute -left-[100vw] -z-1 h-full w-[200vw];
@@ -456,4 +460,36 @@ html {
 
 .animate-gradient {
   animation: gradient 3s ease infinite;
+}
+
+@utility screen-line-top {
+    @apply relative before:absolute before:top-0 before:left-[-100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-line;
+}
+
+@utility screen-line-bottom {
+    @apply relative after:absolute after:bottom-0 after:left-[-100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-line;
+}
+
+@custom-variant retina {
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2x) {
+
+@slot ;
+  }
+}
+
+@utility link {
+    @apply decoration-1 underline-offset-3 hover:underline;
+}
+
+@utility link-underline {
+    @apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current;
+}
+
+@utility prose-ncdai {
+    @apply prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-pretty md:prose-headings:text-balance;
+    @apply prose-a:font-normal prose-a:wrap-break-word prose-a:text-foreground prose-a:link-underline;
+    @apply prose-code:rounded-md prose-code:border prose-code:bg-muted/50 prose-code:px-1 prose-code:py-px prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none retina:prose-code:border-[0.5px];
+    @apply prose-strong:font-medium;
+    @apply prose-blockquote:border-l prose-blockquote:font-normal prose-blockquote:text-muted-foreground prose-blockquote:not-italic prose-blockquote:[&_p:first-of-type]:before:content-none prose-blockquote:[&_p:last-of-type]:after:content-none;
 }
