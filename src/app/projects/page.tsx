@@ -36,18 +36,14 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     setMounted(true);
-    setLoading(true);
-    const timeout = setTimeout(() => setLoading(false), 400);
-    return () => clearTimeout(timeout);
+    setLoading(false);
   }, []);
-
-  if (!mounted || loading) return <ProjectsPageSkeleton />;
 
   const displayedProjects = [...projects].sort((a, b) => (b.video ? 1 : 0) - (a.video ? 1 : 0));
 
   return (
     <div className="min-h-screen min-w-full bg-background relative overflow-hidden font-display antialiased selection:bg-pink-200 dark:selection:bg-pink-900/60 selection:text-foreground">
-      <div className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">
+      <main className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">
         <div className="relative min-h-screen px-6 sm:px-8 pt-12 sm:pt-12 pb-8">
           <Separator orientation="vertical" className="absolute left-0 top-0 bottom-0 -translate-x-1/2 z-50" />
           <Separator orientation="vertical" className="absolute right-0 top-0 bottom-0 translate-x-1/2 z-50" />
@@ -100,7 +96,7 @@ const ProjectsPage = () => {
           </div>
         </div>
       
-      </div>
+      </main>
       
       {/* Hidden Video Preloader */}
       {preloadVideo && (

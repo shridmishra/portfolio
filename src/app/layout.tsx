@@ -4,18 +4,58 @@ import ThemeProvider from "../context/provider";
 import { ConditionalHeader } from "@/src/components/layout";
 
 const info = {
-  name: "Shrid",
+  name: "Shrid Mishra",
   twitter: "@ShridMishra",
   description:
-    "Design Engineer specializing in creating captivating digital experiences with a focus on aesthetics and functionality.",
+    "Design Engineer & Full-Stack Developer specializing in crafting captivating digital experiences, sleek user interfaces, and modern web applications.",
   url: "https://shrid.in",
   image: "https://shrid.in/assets/preview.png", 
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || info.url;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${info.url}/#person`,
+      "name": info.name,
+      "jobTitle": "Design Engineer & Full-Stack Developer",
+      "url": info.url,
+      "image": `${info.url}/assets/me.jpg`,
+      "sameAs": [
+        "https://twitter.com/shridmishra",
+        "https://linkedin.com/in/shridmishra",
+        "https://github.com/shridmishra"
+      ],
+      "knowsAbout": [
+        "Design Engineering",
+        "Full-Stack Development",
+        "Frontend Engineering",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "UI/UX Design"
+      ],
+      "description": info.description
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${info.url}/#website`,
+      "url": info.url,
+      "name": "Shrid Mishra",
+      "publisher": {
+        "@id": `${info.url}/#person`
+      }
+    }
+  ]
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL(info.url),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${info.name} - Design Engineer`,
+    default: "Shrid Mishra - Design Engineer & Full-Stack Developer",
     template: `%s | ${info.name}`,
   },
   description: info.description,
@@ -40,7 +80,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: info.url,
-    title: `${info.name} | Full-Stack Developer`,
+    title: "Shrid Mishra - Design Engineer & Full-Stack Developer",
     description: info.description,
     siteName: info.name,
     images: [
@@ -58,7 +98,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: info.twitter, 
     creator: info.twitter,
-    title: `${info.name} | Full-Stack Developer`,
+    title: "Shrid Mishra - Design Engineer & Full-Stack Developer",
     description: info.description,
     images: [info.image],
   },
@@ -79,7 +119,7 @@ export const metadata: Metadata = {
   },
 
   // SEO
-  alternates: { canonical: info.url },
+  alternates: { canonical: "./" },
   robots: {
     index: true,
     follow: true,
@@ -96,6 +136,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"
