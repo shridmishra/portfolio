@@ -51,6 +51,8 @@ export type ExperienceItemType = {
   companyName: string
   /** URL or path to the company's logo image */
   companyLogo?: string
+  /** Custom className for company logo image (e.g. "dark:invert") */
+  logoClassName?: string
   /** URL to the company's website. */
   companyWebsite?: string
   /**
@@ -114,12 +116,12 @@ export function ExperienceItem({ experience, isLast }: ExperienceItemProps) {
               )}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-muted/90 border border-border/70 text-foreground/80 z-10 overflow-hidden shadow-xs">
+                <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-black border border-border/70 text-foreground/80 z-10 overflow-hidden shadow-xs">
                   {experience.companyLogo ? (
                     <img
                       src={experience.companyLogo}
                       alt={experience.companyName}
-                      className="size-4.5 object-contain"
+                      className={cn("size-4.5 object-contain", experience.logoClassName)}
                     />
                   ) : (
                     <Briefcase className="size-3.5" />

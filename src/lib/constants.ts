@@ -105,7 +105,7 @@ export const words = [
 export const experienceData: I_Experience[] = [
   {
     company_link: "https://www.beiyo.in/",
-    company_logo: "/assets/beiyo.png",
+    company_logo: "/assets/beiyo.webp",
     company_name: "Beiyo",
     duration: "2024 - 2025",
     job_title: "FullStack Developer",
@@ -113,7 +113,7 @@ export const experienceData: I_Experience[] = [
   },
   {
     company_link: "#",
-    company_logo: "/assets/upwork-icon.png",
+    company_logo: "/assets/upwork-icon.webp",
     company_name: "Freelance",
     duration: "2023 - Present",
     job_title: "FullStack Developer",

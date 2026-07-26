@@ -53,7 +53,8 @@ const EXPERIENCES: ExperienceItemType[] = [
   {
     id: "beiyo",
     companyName: "Beiyo",
-    companyLogo: "/assets/beiyo.png",
+    companyLogo: "/assets/beiyo.webp",
+    logoClassName: "dark:invert",
     companyWebsite: "https://www.beiyo.in/",
     positions: [
       {
@@ -75,7 +76,8 @@ const EXPERIENCES: ExperienceItemType[] = [
   {
     id: "freelance",
     companyName: "Freelance",
-    companyLogo: "/assets/upwork-icon.png",
+    companyLogo: "/assets/upwork-icon.webp",
+    logoClassName: "invert dark:invert-0",
     companyWebsite: "https://www.upwork.com",
     positions: [
       {
