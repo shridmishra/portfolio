@@ -55,10 +55,10 @@ const ProjectsPage = () => {
           <SeparatorLine />
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 my-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 my-8">
             {displayedProjects.map((project, index) => (
               <div
-                key={project.title}
+                key={`${project.title}-${project.category}-${index}`}
                 className="group h-full"
                 style={{
                   animationDelay: `${index * 120}ms`,
@@ -75,6 +75,8 @@ const ProjectsPage = () => {
                   description={project.description}
                   tech={project.tech}
                   imageSrc={project.imageSrc}
+                  video={project.video}
+                  isLandingPage={project.category === "landing"}
                   link={project.link}
                   source={project.code}
                   onClick={() => setSelectedProject(project)}

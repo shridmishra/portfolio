@@ -9,7 +9,7 @@ import {
   SiJavascript,
   SiExpress,
   SiMongodb,
-  SiDrizzle,
+  SiFigma,
   SiTailwindcss,
   SiFramer,
   SiRust,
@@ -26,11 +26,10 @@ const skills = [
   { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
   { icon: SiExpress, name: "Express", color: "text-foreground" },
   { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
-  { icon: SiDrizzle, name: "Drizzle", color: "text-foreground" },
+  { icon: SiFigma, name: "Figma", color: "#F24E1E" },
   { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
   { icon: SiFramer, name: "Framer Motion", color: "text-foreground" },
   { icon: SiPrisma, name: "Prisma", color: "text-foreground" },
-
 ];
 
 export const SkillsCarousel = () => {

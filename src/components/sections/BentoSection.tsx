@@ -28,7 +28,7 @@ export default function BentoGrid() {
         </div>
 
         {/* Bottom Large Card */}
-        <div className="bg-card rounded-2xl shadow-lg border border-edge md:flex items-center justify-center min-h-[160px] md:min-h-[220px] md:col-span-3 hidden ">
+        <div className="bg-card rounded-xl shadow-md border border-edge md:flex items-center justify-center min-h-[160px] md:min-h-[220px] md:col-span-3 hidden ">
           <GitHubContributionGraph />
         </div>
       </div>

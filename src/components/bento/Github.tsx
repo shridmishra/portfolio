@@ -54,7 +54,7 @@ export default function GitHubContributionGraph() {
         weeks.push({ contributionDays });
       }
     }
-    setContributionData(weeks.slice(-39));
+    setContributionData(weeks.slice(-43));
     setTotalContributions(totalContribs);
   };
 
@@ -64,7 +64,7 @@ export default function GitHubContributionGraph() {
       const res = await fetch("/api/github-contributions");
       const data = await res.json();
       if (data.error) return;
-      setContributionData(data.weeks.slice(-39));
+      setContributionData(data.weeks.slice(-43));
       setTotalContributions(data.totalContributions);
     } catch {
       // ignore errors to keep mock data
@@ -145,7 +145,7 @@ export default function GitHubContributionGraph() {
   };
 
   return (
-    <div className="bg-background p-4 rounded-lg group w-full h-full flex items-center justify-center">
+    <div className="p-4 md:p-6 group w-full h-full flex items-center justify-center">
       <div className="w-fit">
         {loading ? (
           <div className="space-y-2">
@@ -155,7 +155,7 @@ export default function GitHubContributionGraph() {
               ))}
             </div>
             <div className="flex gap-1">
-              {[...Array(39)].map((_, weekIndex) => (
+              {[...Array(43)].map((_, weekIndex) => (
                 <div key={weekIndex} className="flex flex-col gap-1">
                   {[...Array(7)].map((_, dayIndex) => (
                     <Skeleton key={dayIndex} className="w-2.5 h-2.5 rounded-xs" />
@@ -202,7 +202,7 @@ export default function GitHubContributionGraph() {
             {/* Footer */}
             <div className="flex justify-between items-center mt-4">
               <div className="text-xs text-secondary">
-                <span className="font-medium text-secondary">{totalContributions.toLocaleString()}</span> contributions
+                <span className="font-medium text-secondary">{totalContributions.toLocaleString()}</span> commits
               </div>
               <div className="flex items-center gap-2 text-xs text-secondary">
                 <span>Less</span>
