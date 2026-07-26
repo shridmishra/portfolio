@@ -29,7 +29,7 @@ const Home = () => {
   if (!mounted) return <PageSkeleton />;
 
   return (
-    <div className="min-h-screen min-w-full bg-background relative font-display antialiased selection:bg-pink-600 overflow-x-hidden selection:text-foreground">
+    <div className="min-h-screen min-w-full bg-background relative font-display antialiased selection:bg-pink-200 dark:selection:bg-pink-900/60 overflow-x-hidden selection:text-foreground">
       {/* Interactive Cat Component */}
       <OnekoCat />
       <div className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">

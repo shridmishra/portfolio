@@ -113,11 +113,13 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
 
                 <button
                   onClick={onClose}
+                  aria-label="Close modal"
                   className="
-                    absolute top-4 right-4 p-2.5 
+                    absolute top-4 right-4 p-2.5 min-w-[44px] min-h-[44px]
+                    flex items-center justify-center
                     rounded-full bg-black/20 backdrop-blur-md
                     text-white/90 hover:bg-black/40 hover:text-white hover:scale-105
-                    transition-all duration-200 z-20
+                    transition-all duration-200 z-20 cursor-pointer
                   "
                 >
                   <X className="w-5 h-5" />
@@ -131,7 +133,7 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                     <h2 className="text-xl font-medium tracking-tight text-foreground">{project.title}</h2>
                     <div className="flex flex-wrap gap-3">
                       {project.link && (
-                        <Button asChild size="sm" className="gap-2 h-9 px-4 bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                        <Button asChild variant="default" size="default" className="gap-2 h-11 min-h-[44px] px-5 py-2.5 rounded-full">
                           <a href={project.link} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="w-4 h-4" />
                             Visit Live Site
@@ -139,7 +141,7 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                         </Button>
                       )}
                       {project.code && (
-                        <Button asChild variant="outline" size="sm" className="gap-2 h-9 px-4 hover:bg-muted">
+                        <Button asChild variant="outline" size="default" className="gap-2 h-11 min-h-[44px] px-5 py-2.5 rounded-full">
                           <a href={project.code} target="_blank" rel="noopener noreferrer">
                             <Github className="w-4 h-4" />
                             View Source

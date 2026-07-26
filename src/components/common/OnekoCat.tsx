@@ -287,7 +287,7 @@ export default function OnekoCat() {
         <button
           onClick={toggleEatingTarget}
           aria-label={isEatingTarget ? "Click to make cat follow again" : "Click to feed the cat"}
-          className="cursor-pointer bg-transparent border-0 p-0 outline-none transition-transform duration-200 hover:scale-110 active:scale-95 flex-shrink-0"
+          className="cursor-pointer bg-transparent border-0 p-1.5 min-w-[44px] min-h-[44px] inline-flex items-center justify-center outline-none transition-transform duration-200 hover:scale-110 active:scale-95 flex-shrink-0"
         >
           <img
             src="/food.png"

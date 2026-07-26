@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FlipWords } from "@/src/components/ui/flip-words";
 import { words } from "@/src/lib/constants";
+import { Button } from "@/src/components/ui/button";
 import { Mail, Calendar, ArrowRight } from "lucide-react";
 import { FaLinkedin, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
@@ -79,7 +80,7 @@ export const Hero = () => {
                 <div className="flex items-center gap-2 sm:gap-3">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=shridmishra00@gmail.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
+                      <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=shridmishra00@gmail.com" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
                         <Mail className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -89,7 +90,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
+                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
                         <FaLinkedin className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -99,7 +100,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
+                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
                         <FaXTwitter className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -109,7 +110,7 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
+                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
                         <FaGithub className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -119,9 +120,11 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <a href="/resume.pdf" download="Shrid_Mishra_Resume.pdf" target="_blank" rel="noopener noreferrer" className="p-2 flex items-center justify-center gap-1.5 text-foreground hover:text-muted-foreground transition-all duration-200 text-sm font-medium">
-                        <FaPaperclip className="w-4 h-4" /> <span>Resume</span>
-                      </a>
+                      <Button asChild variant="outline" size="default">
+                        <a href="/resume.pdf" download="Shrid_Mishra_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                          <FaPaperclip className="w-4 h-4" /> <span>Resume</span>
+                        </a>
+                      </Button>
                     </TooltipTrigger>
                     <TooltipContent>
                       <div>Click To Download</div>
@@ -141,8 +144,8 @@ export const Hero = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="text-foreground/80 my-6 text-md lg:text-lg max-w-2xl leading-relaxed">
-              I build full-stack web products end-to-end. I do both <span className="text-foreground/90 font-medium">Design</span> & <span className="text-foreground/90 font-medium">Development</span>.
+            <p className="text-foreground/90 my-6 text-md lg:text-lg max-w-2xl leading-relaxed">
+              I build full-stack web products end-to-end. I do both <span className="text-foreground font-medium">Design</span> & <span className="text-foreground font-medium">Development</span>.
               <br />
               That means I can create beautiful and functional websites.
             </p>

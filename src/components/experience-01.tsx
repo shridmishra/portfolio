@@ -46,7 +46,7 @@ const EXPERIENCE: ExperienceItemType[] = [
           "shadcn/registry",
           "Figma",
         ],
-        isExpanded: true,
+        isExpanded: false,
       },
     ],
     isCurrentEmployer: true,

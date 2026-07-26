@@ -2,7 +2,7 @@
 const Footer = () => {
   return (
     <div className="text-sm my-2">
-      <div className="flex items-center gap-2 text-foreground selection:bg-pink-500 selection:text-white pb-2">
+      <div className="flex items-center gap-2 text-foreground selection:bg-pink-200 dark:selection:bg-pink-900/60 selection:text-foreground pb-2">
         <span>Designed & Made with</span>
         <svg
           width="28"

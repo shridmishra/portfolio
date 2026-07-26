@@ -113,7 +113,7 @@ export const ProjectCard = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="text-foreground/80 hover:text-foreground transition-colors p-1"
+                className="text-foreground/80 hover:text-foreground transition-colors p-2.5 min-w-[44px] min-h-[44px] inline-flex items-center justify-center rounded-full hover:bg-muted/60"
                 aria-label={`Live preview for ${title}`}
               >
                 <ArrowUpRight className="w-5 h-5 text-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

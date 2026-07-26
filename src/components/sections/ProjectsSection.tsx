@@ -32,13 +32,15 @@ export const ProjectsSection = () => {
         {/* Premium Segmented Tab Switcher */}
         <div className="flex justify-center my-4">
           <div className="inline-flex p-1 rounded-full bg-muted/60 dark:bg-neutral-900/90 border border-border/60 dark:border-white/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.5)] backdrop-blur-md relative">
-            <button
+            <Button
+              variant="ghost"
+              size="default"
               onClick={() => setActiveTab("fullstack")}
               className={cn(
-                "relative z-10 px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer select-none",
+                "relative z-10 rounded-full transition-colors duration-200 cursor-pointer select-none",
                 activeTab === "fullstack"
-                  ? "text-foreground font-medium"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground font-medium bg-transparent"
+                  : "text-muted-foreground hover:text-foreground bg-transparent hover:bg-transparent"
               )}
             >
               {activeTab === "fullstack" && (
@@ -49,14 +51,16 @@ export const ProjectsSection = () => {
                 />
               )}
               Full Stack Apps
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="ghost"
+              size="default"
               onClick={() => setActiveTab("landing")}
               className={cn(
-                "relative z-10 px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer select-none",
+                "relative z-10 rounded-full transition-colors duration-200 cursor-pointer select-none",
                 activeTab === "landing"
-                  ? "text-foreground font-medium"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground font-medium bg-transparent"
+                  : "text-muted-foreground hover:text-foreground bg-transparent hover:bg-transparent"
               )}
             >
               {activeTab === "landing" && (
@@ -67,7 +71,7 @@ export const ProjectsSection = () => {
                 />
               )}
               Landing Pages
-            </button>
+            </Button>
           </div>
         </div>
 

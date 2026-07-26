@@ -3,6 +3,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
+import { Button } from "@/src/components/ui/button";
+
 interface Blog {
   title: string;
   link: string;
@@ -27,14 +29,12 @@ export const RecentBlogs = () => {
       <ul className="space-y-2 font-extralight text-secondary">
         {blogs.map((blog, idx) => (
           <li key={idx}>
-            <Link
-              href={blog.link}
-              target="_blank"
-              className="text-secondary hover:underline flex"
-            >
-              {blog.title} 
-              <ArrowUpRight/>
-            </Link>
+            <Button asChild variant="ghost" size="default" className="w-full justify-between font-normal text-foreground hover:text-foreground">
+              <Link href={blog.link} target="_blank">
+                <span>{blog.title}</span> 
+                <ArrowUpRight className="w-4 h-4 shrink-0" />
+              </Link>
+            </Button>
           </li>
         ))}
       </ul>

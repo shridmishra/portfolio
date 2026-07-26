@@ -95,15 +95,15 @@ export function ExperienceItem({ experience, isLast }: ExperienceItemProps) {
   const primaryTitle = primaryPosition?.title;
 
   return (
-    <div className="relative py-3">
+    <div className="relative py-3.5">
       {/* Vertical line connecting to next company logo */}
       {!isLast && (
-        <div className="absolute left-[11px] top-8 bottom-0 w-px bg-border pointer-events-none" />
+        <div className="absolute left-[13px] top-9 bottom-0 w-px bg-border/60 pointer-events-none" />
       )}
 
       {primaryPosition ? (
         <Collapsible
-          defaultOpen={primaryPosition.isExpanded}
+          defaultOpen={primaryPosition.isExpanded ?? false}
           disabled={!primaryPosition.description}
         >
           <div className="not-prose flex items-center justify-between gap-3">
@@ -114,17 +114,26 @@ export function ExperienceItem({ experience, isLast }: ExperienceItemProps) {
               )}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted/70 border border-border/50 text-foreground/70 z-10">
-                  <Briefcase className="size-3.5" />
+                <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-muted/90 border border-border/70 text-foreground/80 z-10 overflow-hidden shadow-xs">
+                  {experience.companyLogo ? (
+                    <img
+                      src={experience.companyLogo}
+                      alt={experience.companyName}
+                      className="size-4.5 object-contain"
+                    />
+                  ) : (
+                    <Briefcase className="size-3.5" />
+                  )}
                 </div>
 
                 <h3 className="text-base sm:text-lg leading-snug flex items-center gap-2 flex-wrap">
                   {experience.companyWebsite ? (
                     <a
-                      className="link font-medium text-foreground hover:underline"
+                      className="link font-medium text-foreground hover:underline min-h-[44px] py-1.5 inline-flex items-center cursor-pointer"
                       href={experience.companyWebsite}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       {experience.companyName}
                     </a>
@@ -132,10 +141,11 @@ export function ExperienceItem({ experience, isLast }: ExperienceItemProps) {
                     <span className="font-medium text-foreground">{experience.companyName}</span>
                   )}
                   {primaryTitle && (
-                    <span className="text-sm font-normal text-muted-foreground">
-                      - {primaryTitle}
+                    <span className="text-xs sm:text-sm font-normal text-muted-foreground">
+                      • {primaryTitle}
                     </span>
                   )}
+                
                 </h3>
               </div>
 
@@ -171,16 +181,16 @@ export function ExperiencePositionDetails({
 
   return (
     <div className="relative">
-      <dl className="relative z-1 flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+      <dl className="relative z-1 flex items-center gap-2 pl-10 text-xs sm:text-sm text-muted-foreground">
         {position.employmentType && (
           <>
             <div>
               <dt className="sr-only">Employment Type</dt>
-              <dd>{position.employmentType}</dd>
+              <dd className="font-medium">{position.employmentType}</dd>
             </div>
 
             <Separator
-              className="data-vertical:h-4 data-vertical:self-center"
+              className="data-vertical:h-3.5 data-vertical:self-center"
               orientation="vertical"
             />
           </>
@@ -192,7 +202,7 @@ export function ExperiencePositionDetails({
             <span>{start}</span>
             <span className="font-mono">-</span>
             {isOngoing ? (
-              <span>Present</span>
+              <span className="font-medium text-foreground/90">Present</span>
             ) : (
               <span>{end}</span>
             )}
@@ -202,7 +212,7 @@ export function ExperiencePositionDetails({
         {duration && (
           <>
             <Separator
-              className="data-vertical:h-4 data-vertical:self-center"
+              className="data-vertical:h-3.5 data-vertical:self-center"
               orientation="vertical"
             />
             <div>
@@ -213,9 +223,9 @@ export function ExperiencePositionDetails({
         )}
       </dl>
 
-      <CollapsibleContent className="overflow-hidden">
+      <CollapsibleContent className="overflow-hidden transition-all">
         {position.description && (
-          <Prose className="pt-2 pl-7">
+          <Prose className="pt-2.5 pl-10">
             <ReactMarkdown>{position.description}</ReactMarkdown>
           </Prose>
         )}
@@ -229,7 +239,7 @@ function Prose({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       className={cn(
-        "prose max-w-none prose-ncdai prose-zinc dark:prose-invert",
+        "prose max-w-none prose-sm dark:prose-invert prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 text-muted-foreground/90 font-normal leading-relaxed text-xs sm:text-sm",
         className
       )}
       {...props}

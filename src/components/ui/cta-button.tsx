@@ -43,7 +43,7 @@ export function CtaButton({
         <div className="absolute inset-[-1.5px] bg-neutral-200 dark:bg-neutral-800 rounded-full z-10 pointer-events-none" />
 
         {/* Button Content Container */}
-        <div className="relative z-20 flex items-center justify-center gap-2 py-2.5 px-5 bg-white text-neutral-900 dark:bg-black dark:text-white rounded-full shadow-[inset_0_1px_1px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] dark:group-hover:brightness-125 transition-all duration-200">
+        <div className="relative z-20 flex items-center justify-center gap-2 min-h-[44px] min-w-[44px] py-2.5 px-5 bg-white text-neutral-900 dark:bg-black dark:text-white rounded-full shadow-[inset_0_1px_1px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] dark:group-hover:brightness-125 transition-all duration-200">
           {/* Google Meet multicolor SVG Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"

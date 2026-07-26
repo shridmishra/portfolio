@@ -55,9 +55,9 @@ export function Header() {
           maxWidth: "46rem"
         }}
       >
-        <Link href="/" className="hover:opacity-75 transition-opacity duration-300">
+        <Link href="/" className="hover:opacity-75 transition-opacity duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center">
           <Image
-            className="w-9 h-9 rounded-full shadow-sm object-cover lg:hidden"
+            className="w-10 h-10 rounded-full shadow-sm object-cover lg:hidden"
             src="/assets/me.jpg"
             width={100}
             height={100}
@@ -73,11 +73,11 @@ export function Header() {
         </Link>
 
         {/* Navigation links on the right */}
-        <div className="ml-auto flex flex-wrap items-center justify-end ">
+        <div className="ml-auto flex flex-wrap items-center justify-end">
           {navItems.map((item, idx) => (
             item.external ? (
               <a
-                className="text-sm relative px-3 py-1.5 text-foreground font-medium transition-colors duration-300 hover:text-muted-foreground"
+                className="text-sm relative px-5 py-2.5 min-h-[44px] min-w-[44px] inline-flex items-center text-foreground font-medium tracking-tight transition-colors duration-300 hover:text-muted-foreground rounded-full"
                 href={item.href}
                 key={idx}
                 target="_blank"
@@ -88,14 +88,14 @@ export function Header() {
                 {hovered === idx && (
                   <motion.span
                     layoutId="hovered-span"
-                    className="h-full w-full absolute inset-0 rounded-md bg-muted"
+                    className="h-full w-full absolute inset-0 rounded-full bg-muted"
                   />
                 )}
                 <span className="relative z-10">{item.title}</span>
               </a>
             ) : (
               <Link
-                className="text-sm relative px-3 py-1.5 text-foreground font-medium transition-colors duration-300 hover:text-muted-foreground"
+                className="text-sm relative px-5 py-2.5 min-h-[44px] min-w-[44px] inline-flex items-center text-foreground font-medium tracking-tight transition-colors duration-300 hover:text-muted-foreground rounded-full"
                 href={item.href}
                 key={idx}
                 onMouseEnter={() => setHovered(idx)}
@@ -104,7 +104,7 @@ export function Header() {
                 {hovered === idx && (
                   <motion.span
                     layoutId="hovered-span"
-                    className="h-full w-full absolute inset-0 rounded-md bg-muted"
+                    className="h-full w-full absolute inset-0 rounded-full bg-muted"
                   />
                 )}
                 <span className="relative z-10">{item.title}</span>

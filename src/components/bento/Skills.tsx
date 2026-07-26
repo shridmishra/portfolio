@@ -18,55 +18,61 @@ import {
 import { cn } from "@/src/lib/utils";
 import { TechBadge } from "@/src/components/ui/tech-badge";
 
-const skills = [
-  { icon: SiNextdotjs, name: "Next.js", color: "text-foreground" },
-  { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
-  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
-  { icon: SiRust, name: "Rust", color: "red" }, { icon: SiReact, name: "React", color: "#61DAFB" },
-  { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
-  { icon: SiExpress, name: "Express", color: "text-foreground" },
-  { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
-  { icon: SiFigma, name: "Figma", color: "#F24E1E" },
-  { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+const row1 = [
   { icon: SiFramer, name: "Framer Motion", color: "text-foreground" },
+  { icon: SiRust, name: "Rust", color: "#DEA584" },
+  { icon: SiExpress, name: "Express", color: "text-foreground" },
+  { icon: SiNextdotjs, name: "Next.js", color: "text-foreground" },
+];
+
+const row2 = [
+  { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+  { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
+  { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+  { icon: SiFigma, name: "Figma", color: "#F24E1E" },
+];
+
+const row3 = [
+  { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+  { icon: SiReact, name: "React", color: "#61DAFB" },
   { icon: SiPrisma, name: "Prisma", color: "text-foreground" },
+  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
 ];
 
 export const SkillsCarousel = () => {
-  const row1 = skills.slice(0, 4);
-  const row2 = skills.slice(4, 8);
-  const row3 = skills.slice(8, 12);
-
   return (
-    <div className="w-full h-full p-2 md:p-4 flex flex-col group">
-      <div className="flex flex-col gap-2 md:gap-4 px-2 md:px-4 justify-center items-center flex-1 content-center">
-        <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
+    <div className="w-full h-full p-2.5 md:p-4 flex flex-col justify-center items-center group">
+      <div className="flex flex-col gap-2 md:gap-3 w-full">
+        <div className="flex items-center justify-between w-full gap-1 sm:gap-2">
           {row1.map((skill, idx) => (
             <TechBadge
-              key={`skill-r1-${idx}`}
+              key={`r1-${idx}`}
               name={skill.name}
               icon={skill.icon}
               color={skill.color}
+              className="px-1.5 py-1 md:px-2 md:py-1"
             />
           ))}
         </div>
-        <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
+        <div className="flex items-center justify-between w-full gap-1 sm:gap-2">
           {row2.map((skill, idx) => (
             <TechBadge
-              key={`skill-r2-${idx}`}
+              key={`r2-${idx}`}
               name={skill.name}
               icon={skill.icon}
               color={skill.color}
+              className="px-1.5 py-1 md:px-2 md:py-1"
             />
           ))}
         </div>
-        <div className="flex flex-wrap md:flex-nowrap gap-1 md:gap-2 justify-start items-center w-full">
+        <div className="flex items-center justify-between w-full gap-1 sm:gap-2">
           {row3.map((skill, idx) => (
             <TechBadge
-              key={`skill-r3-${idx}`}
+              key={`r3-${idx}`}
               name={skill.name}
               icon={skill.icon}
               color={skill.color}
+              className="px-1.5 py-1 md:px-2 md:py-1"
             />
           ))}
         </div>

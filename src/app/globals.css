@@ -77,14 +77,24 @@
   @apply border-border;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & global selection */
 html {
   scroll-behavior: smooth;
 }
 
+::selection {
+  background-color: rgba(251, 207, 232, 0.8);
+  color: #18181b;
+}
+
+.dark ::selection {
+  background-color: rgba(157, 23, 77, 0.5);
+  color: #f4f4f5;
+}
+
 /* Focus styles */
 *:focus-visible {
-  @apply outline-2 outline-offset-2 outline-primary/50;
+  @apply outline-none ring-1 ring-ring;
 }
 
 /* Screen line utilities for full-width borders */
@@ -126,10 +136,10 @@ html {
 
   /* Borders and separators */
   --border: oklch(0.91 0 0);
-  --edge: oklch(0.88 0 0);
-  --background-border: oklch(0.922 0 0);
-  --input: oklch(0.91 0 0);
-  --ring: oklch(0.6 0.18 250);
+  --edge: var(--border);
+  --background-border: var(--border);
+  --input: var(--border);
+  --ring: var(--primary);
 
   /* Status colors */
   --destructive: oklch(0.628 0.258 29.234);
@@ -139,12 +149,12 @@ html {
   --warning: oklch(0.8 0.15 85);
   --warning-foreground: oklch(0.09 0 0);
 
-  /* Custom semantic colors for portfolio */
-  --text-primary: oklch(0.09 0 0);
-  --text-secondary: oklch(0.35 0 0);
-  --text-muted: oklch(0.45 0 0);
-  --text-inverted: oklch(0.998 0 0);
-  --text-on-primary: oklch(0.998 0 0);
+  /* Consolidated semantic text tokens */
+  --text-primary: var(--foreground);
+  --text-secondary: var(--secondary-foreground);
+  --text-muted: var(--muted-foreground);
+  --text-inverted: var(--background);
+  --text-on-primary: var(--primary-foreground);
 }
 
 /* 6. Dark theme overrides */
@@ -170,10 +180,10 @@ html {
 
     /* Borders and separators */
     --border: oklch(0.28 0 0);
-    --edge: oklch(0.3 0 0);
-    --background-border: oklch(1 0 0 / 5%);
-    --input: oklch(0.28 0 0);
-    --ring: oklch(0.75 0.2 250);
+    --edge: var(--border);
+    --background-border: var(--border);
+    --input: var(--border);
+    --ring: var(--primary);
 
     /* Status colors */
     --destructive: oklch(0.7 0.25 29.234);
@@ -183,12 +193,12 @@ html {
     --warning: oklch(0.75 0.15 85);
     --warning-foreground: oklch(0.09 0 0);
 
-    /* Custom semantic colors for portfolio - dark mode */
-    --text-primary: oklch(0.98 0 0);
-    --text-secondary: oklch(0.75 0 0);
-    --text-muted: oklch(0.65 0 0);
-    --text-inverted: oklch(0.09 0 0);
-    --text-on-primary: oklch(0.09 0 0);
+    /* Consolidated semantic text tokens - dark mode */
+    --text-primary: var(--foreground);
+    --text-secondary: var(--secondary-foreground);
+    --text-muted: var(--muted-foreground);
+    --text-inverted: var(--background);
+    --text-on-primary: var(--primary-foreground);
   }
 }
 

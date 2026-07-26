@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Button } from "@/src/components/ui/button";
+
 export function CodeBlock({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -13,12 +15,14 @@ export function CodeBlock({ code }: { code: string }) {
 
   return (
     <div className="relative border border-border rounded-lg bg-muted p-4">
-      <button
+      <Button
+        variant="default"
+        size="default"
         onClick={handleCopy}
-        className="absolute top-2 right-2 px-3 py-1 text-xs bg-primary text-white rounded-md hover:bg-primary/80 transition-colors"
+        className="absolute top-2 right-2 shadow-sm"
       >
         {copied ? "Copied!" : "Copy"}
-      </button>
+      </Button>
       <pre className="overflow-x-auto text-sm">
         <code>{code}</code>
       </pre>
