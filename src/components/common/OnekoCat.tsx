@@ -28,6 +28,7 @@ const SPRITE_SETS: SpriteSet = {
   scratchWallW: [[-4, 0], [-4, -1]],
   tired: [[-3, -2]],
   sleeping: [[-2, 0], [-2, -1]],
+  eating: [[-3, -2], [-3, -3], [-3, -2], [-2, 0]],
   N: [[-1, -2], [-1, -3]],
   NE: [[0, -2], [0, -3]],
   E: [[-3, 0], [-3, -1]],
@@ -44,6 +45,9 @@ export default function OnekoCat() {
   const nekoRef = useRef<HTMLDivElement>(null);
   const [nekoPos, setNekoPos] = useState<Position>({ x: 32, y: 32 });
   const [mousePos, setMousePos] = useState<Position>({ x: 0, y: 0 });
+  const [foodPos, setFoodPos] = useState<Position>({ x: 100, y: 100 });
+  const [isEatingTarget, setIsEatingTarget] = useState(false);
+  const [isEating, setIsEating] = useState(false);
   const [frameCount, setFrameCount] = useState(0);
   const [idleTime, setIdleTime] = useState(0);
   const [idleAnimation, setIdleAnimation] = useState<string | null>(null);
@@ -51,6 +55,19 @@ export default function OnekoCat() {
   const [hearts, setHearts] = useState<Heart[]>([]);
   const lastFrameTimestamp = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
+
+  // Update food position based on viewport
+  useEffect(() => {
+    const updateFoodPos = () => {
+      setFoodPos({
+        x: window.innerWidth - 65,
+        y: window.innerHeight - 45
+      });
+    };
+    updateFoodPos();
+    window.addEventListener('resize', updateFoodPos);
+    return () => window.removeEventListener('resize', updateFoodPos);
+  }, []);
 
   const setSprite = (name: string, frame: number) => {
     if (!nekoRef.current) return;
@@ -104,15 +121,29 @@ export default function OnekoCat() {
     if (!nekoRef.current) return;
 
     setFrameCount(prev => prev + 1);
-    const diffX = nekoPos.x - mousePos.x;
-    const diffY = nekoPos.y - mousePos.y;
+
+    // Determine target position: food plate if active, else mouse position
+    const target = isEatingTarget ? foodPos : mousePos;
+
+    const diffX = nekoPos.x - target.x;
+    const diffY = nekoPos.y - target.y;
     const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
-    if (distance < NEKO_SPEED || distance < 48) {
+    const currentSpeed = isEatingTarget ? 25 : NEKO_SPEED;
+
+    if (distance < currentSpeed || distance < 40) {
+      if (isEatingTarget) {
+        setIsEating(true);
+        // Cat realistic eating animation (dipping head down to plate, chewing upright)
+        setSprite("eating", Math.floor(frameCount / 3));
+        return;
+      }
+      setIsEating(false);
       handleIdle();
       return;
     }
 
+    setIsEating(false);
     setIdleAnimation(null);
     setIdleAnimationFrame(0);
 
@@ -129,13 +160,19 @@ export default function OnekoCat() {
     direction += diffX / distance < -0.5 ? "E" : "";
     setSprite(direction, frameCount);
 
-    const newX = nekoPos.x - (diffX / distance) * NEKO_SPEED;
-    const newY = nekoPos.y - (diffY / distance) * NEKO_SPEED;
+    const newX = nekoPos.x - (diffX / distance) * currentSpeed;
+    const newY = nekoPos.y - (diffY / distance) * currentSpeed;
 
     setNekoPos({
       x: Math.min(Math.max(16, newX), window.innerWidth - 16),
       y: Math.min(Math.max(16, newY), window.innerHeight - 16)
     });
+  };
+
+  const playMeow = () => {
+    const audio = new Audio('/meow.wav');
+    audio.volume = 0.5;
+    audio.play().catch(e => console.error("Audio play failed:", e));
   };
 
   const handleNekoClick = () => {
@@ -155,14 +192,19 @@ export default function OnekoCat() {
 
     setHearts(prev => [...prev, largeHeart, smallHeart]);
 
-    // Play meow sound
-    const audio = new Audio('/meow.wav');
-    audio.volume = 0.5;
-    audio.play().catch(e => console.error("Audio play failed:", e));
+    playMeow();
 
     setTimeout(() => {
       setHearts(prev => prev.filter(h => h.id !== timestamp && h.id !== timestamp + 1));
     }, 1000);
+  };
+
+  const toggleEatingTarget = () => {
+    setIsEatingTarget(prev => !prev);
+    // Alert sprite when state changes
+    setSprite("alert", 0);
+    setIdleTime(5);
+    playMeow();
   };
 
   useEffect(() => {
@@ -197,10 +239,11 @@ export default function OnekoCat() {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nekoPos, mousePos, frameCount, idleTime, idleAnimation, idleAnimationFrame]);
+  }, [nekoPos, mousePos, foodPos, isEatingTarget, frameCount, idleTime, idleAnimation, idleAnimationFrame]);
 
   return (
     <>
+      {/* Hearts animation */}
       {hearts.map(heart => (
         <div
           key={heart.id}
@@ -231,6 +274,31 @@ export default function OnekoCat() {
           />
         </div>
       ))}
+
+      {/* Interactive Food Plate Button */}
+      <div className="fixed bottom-5 right-5 z-[2147483646] group">
+        {/* Tooltip on hover (positioned above food plate with V-shaped arrow) */}
+        <div className="absolute bottom-full right-0 mb-2.5 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-y-1 group-hover:translate-y-0 px-3 py-1.5 rounded-xl bg-background/95 border border-border/80 shadow-lg backdrop-blur-md text-[11px] font-medium text-foreground/90 whitespace-nowrap">
+          <span>{isEatingTarget ? "Cat is eating! Click to wake up" : "Feed food to stop cat chase!"}</span>
+          {/* Tooltip Arrow (V caret pointing down) */}
+          <div className="absolute top-full right-5 -mt-[5px] w-2.5 h-2.5 bg-background/95 border-r border-b border-border/80 rotate-45" />
+        </div>
+
+        <button
+          onClick={toggleEatingTarget}
+          aria-label={isEatingTarget ? "Click to make cat follow again" : "Click to feed the cat"}
+          className="cursor-pointer bg-transparent border-0 p-0 outline-none transition-transform duration-200 hover:scale-110 active:scale-95 flex-shrink-0"
+        >
+          <img
+            src="/food.png"
+            alt="Cat Food Plate"
+            className={`w-12 h-12 sm:w-14 sm:h-14 object-contain transition-transform duration-300 ${isEatingTarget ? 'scale-110' : 'group-hover:rotate-12'}`}
+            style={{ imageRendering: 'pixelated' }}
+          />
+        </button>
+      </div>
+
+      {/* Oneko Cat Sprite */}
       <div
         ref={nekoRef}
         onClick={handleNekoClick}

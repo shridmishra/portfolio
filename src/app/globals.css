@@ -25,31 +25,6 @@
   font-display: swap;
 }
 
-/* ClashDisplay Font */
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('/fonts/ClashDisplay-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('/fonts/ClashDisplay-Semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 @import "tailwindcss";
 
 @plugin "@tailwindcss/typography";
@@ -58,12 +33,14 @@
 @source "./components/**/*.{js,jsx,ts,tsx}";
 
 @theme {
-  --font-sans: "Satoshi", sans-serif;
-
+  --font-sans: "Satoshi", system-ui, -apple-system, sans-serif;
+  --font-display: "Satoshi", system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
 }
 
 /* 4. Global styles */
 @layer base {
+
   html,
   body {
     font-family: var(--font-sans);
@@ -78,7 +55,12 @@
     line-height: 1.7;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     line-height: 1.2;
     font-weight: 600;
   }
@@ -255,19 +237,24 @@ html {
 
 /* 8. Semantic utility classes */
 @layer utilities {
+
   /* Text colors */
   .text-primary {
     color: var(--color-text-primary);
   }
+
   .text-secondary {
     color: var(--color-text-secondary);
   }
+
   .text-muted {
     color: var(--color-text-muted);
   }
+
   .text-inverted {
     color: var(--color-text-inverted);
   }
+
   .text-on-primary {
     color: var(--color-text-on-primary);
   }
@@ -328,6 +315,7 @@ html {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -339,21 +327,27 @@ html {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 /* flicker keyframes */
 @keyframes flicker-once {
+
   0%,
   100% {
     opacity: 1;
   }
+
   25%,
   75% {
     opacity: 0.4;
-  } /* slightly stronger flicker for corners too */
+  }
+
+  /* slightly stronger flicker for corners too */
   50% {
     opacity: 1;
   }
@@ -374,13 +368,15 @@ html {
   animation-name: flicker-once;
   animation-duration: 0.32s;
   animation-timing-function: ease-in-out;
-  animation-delay: 150ms; /* start after the fade-in */
+  animation-delay: 150ms;
+  /* start after the fade-in */
   animation-iteration-count: 1;
   animation-fill-mode: none;
 }
 
 /* 10. Component-specific enhancements */
 @layer components {
+
   /* Magic card enhancements */
   .magic-card {
     @apply relative overflow-hidden rounded-xl border border-edge bg-card/30 backdrop-blur-sm transition-all duration-300;
@@ -413,13 +409,11 @@ html {
   .separator-pattern::before {
     content: "";
     @apply absolute -left-[100vw] -z-1 h-full w-[200vw];
-    background: repeating-linear-gradient(
-      315deg,
-      var(--color-edge) 0,
-      var(--color-edge) 1px,
-      transparent 0,
-      transparent 50%
-    );
+    background: repeating-linear-gradient(315deg,
+        var(--color-edge) 0,
+        var(--color-edge) 1px,
+        transparent 0,
+        transparent 50%);
     background-size: 10px 10px;
     opacity: 0.56;
   }
@@ -435,6 +429,7 @@ html {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
+
   100% {
     transform: translateY(-40px) scale(1.5);
     opacity: 0;
@@ -450,9 +445,11 @@ html {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -463,33 +460,34 @@ html {
 }
 
 @utility screen-line-top {
-    @apply relative before:absolute before:top-0 before:left-[-100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-line;
+  @apply relative before:absolute before:top-0 before:left-[-100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-line;
 }
 
 @utility screen-line-bottom {
-    @apply relative after:absolute after:bottom-0 after:left-[-100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-line;
+  @apply relative after:absolute after:bottom-0 after:left-[-100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-line;
 }
 
 @custom-variant retina {
 
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2x) {
+  @media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2x) {
 
-@slot ;
+    @slot ;
   }
 }
 
 @utility link {
-    @apply decoration-1 underline-offset-3 hover:underline;
+  @apply decoration-1 underline-offset-3 hover:underline;
 }
 
 @utility link-underline {
-    @apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current;
+  @apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current;
 }
 
 @utility prose-ncdai {
-    @apply prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-pretty md:prose-headings:text-balance;
-    @apply prose-a:font-normal prose-a:wrap-break-word prose-a:text-foreground prose-a:link-underline;
-    @apply prose-code:rounded-md prose-code:border prose-code:bg-muted/50 prose-code:px-1 prose-code:py-px prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none retina:prose-code:border-[0.5px];
-    @apply prose-strong:font-medium;
-    @apply prose-blockquote:border-l prose-blockquote:font-normal prose-blockquote:text-muted-foreground prose-blockquote:not-italic prose-blockquote:[&_p:first-of-type]:before:content-none prose-blockquote:[&_p:last-of-type]:after:content-none;
+  @apply prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-pretty md:prose-headings:text-balance;
+  @apply prose-a:font-normal prose-a:wrap-break-word prose-a:text-foreground prose-a:link-underline;
+  @apply prose-code:rounded-md prose-code:border prose-code:bg-muted/50 prose-code:px-1 prose-code:py-px prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none retina:prose-code:border-[0.5px];
+  @apply prose-strong:font-medium;
+  @apply prose-blockquote:border-l prose-blockquote:font-normal prose-blockquote:text-muted-foreground prose-blockquote:not-italic prose-blockquote:[&_p:first-of-type]:before:content-none prose-blockquote:[&_p:last-of-type]:after:content-none;
 }

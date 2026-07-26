@@ -7,13 +7,15 @@ interface Title {
 
 const Title = ({ title, subtitle }: Title) => {
     return (
-        <header className="text-center my-4 lg:my-8">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-foreground mb-3" style={{ fontFamily: 'ClashDisplay, sans-serif' }}>
+        <header className="text-center py-1 md:py-2 my-1">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-foreground">
                 {title}
             </h2>
-            <p className="mt-3 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                {subtitle}
-            </p>
+            {subtitle && (
+                <p className="mt-2 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                    {subtitle}
+                </p>
+            )}
         </header>
     )
 }

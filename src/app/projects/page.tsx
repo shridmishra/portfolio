@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { ProjectCard } from "@/src/components/ui/project-card";
 import { ProjectModal } from "@/src/components/ui/project-modal";
 import { projects } from "@/src/lib/constants";
@@ -40,22 +42,22 @@ const ProjectsPage = () => {
 
   if (!mounted || loading) return <ProjectsPageSkeleton />;
 
-  const displayedProjects = projects;
+  const displayedProjects = [...projects].sort((a, b) => (b.video ? 1 : 0) - (a.video ? 1 : 0));
 
   return (
     <div className="min-h-screen min-w-full bg-background relative overflow-hidden font-display antialiased selection:bg-pink-600 selection:text-foreground">
       <div className="relative z-10 max-w-lg sm:max-w-3xl mx-auto">
-        <div className="relative min-h-screen px-6 sm:px-8 py-12 ">
+        <div className="relative min-h-screen px-6 sm:px-8 pt-12 sm:pt-12 pb-8">
           <Separator orientation="vertical" className="absolute left-0 top-0 bottom-0 -translate-x-1/2 z-50" />
           <Separator orientation="vertical" className="absolute right-0 top-0 bottom-0 translate-x-1/2 z-50" />
           <SeparatorLine />
           {/* Section Header */}
-          <Title title="My Projects" subtitle="A showcase of my work in full-stack & blockchain applications."/>
+          <Title title="My Projects" subtitle="A showcase of my work in full-stack apps & landing pages"/>
           
           <SeparatorLine />
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 my-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 my-4">
             {displayedProjects.map((project, index) => (
               <div
                 key={`${project.title}-${project.category}-${index}`}
@@ -83,7 +85,19 @@ const ProjectsPage = () => {
                 />
               </div>
             ))}
-          </div><Separator/>
+          </div>
+          <SeparatorLine />
+
+          {/* Back to Home Link */}
+          <div className="pt-6 pb-2 flex justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 group cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
+              <span>Back to home</span>
+            </Link>
+          </div>
         </div>
       
       </div>

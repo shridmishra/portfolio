@@ -8,17 +8,16 @@ import { SeparatorLine } from "@/src/components/ui/separator-line";
 export const ExperienceSection = () => {
   return (
     <section>
-      <div className="max-w-4xl mx-auto py-8">
+      <div className="max-w-4xl mx-auto ">
         {/* Section Header */}
         <Title
           title="Experience"
-          subtitle="My professional journey building innovative solutions."
         />
 
         <SeparatorLine />
 
         {/* Experience Timeline */}
-        <div className="mt-8">
+        <div className="mt-4">
           <WorkExperience
             className="bg-transparent"
             experiences={EXPERIENCES}

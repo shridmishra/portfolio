@@ -12,6 +12,7 @@ import DisplacementText from "../components/ui/displacement-text";
 import Link from "next/link";
 import { HoverBorderGradient } from "../components/ui/hover-border-gradient";
 import { ArrowRight, Calendar, Mail } from "lucide-react";
+import { CtaButton } from "@/src/components/ui/cta-button";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
@@ -53,54 +54,45 @@ const Home = () => {
           </div>
 
           {/* Projects Section */}
-          <div className="px-6 sm:px-8 py-4 sm:py-8">
+          <div className="px-6 sm:px-8 py-2 sm:py-3">
             <SeparatorLine />
             <ProjectsSection />
           </div>
 
           {/* Experience Section */}
-          <div className="px-6 sm:px-8 mb-12 ">
+          <div className="px-6 sm:px-8 mb-4">
             <SeparatorLine />
             <ExperienceSection />
           </div>
 
- <SeparatorLine />
+          <SeparatorLine />
 
-            {/* CTA Section */}
-            <div className="pt-6 flex flex-col lg:flex-row items-center justify-center gap-6 ">
-              <h2 className="text-foreground text-xl font-thin sm:text-2xl " style={{ fontFamily: '"Instrument Serif", serif' }}>
-                Let&apos;s build something great together
-              </h2>
+          {/* CTA Section */}
+          <div className="pt-3 flex flex-col lg:flex-row items-center justify-center gap-4">
+            <h2 className="text-foreground text-xl font-thin sm:text-2xl " style={{ fontFamily: '"Instrument Serif", serif' }}>
+              Let&apos;s build something great together
+            </h2>
 
-              <div className="flex flex-wrap flex-col lg:flex-row items-center gap-3 sm:gap-4">
-                <Link href="mailto:shridmishra00@gmail.com" className="group/btn">
-                  <HoverBorderGradient
-                    containerClassName="rounded-full"
-                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>Email Me</span>
-                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
-                  </HoverBorderGradient>
-                </Link>
+            <div className="flex flex-wrap flex-col lg:flex-row items-center gap-3 sm:gap-4">
+              <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=shridmishra00@gmail.com" target="_blank" rel="noopener noreferrer" className="group/btn">
+                <HoverBorderGradient
+                  containerClassName="rounded-full"
+                  className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Email Me</span>
+                  <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
+                </HoverBorderGradient>
+              </Link>
 
-                <span className="text-muted-foreground text-lg" style={{ fontFamily: '"Instrument Serif", serif' }}>or</span>
+              <span className="text-muted-foreground text-lg" style={{ fontFamily: '"Instrument Serif", serif' }}>or</span>
 
-                <Link href="https://cal.com/shridmishra" target="_blank" rel="noopener noreferrer" className="group/btn">
-                  <HoverBorderGradient
-                    containerClassName="rounded-full"
-                    className="flex items-center gap-2 bg-background dark:bg-black text-foreground"
-                  >
-                    <Calendar className="w-4 h-4" />
-                    <span>Book a Call</span>
-                    <ArrowRight className="w-3 h-3 opacity-0 -ml-1 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-200" />
-                  </HoverBorderGradient>
-                </Link>
-              </div>
+              <CtaButton text="Book a 15 min call" href="https://cal.com/shridmishra" />
             </div>
+          </div>
           {/* Footer Section */}
           <div
-            className="px-6 sm:px-8 py-10 sm:py-8 relative"
+            className="px-6 sm:px-8 py-3 sm:py-4 relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >

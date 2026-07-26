@@ -18,7 +18,9 @@ export const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [preloadVideo, setPreloadVideo] = useState<string | null>(null);
 
-  const filteredProjects = projects.filter((project) => project.category === activeTab);
+  const filteredProjects = projects
+    .filter((project) => project.category === activeTab)
+    .sort((a, b) => (b.video ? 1 : 0) - (a.video ? 1 : 0));
   const displayedProjects = filteredProjects.slice(0, 6);
 
   return (
@@ -27,22 +29,22 @@ export const ProjectsSection = () => {
         {/* Section Header */}
         <Title title="Proof Of Work" />
 
-        {/* Inset Shadow Tab Switcher */}
-        <div className="flex justify-center my-3">
-          <div className="inline-flex p-1 rounded-lg bg-card border border-edge/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)] backdrop-blur-md relative">
+        {/* Premium Segmented Tab Switcher */}
+        <div className="flex justify-center my-4">
+          <div className="inline-flex p-1 rounded-full bg-muted/60 dark:bg-neutral-900/90 border border-border/60 dark:border-white/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.5)] backdrop-blur-md relative">
             <button
               onClick={() => setActiveTab("fullstack")}
               className={cn(
-                "relative z-10 px-3 py-1 text-xs sm:text-xs md:text-sm font-medium rounded-md transition-colors duration-200 cursor-pointer",
+                "relative z-10 px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer select-none",
                 activeTab === "fullstack"
-                  ? "text-background"
+                  ? "text-foreground font-medium"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
               {activeTab === "fullstack" && (
                 <motion.span
                   layoutId="active-tab-indicator"
-                  className="absolute inset-0 bg-foreground rounded-md z-[-1] shadow-xs"
+                  className="absolute inset-0 bg-background dark:bg-neutral-800 rounded-full z-[-1] border border-border/50 dark:border-white/15 shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
@@ -51,16 +53,16 @@ export const ProjectsSection = () => {
             <button
               onClick={() => setActiveTab("landing")}
               className={cn(
-                "relative z-10 px-3 py-1 text-xs sm:text-xs md:text-sm font-medium rounded-md transition-colors duration-200 cursor-pointer",
+                "relative z-10 px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer select-none",
                 activeTab === "landing"
-                  ? "text-background"
+                  ? "text-foreground font-medium"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
               {activeTab === "landing" && (
                 <motion.span
                   layoutId="active-tab-indicator"
-                  className="absolute inset-0 bg-foreground rounded-md z-[-1] shadow-xs"
+                  className="absolute inset-0 bg-background dark:bg-neutral-800 rounded-full z-[-1] border border-border/50 dark:border-white/15 shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
@@ -72,7 +74,7 @@ export const ProjectsSection = () => {
         <SeparatorLine />
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-6 mb-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-6 my-4">
           {displayedProjects.map((project, index) => (
             <div
               key={`${project.title}-${project.category}-${index}`}
@@ -121,9 +123,7 @@ export const ProjectsSection = () => {
 
         {/* Footer CTA */}
         <footer>
-          
-
-          <div className="flex justify-center py-6">
+          <div className="flex justify-center py-2">
             <Button asChild variant="outline" className="group">
               <Link href="/projects">
                 Explore More Projects
@@ -131,8 +131,6 @@ export const ProjectsSection = () => {
               </Link>
             </Button>
           </div>
-          
-
         </footer>
       </div>
 

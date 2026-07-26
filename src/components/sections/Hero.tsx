@@ -68,7 +68,7 @@ export const Hero = () => {
           >
             {/* Name and Title */}
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-2 leading-tight flex items-center gap-2" style={{ fontFamily: '"Instrument Serif", serif' }}>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-0.5 leading-none flex items-center gap-2" style={{ fontFamily: '"Instrument Serif", serif' }}>
                 Shrid Mishra
               </h1>
               <div className="flex items-center justify-between gap-4">
@@ -77,6 +77,16 @@ export const Hero = () => {
                   className="text-md sm:text-lg hidden sm:block text-muted-foreground/80 font-thin"
                 />
                 <div className="flex items-center gap-2 sm:gap-3">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=shridmishra00@gmail.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
+                        <Mail className="w-5 h-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Email</p>
+                    </TooltipContent>
+                  </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
@@ -109,8 +119,8 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <a href="/resume.pdf" download="Shrid_Mishra_Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-2 py-1 flex items-center justify-center border border-2 gap-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200">
-                        <FaPaperclip className="w-4 h-4" /> <div>Resume</div>
+                      <a href="/resume.pdf" download="Shrid_Mishra_Resume.pdf" target="_blank" rel="noopener noreferrer" className="p-2 flex items-center justify-center gap-1.5 text-foreground hover:text-muted-foreground transition-all duration-200 text-sm font-medium">
+                        <FaPaperclip className="w-4 h-4" /> <span>Resume</span>
                       </a>
                     </TooltipTrigger>
                     <TooltipContent>
