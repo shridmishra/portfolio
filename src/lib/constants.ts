@@ -35,7 +35,7 @@ import {
 // Technology icons and colors mapping
 export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
   // Frameworks
-  "Next.js": { icon: SiNextdotjs, color: "#ffffff" },
+  "Next.js": { icon: SiNextdotjs, color: "text-foreground" },
   "React": { icon: SiReact, color: "#61DAFB" },
   
   // Languages
@@ -58,8 +58,8 @@ export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
   
   // Backend
   "Node.js": { icon: SiNodedotjs, color: "#339933" },
-  "Express": { icon: SiExpress, color: "#ffffff" },
-  "Socket.io": { icon: SiSocketdotio, color: "#010101" },
+  "Express": { icon: SiExpress, color: "text-foreground" },
+  "Socket.io": { icon: SiSocketdotio, color: "text-foreground" },
   "trpc": { icon: TbApi, color: "#2596BE" },
   "TRPC": { icon: TbApi, color: "#2596BE" },
   "BetterAuth": { icon: TbApi, color: "#10B981" },
@@ -240,18 +240,6 @@ export const projects = [
     imageSrc: "/projects/notes.png",
   },
   {
-    title: "Practice JS",
-    description: "Leetcode like questions but for FullStack Development.",
-    tech: ["Next.js", "TypeScript", "MongoDB", "React", "Tailwind CSS", "Framer Motion"],
-    category: "landing",
-    status: "Live",
-    year: "2025",
-    link: "https://practicejs.shrid.in",
-    code: "https://github.com/shridmishra/practicejs",
-    imageSrc: "/projects/js.png",
-    video: "/projects/video/practicejs.mp4",
-  },
-  {
     title: "Qrux Studio",
     description: "Digital design and branding agency landing page.",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
@@ -286,6 +274,18 @@ export const projects = [
     code: "https://github.com/shridmishra",
     imageSrc: "/projects/rivvl.png",
     video: "/projects/video/rivvl.mp4",
+  },
+  {
+    title: "Practice JS",
+    description: "Leetcode like questions but for FullStack Development.",
+    tech: ["Next.js", "TypeScript", "MongoDB", "React", "Tailwind CSS", "Framer Motion"],
+    category: "landing",
+    status: "Live",
+    year: "2025",
+    link: "https://practicejs.shrid.in",
+    code: "https://github.com/shridmishra/practicejs",
+    imageSrc: "/projects/js.png",
+    video: "/projects/video/practicejs.mp4",
   },
   {
     title: "Landing Page",

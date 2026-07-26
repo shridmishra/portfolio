@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/src/components/ui/separator"
 import type { ChevronsUpDownIconHandle } from "@/src/components/chevrons-up-down-icon"
 import { ChevronsUpDownIcon } from "@/src/components/chevrons-up-down-icon"
-import { BriefcaseBusinessIcon, InfinityIcon, LockIcon } from "lucide-react"
+import { BriefcaseBusinessIcon, InfinityIcon, LockIcon, ChevronDown, Building2 } from "lucide-react"
 import { TechBadge } from "@/src/components/ui/tech-badge"
 import { TECH_ICONS } from "@/src/lib/constants"
 
@@ -74,202 +74,156 @@ export function WorkExperience({
 }: WorkExperienceProps) {
   return (
     <div className={cn("bg-background px-4 text-foreground", className)}>
-      {experiences.map((experience) => (
-        <ExperienceItem key={experience.id} experience={experience} />
+      {experiences.map((experience, index) => (
+        <ExperienceItem
+          key={experience.id}
+          experience={experience}
+          isLast={index === experiences.length - 1}
+        />
       ))}
     </div>
   )
 }
 
 export type ExperienceItemProps = {
-  experience: ExperienceItemType
+  experience: ExperienceItemType;
+  isLast?: boolean;
 }
 
-export function ExperienceItem({ experience }: ExperienceItemProps) {
+export function ExperienceItem({ experience, isLast }: ExperienceItemProps) {
+  const primaryPosition = experience.positions[0];
+  const primaryTitle = primaryPosition?.title;
+
   return (
-    <div className="space-y-4 py-4">
-      <div className="not-prose flex items-center gap-3">
-        <div className="flex size-6 shrink-0 items-center justify-center">
-          {experience.companyLogo ? (
-            <img
-              src={experience.companyLogo}
-              alt={experience.companyName}
-              className="size-6 rounded-full"
-              aria-hidden
-            />
-          ) : (
-            <LockIcon className="size-4 text-muted-foreground" />
-          )}
-        </div>
+    <div className="relative py-3">
+      {/* Vertical line connecting to next company logo */}
+      {!isLast && (
+        <div className="absolute left-[11px] top-8 bottom-0 w-px bg-border pointer-events-none" />
+      )}
 
-        <h3 className="text-lg leading-snug font-semibold">
-          {experience.companyWebsite ? (
-            <a
-              className="link"
-              href={experience.companyWebsite}
-              target="_blank"
-              rel="noopener noreferrer"
+      {primaryPosition ? (
+        <Collapsible
+          defaultOpen={primaryPosition.isExpanded}
+          disabled={!primaryPosition.description}
+        >
+          <div className="not-prose flex items-center justify-between gap-3">
+            <CollapsibleTrigger
+              className={cn(
+                "group/experience-position not-prose flex items-center justify-between gap-3 text-left select-none cursor-pointer w-full",
+                "disabled:cursor-default"
+              )}
             >
-              {experience.companyName}
-            </a>
-          ) : (
-            experience.companyName
-          )}
-        </h3>
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted border border-border/50 text-muted-foreground z-10">
+                  <Building2 className="size-3.5" />
+                </div>
 
-        {experience.isCurrentEmployer && (
-          <span
-            className="relative flex items-center justify-center"
-            aria-label="Current Employer"
-          >
-            <span className="absolute inline-flex size-3 animate-ping rounded-full bg-sky-500 opacity-50" />
-            <span className="relative inline-flex size-2 rounded-full bg-sky-500" />
-          </span>
-        )}
-      </div>
+                <h3 className="text-base sm:text-lg leading-snug flex items-center gap-2 flex-wrap">
+                  {experience.companyWebsite ? (
+                    <a
+                      className="link font-medium text-foreground hover:underline"
+                      href={experience.companyWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {experience.companyName}
+                    </a>
+                  ) : (
+                    <span className="font-medium text-foreground">{experience.companyName}</span>
+                  )}
+                  {primaryTitle && (
+                    <span className="text-sm font-normal text-muted-foreground">
+                      - {primaryTitle}
+                    </span>
+                  )}
+                </h3>
+              </div>
 
-      <div className="relative space-y-4 before:absolute before:left-3 before:h-full before:w-px before:bg-border">
-        {experience.positions.map((position) => (
-          <ExperiencePositionItem key={position.id} position={position} />
-        ))}
-      </div>
+              {primaryPosition.description && (
+                <div className="shrink-0 text-muted-foreground pr-1">
+                  <ChevronDown className="w-4 h-4 transition-transform duration-200 group-data-[state=open]/experience-position:rotate-180" />
+                </div>
+              )}
+            </CollapsibleTrigger>
+          </div>
+
+          <div className="relative space-y-3 pt-2">
+            {experience.positions.map((position) => (
+              <ExperiencePositionDetails key={position.id} position={position} />
+            ))}
+          </div>
+        </Collapsible>
+      ) : null}
     </div>
   )
 }
 
-export type ExperiencePositionItemProps = {
+export type ExperiencePositionDetailsProps = {
   position: ExperiencePositionItemType
 }
 
-export function ExperiencePositionItem({
+export function ExperiencePositionDetails({
   position,
-}: ExperiencePositionItemProps) {
-  const chevronsUpDownIconRef = useRef<ChevronsUpDownIconHandle>(null)
-
-  const handleOpenChange = useCallback((open: boolean) => {
-    const controls = chevronsUpDownIconRef.current
-    if (!controls) return
-
-    if (open) {
-      controls.startAnimation()
-    } else {
-      controls.stopAnimation()
-    }
-  }, [])
-
+}: ExperiencePositionDetailsProps) {
   const { start, end } = position.employmentPeriod
   const isOngoing = !end
   const duration = formatDuration(start, end)
 
   return (
-    <Collapsible
-      defaultOpen={position.isExpanded}
-      onOpenChange={handleOpenChange}
-      disabled={!position.description}
-      asChild
-    >
-      <div className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background">
-        <CollapsibleTrigger
-          className={cn(
-            "group/experience-position not-prose block w-full text-left select-none",
-            "relative before:absolute before:-top-1 before:-right-1 before:-bottom-1.5 before:left-7 before:rounded-lg hover:before:bg-muted/30",
-            "data-disabled:before:content-none"
-          )}
-        >
-          <div className="relative z-1 mb-1 flex items-start gap-3 text-base">
-            <div
-              className={cn(
-                "flex size-6 shrink-0 items-center justify-center rounded-lg",
-                "bg-muted text-muted-foreground",
-                "border border-muted-foreground/15 ring-1 ring-line ring-offset-1 ring-offset-background",
-                "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-              )}
-            >
-              {position.icon ?? (
-                <BriefcaseBusinessIcon
-                />
-              )}
-            </div>
-
-            <h4 className="flex-1 font-medium text-balance text-foreground">
-              {position.title}
-            </h4>
-
-            <div className="shrink-0 text-muted-foreground group-disabled/experience-position:hidden [&_svg]:h-lh [&_svg]:w-4">
-              <ChevronsUpDownIcon ref={chevronsUpDownIconRef} duration={0.15} />
-            </div>
-          </div>
-
-          <dl className="relative z-1 flex items-center gap-2 pl-9 text-sm text-muted-foreground">
-            {position.employmentType && (
-              <>
-                <div>
-                  <dt className="sr-only">Employment Type</dt>
-                  <dd>{position.employmentType}</dd>
-                </div>
-
-                <Separator
-                  className="data-vertical:h-4 data-vertical:self-center"
-                  orientation="vertical"
-                />
-              </>
-            )}
-
+    <div className="relative">
+      <dl className="relative z-1 flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+        {position.employmentType && (
+          <>
             <div>
-              <dt className="sr-only">Employment Period</dt>
-              <dd className="flex items-center gap-0.5 tabular-nums">
-                <span>{start}</span>
-                <span className="font-mono">—</span>
-                {isOngoing ? (
-                  <InfinityIcon className="size-4.5 translate-y-[0.5px]" aria-label="Present" />
-                ) : (
-                  <span>{end}</span>
-                )}
-              </dd>
+              <dt className="sr-only">Employment Type</dt>
+              <dd>{position.employmentType}</dd>
             </div>
 
-            {duration && (
-              <>
-                <Separator
-                  className="data-vertical:h-4 data-vertical:self-center"
-                  orientation="vertical"
-                />
-                <div>
-                  <dt className="sr-only">Duration</dt>
-                  <dd className="tabular-nums">{duration}</dd>
-                </div>
-              </>
-            )}
-          </dl>
-        </CollapsibleTrigger>
-
-        <CollapsibleContent className="overflow-hidden">
-          {position.description && (
-            <Prose className="pt-2 pl-9">
-              <ReactMarkdown>{position.description}</ReactMarkdown>
-            </Prose>
-          )}
-        </CollapsibleContent>
-
-        {Array.isArray(position.skills) && position.skills.length > 0 && (
-          <div className="not-prose flex flex-wrap gap-2 pt-3 pl-9">
-            {position.skills.map((skill, index) => {
-              const tech = TECH_ICONS[skill];
-              return (
-                <TechBadge
-                  key={index}
-                  name={skill}
-                  icon={tech?.icon}
-                  color={tech?.color}
-                />
-              );
-            })}
-          </div>
+            <Separator
+              className="data-vertical:h-4 data-vertical:self-center"
+              orientation="vertical"
+            />
+          </>
         )}
-      </div>
-    </Collapsible>
+
+        <div>
+          <dt className="sr-only">Employment Period</dt>
+          <dd className="flex items-center gap-1 tabular-nums">
+            <span>{start}</span>
+            <span className="font-mono">-</span>
+            {isOngoing ? (
+              <span>Present</span>
+            ) : (
+              <span>{end}</span>
+            )}
+          </dd>
+        </div>
+
+        {duration && (
+          <>
+            <Separator
+              className="data-vertical:h-4 data-vertical:self-center"
+              orientation="vertical"
+            />
+            <div>
+              <dt className="sr-only">Duration</dt>
+              <dd className="tabular-nums">{duration}</dd>
+            </div>
+          </>
+        )}
+      </dl>
+
+      <CollapsibleContent className="overflow-hidden">
+        {position.description && (
+          <Prose className="pt-2 pl-7">
+            <ReactMarkdown>{position.description}</ReactMarkdown>
+          </Prose>
+        )}
+      </CollapsibleContent>
+    </div>
   )
 }
+
 
 function Prose({ className, ...props }: ComponentProps<"div">) {
   return (

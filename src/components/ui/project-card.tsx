@@ -37,7 +37,7 @@ export const ProjectCard = ({
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (videoRef.current) {
-      videoRef.current.playbackRate = title === "Practice JS" ? 1 : (isLandingPage ? 2 : 4);
+      videoRef.current.playbackRate = (title === "Practice JS" && isLandingPage) ? 1 : 5;
       videoRef.current.currentTime = 0;
       videoRef.current.play().catch(() => {});
     }

@@ -4,7 +4,6 @@ import { WorkExperience } from "@/src/components/work-experience";
 import type { ExperienceItemType } from "@/src/components/work-experience";
 import Title from "@/src/components/ui/title";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
-import { CodeXmlIcon, LockIcon } from "lucide-react";
 
 export const ExperienceSection = () => {
   return (
@@ -42,13 +41,11 @@ const EXPERIENCES: ExperienceItemType[] = [
         title: "Full-Stack Developer",
         employmentPeriod: {
           start: "01.2026",
-          end: "06.2026",
         },
         employmentType: "Full-time",
         description: `- Engineered key product features and scalable APIs for a stealth-stage venture.
 - Designed user interfaces and responsive web layouts to drive early traction and product launch.`,
         skills: ["Next.js", "TypeScript", "React", "Tailwind CSS", "PostgreSQL"],
-        icon:  <CodeXmlIcon />,
         isExpanded: true,
       }
     ],
@@ -57,7 +54,7 @@ const EXPERIENCES: ExperienceItemType[] = [
   {
     id: "freelance",
     companyName: "Freelance",
-    companyLogo: "/assets/upwork-icon.png",
+    companyLogo: "",
     companyWebsite: "https://www.upwork.com",
     positions: [
       {
@@ -70,14 +67,13 @@ const EXPERIENCES: ExperienceItemType[] = [
         description: `- Delivering high-quality custom web applications, responsive e-commerce stores, and web dashboards for global clients.
 - Collaborating closely with clients from design mockups in Figma to final deployments on Vercel.`,
         skills: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Framer Motion", "MongoDB"],
-        icon: <CodeXmlIcon />,
       }
     ],
   },
   {
     id: "beiyo",
     companyName: "Beiyo",
-    companyLogo: "/assets/beiyo.png",
+    companyLogo: "",
     companyWebsite: "https://www.beiyo.in/",
     positions: [
       {
@@ -92,7 +88,6 @@ const EXPERIENCES: ExperienceItemType[] = [
 - Integrated third-party APIs and built reusable components following modern Design System principles.
 - Optimized backend queries and database schema designs using PostgreSQL and Prisma.`,
         skills: ["Next.js", "TypeScript", "React", "PostgreSQL", "Tailwind CSS"],
-        icon: <CodeXmlIcon />,
       }
     ],
   }

@@ -88,7 +88,10 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                       muted
                       loop
                       playsInline
-                      onLoadedData={() => setIsVideoLoading(false)}
+                      onLoadedData={(e) => {
+                        setIsVideoLoading(false);
+                        e.currentTarget.playbackRate = project.title === "Practice JS" ? 1 : 5;
+                      }}
                       className="w-full h-full object-cover"
                     />
                   </>
