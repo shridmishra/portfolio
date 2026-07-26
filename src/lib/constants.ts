@@ -131,7 +131,7 @@ export const projects = [
     year: "2025",
     link: "https://paths.shrid.in",
     code: "https://github.com/shridmishra/paths",
-    imageSrc: "/projects/path.png",
+    imageSrc: "/projects/path.webp",
     video:"/projects/video/paths.mp4"
   },
    {
@@ -143,7 +143,7 @@ export const projects = [
     year: "2025",
     link: "https://crm.shrid.in",
     code: "https://github.com/shridmishra",
-    imageSrc: "/projects/crm.png",
+    imageSrc: "/projects/crm.webp",
     video:"/projects/video/crm.mp4"
   },
   {
@@ -155,7 +155,7 @@ export const projects = [
     year: "2025",
     link: "https://projects.shrid.in",
     code: "https://github.com/shridmishra/project-management",
-    imageSrc: "/projects/projects.png",
+    imageSrc: "/projects/projects.webp",
     video:"/projects/video/projects.mp4"
   },{
     title: "Practice JS",
@@ -166,7 +166,7 @@ export const projects = [
     year: "2025",
     link: "https://practicejs.shrid.in",
     code: "https://github.com/shridmishra/practicejs",
-    imageSrc: "/projects/js.png",
+    imageSrc: "/projects/js.webp",
     video: "/projects/video/practicejs.mp4",
   },
   {
@@ -178,7 +178,7 @@ export const projects = [
     year: "2025",
     link: "https://animeflix.shrid.in",
     code: "https://github.com/shridmishra/animeflix",
-    imageSrc: "/projects/animeflix.png",
+    imageSrc: "/projects/animeflix.webp",
     video: "/projects/video/animeflix.mp4",
 
   },
@@ -191,7 +191,7 @@ export const projects = [
     year: "2025",
     link: "https://grocery.shrid.in",
     code: "https://github.com/shridmishra/grocery-store",
-    imageSrc: "/projects/grocery.png",
+    imageSrc: "/projects/grocery.webp",
     video: "/projects/video/grocery.mp4",
 
 
@@ -207,7 +207,7 @@ export const projects = [
     year: "2025",
     link: "https://blogs.shrid.in/post/new",
     code: "https://github.com/shridmishra/blogs",
-    imageSrc: "/projects/blogs.png",
+    imageSrc: "/projects/blogs.webp",
   },
   {
     title: "Crypto Explorer",
@@ -225,7 +225,7 @@ export const projects = [
     year: "2025",
     link: "https://crypto.shrid.in",
     code: "https://github.com/shridmishra/crypto-explorer",
-    imageSrc: "/projects/crypto.png",
+    imageSrc: "/projects/crypto.webp",
   },
   
   {
@@ -237,7 +237,7 @@ export const projects = [
     year: "2025",
     link: "https://notes.shrid.in",
     code: "https://github.com/shridmishra/sgsits-notes",
-    imageSrc: "/projects/notes.png",
+    imageSrc: "/projects/notes.webp",
   },
   {
     title: "Qrux Studio",
@@ -248,7 +248,7 @@ export const projects = [
     year: "2025",
     link: "https://qruxstudios.in",
     code: "https://github.com/shridmishra",
-    imageSrc: "/projects/qrux.png",
+    imageSrc: "/projects/qrux.webp",
     video: "/projects/video/qrux.mp4",
   },
   {
@@ -272,7 +272,7 @@ export const projects = [
     year: "2025",
     link: "https://rivvl.vercel.app",
     code: "https://github.com/shridmishra",
-    imageSrc: "/projects/rivvl.png",
+    imageSrc: "/projects/rivvl.webp",
     video: "/projects/video/rivvl.mp4",
   },
   {
@@ -284,7 +284,7 @@ export const projects = [
     year: "2025",
     link: "https://practicejs.shrid.in",
     code: "https://github.com/shridmishra/practicejs",
-    imageSrc: "/projects/js.png",
+    imageSrc: "/projects/js.webp",
     video: "/projects/video/practicejs.mp4",
   },
   {
@@ -296,6 +296,6 @@ export const projects = [
     year: "2025",
     link: "https://landing-page-shrid.vercel.app/",
     code: "https://github.com/shridmishra/landing-page",
-    imageSrc: "/projects/landing.png",
+    imageSrc: "/projects/landing.webp",
   },
 ];

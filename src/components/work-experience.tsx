@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/src/components/ui/separator"
 import type { ChevronsUpDownIconHandle } from "@/src/components/chevrons-up-down-icon"
 import { ChevronsUpDownIcon } from "@/src/components/chevrons-up-down-icon"
-import { BriefcaseBusinessIcon, InfinityIcon, LockIcon, ChevronDown, Building2 } from "lucide-react"
+import { Briefcase, InfinityIcon, LockIcon, ChevronDown } from "lucide-react"
 import { TechBadge } from "@/src/components/ui/tech-badge"
 import { TECH_ICONS } from "@/src/lib/constants"
 
@@ -114,8 +114,8 @@ export function ExperienceItem({ experience, isLast }: ExperienceItemProps) {
               )}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted border border-border/50 text-muted-foreground z-10">
-                  <Building2 className="size-3.5" />
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted/70 border border-border/50 text-foreground/70 z-10">
+                  <Briefcase className="size-3.5" />
                 </div>
 
                 <h3 className="text-base sm:text-lg leading-snug flex items-center gap-2 flex-wrap">

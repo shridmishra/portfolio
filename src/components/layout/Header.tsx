@@ -112,7 +112,7 @@ export function Header() {
             )
           ))}
 
-          <div className="pl-2 border-l bg-background/10 border-border/50">
+          <div className="pl-2 bg-background/10">
             <motion.div
               animate={{ scale: 1 }}
               whileHover={{ scale: 1.08 }}
