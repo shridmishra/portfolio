@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 export const FolderIcon = () => {
     return (
         <a
-            href="https://gsap-ui.shrid.in/"
+            href="https://gsap-ui.shrid.site/"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full h-full p-3.5 md:p-4 flex flex-col justify-between group cursor-pointer relative z-10"

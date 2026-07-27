@@ -8,7 +8,7 @@ const data = {
   title: "Full-Stack Developer | Design Engineer",
   contact: {
     email: "shridmishra@gmail.com", // Placeholder
-    website: "https://shrid.in",
+    website: "https://shrid.site",
     linkedin: "linkedin.com/in/shridmishra", // Placeholder
     github: "github.com/shridmishra",
     location: "India"
@@ -48,25 +48,25 @@ const data = {
     {
       title: "MediChain",
       tech: "Next.js, Solana, Anchor",
-      link: "https://medichain.shrid.in",
+      link: "https://medichain.shrid.site",
       description: "A decentralized platform for secure health data management on the Solana blockchain, ensuring patient privacy and data integrity."
     },
     {
       title: "Practice JS",
       tech: "Next.js, TypeScript",
-      link: "https://practicejs.shrid.in",
+      link: "https://practicejs.shrid.site",
       description: "Interactive JavaScript learning platform featuring real-time quizzes and coding challenges to enhance developer skills."
     },
     {
       title: "AnimeFlix",
       tech: "NeoBrutalism, YouTube API",
-      link: "https://animeflix.shrid.in",
+      link: "https://animeflix.shrid.site",
       description: "Streaming platform with a unique Neo-Brutalism design, utilizing the YouTube API for content delivery."
     },
     {
       title: "Grocery Store",
       tech: "React, Stripe, MongoDB",
-      link: "https://grocery.shrid.in",
+      link: "https://grocery.shrid.site",
       description: "Full-featured e-commerce application with shopping cart functionality and secure Stripe payment integration."
     },
     {

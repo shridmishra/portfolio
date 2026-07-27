@@ -13,7 +13,7 @@ $ whoami
 > Code. Debug. Repeat.
 
 $ cat contact.txt
-> Website: shrid.in
+> Website: shrid.site
 > X: @shridmishra
 
 $ ls skills/

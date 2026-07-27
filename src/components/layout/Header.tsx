@@ -9,7 +9,7 @@ import { cn } from "@/src/lib/utils";
 
 export function Header() {
   const navItems = [
-    { title: "Components", href: "https://gsap-ui.shrid.in/", external: true },
+    { title: "Components", href: "https://gsap-ui.shrid.site/", external: true },
     { title: "Projects", href: "/projects" },
   ];
 

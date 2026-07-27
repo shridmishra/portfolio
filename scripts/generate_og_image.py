@@ -169,7 +169,7 @@ def create_og_image():
     bg = Image.alpha_composite(bg, pill_layer)
     draw = ImageDraw.Draw(bg)
 
-    # 4. Footer URL Anchor: Diagonal Arrow Box + shrid.in
+    # 4. Footer URL Anchor: Diagonal Arrow Box + shrid.site
     url_y = H - 95
     box_s = 38
     draw.rounded_rectangle(
@@ -184,8 +184,8 @@ def create_og_image():
     draw.line([(ax2 - 8, ay2), (ax2, ay2)], fill=(10, 10, 12, 255), width=3)
     draw.line([(ax2, ay2), (ax2, ay2 + 8)], fill=(10, 10, 12, 255), width=3)
 
-    # Domain URL Text: shrid.in
-    draw.text((pad_l + 52, url_y + 6), "shrid.in", font=fn_url, fill=(255, 255, 255, 255))
+    # Domain URL Text: shrid.site
+    draw.text((pad_l + 52, url_y + 6), "shrid.site", font=fn_url, fill=(255, 255, 255, 255))
 
     # Save
     rgb = bg.convert("RGB")

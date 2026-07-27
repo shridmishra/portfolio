@@ -8,8 +8,8 @@ const info = {
   twitter: "@ShridMishra",
   description:
     "Design Engineer & Full-Stack Developer specializing in crafting captivating digital experiences, sleek user interfaces, and modern web applications.",
-  url: "https://shrid.in",
-  image: "https://shrid.in/assets/preview.png", 
+  url: "https://shrid.site",
+  image: "https://shrid.site/assets/preview.png", 
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || info.url;
