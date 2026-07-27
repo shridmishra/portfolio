@@ -145,7 +145,7 @@ html {
   --card-foreground: oklch(0.09 0 0);
 
   /* Interactive colors */
-  --primary: oklch(0.6 0.18 250);
+  --primary: oklch(0.09 0 0);
   --primary-foreground: oklch(0.998 0 0);
   --secondary: oklch(0.96 0 0);
   --secondary-foreground: oklch(0.09 0 0);
@@ -189,7 +189,7 @@ html {
     --card-foreground: oklch(0.98 0 0);
 
     /* Interactive colors */
-    --primary: oklch(0.75 0.2 250);
+    --primary: oklch(0.98 0 0);
     --primary-foreground: oklch(0.09 0 0);
     --secondary: oklch(0.15 0 0);
     --secondary-foreground: oklch(0.98 0 0);
