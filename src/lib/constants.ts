@@ -1,3 +1,4 @@
+import React from "react";
 import { I_Experience } from "@/src/types/type";
 import { IconType } from "react-icons";
 import {
@@ -19,6 +20,7 @@ import {
   SiDrizzle,
   SiFigma,
   SiVite,
+  SiGreensock,
 } from "react-icons/si";
 import { DiRedis } from "react-icons/di";
 import {
@@ -32,6 +34,38 @@ import {
   TbFileTypography,
 } from "react-icons/tb";
 
+export const GsapFilledIcon: IconType = (props) =>
+  React.createElement(
+    "svg",
+    {
+      viewBox: "0 0 24 24",
+      fill: "none",
+      width: "1em",
+      height: "1em",
+      ...props,
+    },
+    React.createElement("rect", {
+      width: "24",
+      height: "24",
+      rx: "4",
+      fill: "currentColor",
+    }),
+    React.createElement(
+      "text",
+      {
+        x: "12",
+        y: "15.5",
+        textAnchor: "middle",
+        fill: "#000000",
+        fontSize: "7.5",
+        fontWeight: "900",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+        letterSpacing: "-0.3px",
+      },
+      "GSAP"
+    )
+  );
+
 // Technology icons and colors mapping
 export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
   // Frameworks
@@ -41,12 +75,12 @@ export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
   // Languages
   "TypeScript": { icon: SiTypescript, color: "#3178C6" },
   "JavaScript": { icon: SiJavascript, color: "#F7DF1E" },
-  "Rust": { icon: SiRust, color: "#DEA584" },
   
   // Styling
   "Tailwind CSS": { icon: SiTailwindcss, color: "#06B6D4" },
   "Framer": { icon: SiFramer, color: "#0055FF" },
   "Framer Motion": { icon: SiFramer, color: "#0055FF" },
+  "GSAP": { icon: GsapFilledIcon, color: "#88CE02" },
   "NeoBrutalism": { icon: TbPalette, color: "#FF6B6B" },
   "Figma": { icon: SiFigma, color: "#F24E1E" },
   
@@ -238,6 +272,18 @@ export const projects = [
     link: "https://notes.shrid.site",
     code: "https://github.com/shridmishra/sgsits-notes",
     imageSrc: "/projects/notes.webp",
+  },
+  {
+    title: "GTA VI",
+    description: "Immersive Grand Theft Auto VI landing page experience.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
+    category: "landing",
+    status: "Live",
+    year: "2025",
+    link: "https://gta.shrid.site",
+    code: "https://github.com/shridmishra/gta",
+    imageSrc: "/projects/gta.webp",
+    video: "/projects/video/gta.mp4",
   },
   {
     title: "Qrux Studio",

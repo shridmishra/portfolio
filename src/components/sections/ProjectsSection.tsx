@@ -14,7 +14,7 @@ import { ChevronRight } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 
 export const ProjectsSection = () => {
-  const [activeTab, setActiveTab] = useState<"fullstack" | "landing">("fullstack");
+  const [activeTab, setActiveTab] = useState<"fullstack" | "landing">("landing");
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [preloadVideo, setPreloadVideo] = useState<string | null>(null);
 
@@ -35,26 +35,6 @@ export const ProjectsSection = () => {
             <Button
               variant="ghost"
               size="default"
-              onClick={() => setActiveTab("fullstack")}
-              className={cn(
-                "relative z-10 rounded-full transition-colors duration-200 cursor-pointer select-none",
-                activeTab === "fullstack"
-                  ? "text-foreground font-medium bg-transparent"
-                  : "text-muted-foreground hover:text-foreground bg-transparent hover:bg-transparent"
-              )}
-            >
-              {activeTab === "fullstack" && (
-                <motion.span
-                  layoutId="active-tab-indicator"
-                  className="absolute inset-0 bg-background dark:bg-neutral-800 rounded-full z-[-1] border border-border/50 dark:border-white/15 shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              Full Stack Apps
-            </Button>
-            <Button
-              variant="ghost"
-              size="default"
               onClick={() => setActiveTab("landing")}
               className={cn(
                 "relative z-10 rounded-full transition-colors duration-200 cursor-pointer select-none",
@@ -71,6 +51,26 @@ export const ProjectsSection = () => {
                 />
               )}
               Landing Pages
+            </Button>
+            <Button
+              variant="ghost"
+              size="default"
+              onClick={() => setActiveTab("fullstack")}
+              className={cn(
+                "relative z-10 rounded-full transition-colors duration-200 cursor-pointer select-none",
+                activeTab === "fullstack"
+                  ? "text-foreground font-medium bg-transparent"
+                  : "text-muted-foreground hover:text-foreground bg-transparent hover:bg-transparent"
+              )}
+            >
+              {activeTab === "fullstack" && (
+                <motion.span
+                  layoutId="active-tab-indicator"
+                  className="absolute inset-0 bg-background dark:bg-neutral-800 rounded-full z-[-1] border border-border/50 dark:border-white/15 shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              Full Stack Apps
             </Button>
           </div>
         </div>

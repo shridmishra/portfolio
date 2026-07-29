@@ -12,15 +12,15 @@ import {
   SiFigma,
   SiTailwindcss,
   SiFramer,
-  SiRust,
 } from "react-icons/si";
 
 import { cn } from "@/src/lib/utils";
 import { TechBadge } from "@/src/components/ui/tech-badge";
+import { GsapFilledIcon } from "@/src/lib/constants";
 
 const row1 = [
   { icon: SiFramer, name: "Framer Motion", color: "text-foreground" },
-  { icon: SiRust, name: "Rust", color: "#DEA584" },
+  { icon: GsapFilledIcon, name: "GSAP", color: "#88CE02" },
   { icon: SiExpress, name: "Express", color: "text-foreground" },
   { icon: SiNextdotjs, name: "Next.js", color: "text-foreground" },
 ];

@@ -90,7 +90,7 @@ export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) =>
                       playsInline
                       onLoadedData={(e) => {
                         setIsVideoLoading(false);
-                        e.currentTarget.playbackRate = project.title === "Practice JS" ? 1 : 5;
+                        e.currentTarget.playbackRate = project.title === "Practice JS" || project.title === "GTA VI" ? 1 : 5;
                       }}
                       className="w-full h-full object-cover"
                     />
