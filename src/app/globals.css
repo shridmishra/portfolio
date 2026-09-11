@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
-/* Local Satoshi font (place WOFF2 files in /public/fonts) */
+/* Local Satoshi font */
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -15,6 +16,7 @@
   font-weight: 500;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -23,6 +25,7 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @import "tailwindcss";
@@ -88,11 +91,92 @@
   }
 
   /* View Transition API */
-  ::view-transition-old(root),
+  ::view-transition-image-pair(root) {
+    isolation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: none;
+    mix-blend-mode: normal;
+    z-index: 1;
+  }
+
   ::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;
+    z-index: 9999;
   }
+}
+
+:root {
+  --guitar-fretboard: #bf7644;
+  --guitar-fretboard-edge: #824722;
+  --guitar-wood-grain: #8d4d23;
+  --guitar-wood-warm: #c88251;
+  --guitar-wood-amber: #d4935e;
+  --guitar-maple-base: #bf7644;
+  --guitar-maple-light: #cb8452;
+  --guitar-maple-dark: #9e5b2e;
+  --guitar-maple-deep: #7e441d;
+  --guitar-maple-grain: #8d4d23;
+  --guitar-maple-bevel: #6e3916;
+  --guitar-body-buttercream: #f4e3c3;
+  --guitar-body-buttercream-shadow: #deb886;
+  --guitar-abalone-1: #28635c;
+  --guitar-abalone-2: #488b80;
+  --guitar-abalone-3: #8eada1;
+  --guitar-abalone-copper: #c7885b;
+  --guitar-abalone-ring: #1f4743;
+  --guitar-soundboard: #c89d68;
+  --guitar-soundboard-dark: #a27848;
+  --guitar-binding: #eae3d2;
+  --guitar-fret-metal: #d6c8be;
+  --guitar-fret-wire: #b4bec7;
+  --guitar-fret-highlight: #f8f6f4;
+  --guitar-fret-shadow: #5c351b;
+  --guitar-string-steel: #f8fafc;
+  --guitar-string-core: #e2e8f0;
+  --guitar-string-highlight: #ffffff;
+  --guitar-string-wound-ridge: #94a3b8;
+  --guitar-string-bronze: #d99a53;
+  --guitar-string-bronze-dark: #8c5d26;
+  --guitar-inlay-pearl: #8eada1;
+  --guitar-inlay-glow: #488b80;
+  --guitar-nut-bone: #f4efe2;
+  --guitar-rosette-inner: #1a0f0a;
+  --guitar-rosette-gold: #c59b27;
+  --guitar-rosette-ivory: #ece4d0;
+  --guitar-pin-brass: #d4af37;
+  --guitar-stage-sky: #b2e2ef;
+  --guitar-pick-black: #18181b;
+  --guitar-pick-blue: #034ead;
+  --guitar-pickguard: #ffffff;
+  --guitar-neck-shadow: #3b7489;
+  --guitar-chrome-bright: #ffffff;
+  --guitar-chrome-mid: #cbd5e1;
+  --guitar-chrome-dark: #64748b;
+  --guitar-wound-crevice: #334155;
+  --guitar-wound-peak: #f8fafc;
+  --guitar-rosewood-base: #382015;
+  --guitar-rosewood-dark: #27150d;
+  --guitar-rosewood-deep: #1a0d07;
+  --guitar-rosewood-grain: #150a05;
+  --guitar-rosewood-warm: #4d2d1d;
+  --guitar-rosewood-chestnut: #5e3723;
+  --guitar-rosewood-shadow: #140904;
+  --guitar-binding-cream: #f4ece1;
+  --guitar-binding-edge: #d8caa9;
+  --guitar-binding-shadow: #23120a;
+  --guitar-inlay-steel-bright: #ffffff;
+  --guitar-inlay-steel-core: #e8edf2;
+  --guitar-inlay-steel-mid: #cbd5e1;
+  --guitar-inlay-steel-dark: #94a3b8;
+  --guitar-inlay-steel-rim: #1e293b;
+  --guitar-pearl-base: #f5f1e8;
+  --guitar-pearl-mid: #eae3d2;
+  --guitar-pearl-shade: #ded5c0;
+  --guitar-pearl-sheen: #ffffff;
+  --guitar-pearl-edge: #26150e;
 }
 
 * {
@@ -177,6 +261,83 @@ html {
   --text-muted: var(--muted-foreground);
   --text-inverted: var(--background);
   --text-on-primary: var(--primary-foreground);
+
+  /* App UI Primary Accent - Branding for the App UI (sidebar active branch, UI chrome, etc.) */
+  --app-accent: var(--swatch-orange);
+  --app-accent-foreground: #FFFFFF;
+
+  /* Component Showcase Default Swatch - Default accent for showcased components */
+  --showcase-default-accent: var(--swatch-purple);
+  --primary-accent: var(--showcase-default-accent);
+  --primary-accent-hover: oklch(0.68 0.22 300);
+  --primary-accent-foreground: #FFFFFF;
+
+  /* Swatch palette tokens */
+  --swatch-purple: oklch(0.62 0.22 300);
+  --swatch-rose: oklch(0.645 0.246 16.4);
+  --swatch-pink: var(--swatch-rose);
+  --swatch-orange: oklch(0.68 0.22 45);
+  --swatch-blue: oklch(0.60 0.22 250);
+  --swatch-red: oklch(0.62 0.24 25);
+  --swatch-green: oklch(0.68 0.22 145);
+  --swatch-black: oklch(0.20 0 0);
+  --swatch-white: oklch(0.96 0 0);
+
+  /* Showcase Stage tokens - Light */
+  --stage-slab: oklch(0.93 0 0);
+  --stage-card: oklch(1 0 0);
+  --stage-action-pill: oklch(0.99 0 0);
+  --accent-notch: var(--app-accent);
+
+  /* Framer Tactile Blue Tokens */
+  --framer-blue: rgb(53, 87, 255);
+  --framer-blue-foreground: rgb(255, 255, 255);
+  --framer-blue-border: rgba(0, 38, 128, 0.12);
+  --framer-blue-bg: rgba(0, 38, 128, 0.04);
+  --framer-blue-gradient: radial-gradient(
+    117.855% 100% at 50.2146% 100%,
+    rgb(110, 154, 255) 0%,
+    rgb(53, 87, 255) 100%
+  );
+  --framer-blue-gradient-hover: radial-gradient(
+    117.855% 100% at 50.2146% 100%,
+    rgb(125, 168, 255) 0%,
+    rgb(68, 100, 255) 100%
+  );
+  --cta-framer-shadow: 0 10px 25px -4px rgba(53, 87, 255, 0.28),
+    0 4px 10px -2px rgba(53, 87, 255, 0.16),
+    0 2px 4px 0 rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1.5px 0 0 rgba(0, 38, 128, 0.20);
+  --cta-framer-shadow-hover: 0 16px 36px -4px rgba(53, 87, 255, 0.40),
+    0 8px 16px -2px rgba(53, 87, 255, 0.24),
+    0 2px 6px 0 rgba(0, 0, 0, 0.10),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1.5px 0 0 rgba(0, 38, 128, 0.30);
+
+  /* Mango Card Colors */
+  --color-mango-brown: #4A3427;
+  --color-mango-brown-hover: #3d2b20;
+  --color-mango-gold: #D98808;
+
+}
+
+@utility btn-framer-gradient {
+  background: var(--framer-blue-gradient);
+  color: var(--framer-blue-foreground);
+  box-shadow: var(--cta-framer-shadow);
+}
+
+@utility shadow-cta-framer {
+  box-shadow: var(--cta-framer-shadow);
+}
+
+@utility cursor-guitar-pick {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28' fill='none'%3E%3Cpath d='M12 26 C9 22 2 13 2 8 C2 3.5 6.5 1 12 1 C17.5 1 22 3.5 22 8 C22 13 15 22 12 26 Z' fill='%23000000' fill-opacity='0.35' transform='translate(0.5, 1)'/%3E%3Cpath d='M12 26 C9 22 2 13 2 8 C2 3.5 6.5 1 12 1 C17.5 1 22 3.5 22 8 C22 13 15 22 12 26 Z' fill='%23034ead' stroke='%23ffffff' stroke-width='1.2' stroke-linejoin='round'/%3E%3Cpath d='M6 7 C6 4.5 8.5 2.5 12 2.5' stroke='%23ffffff' stroke-width='0.8' stroke-linecap='round' stroke-opacity='0.6'/%3E%3Ccircle cx='12' cy='9' r='1.5' fill='%23ffffff' fill-opacity='0.6'/%3E%3C/svg%3E") 12 26, crosshair;
+}
+
+@utility shadow-cta-framer-hover {
+  box-shadow: var(--cta-framer-shadow-hover);
 }
 
 /* 6. Dark theme overrides */
@@ -221,6 +382,24 @@ html {
     --text-muted: var(--muted-foreground);
     --text-inverted: var(--background);
     --text-on-primary: var(--primary-foreground);
+
+    /* Showcase Stage tokens - Dark */
+    --stage-slab: oklch(0.14 0 0);
+    --stage-card: oklch(0.08 0 0);
+    --stage-action-pill: oklch(0.16 0 0);
+    --accent-notch: var(--app-accent);
+
+    /* Framer Tactile Shadow - dark mode */
+    --cta-framer-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.75),
+      0 4px 12px -2px rgba(53, 87, 255, 0.35),
+      0 2px 4px 0 rgba(0, 0, 0, 0.50),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1.5px 0 0 rgba(0, 0, 0, 0.45);
+    --cta-framer-shadow-hover: 0 16px 38px -4px rgba(0, 0, 0, 0.85),
+      0 8px 18px -2px rgba(53, 87, 255, 0.50),
+      0 2px 6px 0 rgba(0, 0, 0, 0.60),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1.5px 0 0 rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -257,6 +436,73 @@ html {
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+
+  /* Swatch and stage inline tokens */
+  --color-app-accent: var(--app-accent);
+  --color-primary-accent: var(--primary-accent);
+  --color-swatch-rose: var(--swatch-rose);
+  --color-swatch-pink: var(--swatch-pink);
+  --color-swatch-orange: var(--swatch-orange);
+  --color-swatch-blue: var(--swatch-blue);
+  --color-swatch-red: var(--swatch-red);
+  --color-swatch-green: var(--swatch-green);
+  --color-swatch-purple: var(--swatch-purple);
+  --color-swatch-black: var(--swatch-black);
+  --color-swatch-white: var(--swatch-white);
+  --color-stage-slab: var(--stage-slab);
+  --color-stage-card: var(--stage-card);
+  --color-stage-action-pill: var(--stage-action-pill);
+  --color-accent-notch: var(--accent-notch);
+
+  /* Guitar Material Tokens */
+  --color-guitar-fretboard: var(--guitar-fretboard);
+  --color-guitar-fretboard-edge: var(--guitar-fretboard-edge);
+  --color-guitar-wood-grain: var(--guitar-wood-grain);
+  --color-guitar-wood-warm: var(--guitar-wood-warm);
+  --color-guitar-wood-amber: var(--guitar-wood-amber);
+  --color-guitar-maple-base: var(--guitar-maple-base);
+  --color-guitar-maple-light: var(--guitar-maple-light);
+  --color-guitar-maple-dark: var(--guitar-maple-dark);
+  --color-guitar-maple-deep: var(--guitar-maple-deep);
+  --color-guitar-maple-grain: var(--guitar-maple-grain);
+  --color-guitar-maple-bevel: var(--guitar-maple-bevel);
+  --color-guitar-body-buttercream: var(--guitar-body-buttercream);
+  --color-guitar-body-buttercream-shadow: var(--guitar-body-buttercream-shadow);
+  --color-guitar-abalone-1: var(--guitar-abalone-1);
+  --color-guitar-abalone-2: var(--guitar-abalone-2);
+  --color-guitar-abalone-3: var(--guitar-abalone-3);
+  --color-guitar-abalone-copper: var(--guitar-abalone-copper);
+  --color-guitar-abalone-ring: var(--guitar-abalone-ring);
+  --color-guitar-soundboard: var(--guitar-soundboard);
+  --color-guitar-soundboard-dark: var(--guitar-soundboard-dark);
+  --color-guitar-binding: var(--guitar-binding);
+  --color-guitar-fret-metal: var(--guitar-fret-metal);
+  --color-guitar-fret-wire: var(--guitar-fret-wire);
+  --color-guitar-fret-highlight: var(--guitar-fret-highlight);
+  --color-guitar-fret-shadow: var(--guitar-fret-shadow);
+  --color-guitar-string-steel: var(--guitar-string-steel);
+  --color-guitar-string-core: var(--guitar-string-core);
+  --color-guitar-string-highlight: var(--guitar-string-highlight);
+  --color-guitar-string-wound-ridge: var(--guitar-string-wound-ridge);
+  --color-guitar-string-bronze: var(--guitar-string-bronze);
+  --color-guitar-string-bronze-dark: var(--guitar-string-bronze-dark);
+  --color-guitar-inlay-pearl: var(--guitar-inlay-pearl);
+  --color-guitar-inlay-glow: var(--guitar-inlay-glow);
+  --color-guitar-nut-bone: var(--guitar-nut-bone);
+  --color-guitar-rosette-inner: var(--guitar-rosette-inner);
+  --color-guitar-rosette-gold: var(--guitar-rosette-gold);
+  --color-guitar-rosette-ivory: var(--guitar-rosette-ivory);
+  --color-guitar-pin-brass: var(--guitar-pin-brass);
+  --color-guitar-stage-sky: var(--guitar-stage-sky);
+  --color-guitar-pick-black: var(--guitar-pick-black);
+  --color-guitar-pick-blue: var(--guitar-pick-blue);
+  --color-guitar-pickguard: var(--guitar-pickguard);
+  --color-guitar-neck-shadow: var(--guitar-neck-shadow);
+  --color-guitar-chrome-bright: var(--guitar-chrome-bright);
+  --color-guitar-chrome-mid: var(--guitar-chrome-mid);
+  --color-guitar-chrome-dark: var(--guitar-chrome-dark);
+  --color-guitar-wound-crevice: var(--guitar-wound-crevice);
+  --color-guitar-wound-peak: var(--guitar-wound-peak);
 
   /* Custom semantic colors */
   --color-text-primary: var(--text-primary);
@@ -432,6 +678,7 @@ html {
   .tech-badge {
     @apply px-2.5 py-1 text-xs font-medium bg-secondary/50 text-secondary-foreground rounded-md border border-edge;
   }
+
 
   /* Separator with diagonal pattern */
   .separator-pattern {

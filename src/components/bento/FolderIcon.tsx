@@ -1,18 +1,17 @@
 import React from "react";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export const FolderIcon = () => {
     return (
-        <a
-            href="https://gsap-ui.shrid.site/"
-            target="_blank"
-            rel="noopener noreferrer"
+        <Link
+            href="/ui"
             className="w-full h-full p-3.5 md:p-4 flex flex-col justify-between group cursor-pointer relative z-10"
         >
             {/* Header: Title on top-left, Arrow on top-right */}
             <div className="flex items-center justify-between w-full">
                 <span className="text-xs md:text-sm font-medium text-foreground">UI Library</span>
-                <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
             </div>
 
             {/* Folder Center */}
@@ -54,6 +53,6 @@ export const FolderIcon = () => {
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 };

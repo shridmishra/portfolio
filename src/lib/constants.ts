@@ -1,5 +1,4 @@
 import React from "react";
-import { I_Experience } from "@/src/types/type";
 import { IconType } from "react-icons";
 import {
   SiNextdotjs,
@@ -127,32 +126,12 @@ export const TECH_ICONS: Record<string, { icon: IconType; color: string }> = {
   // Editor & Content
   "TipTap": { icon: TbFileTypography, color: "#68D391" },
   "MDX": { icon: TbFileTypography, color: "#FCB32C" },
-  "Framer Motion  ": { icon: SiFramer, color: "#0055FF" },
 };
 
 export const words = [
   "Design Engineer",
   "Full-Stack Developer",
   "Frontend Specialist",
-];
-
-export const experienceData: I_Experience[] = [
-  {
-    company_link: "https://www.beiyo.in/",
-    company_logo: "/assets/beiyo.webp",
-    company_name: "Beiyo",
-    duration: "2024 - 2025",
-    job_title: "FullStack Developer",
-    description: "",
-  },
-  {
-    company_link: "#",
-    company_logo: "/assets/upwork-icon.webp",
-    company_name: "Freelance",
-    duration: "2023 - Present",
-    job_title: "FullStack Developer",
-    description: "",
-  },
 ];
 
 export const projects = [
@@ -320,18 +299,6 @@ export const projects = [
     code: "https://github.com/shridmishra",
     imageSrc: "/projects/rivvl.webp",
     video: "/projects/video/rivvl.mp4",
-  },
-  {
-    title: "Practice JS",
-    description: "Leetcode like questions but for FullStack Development.",
-    tech: ["Next.js", "TypeScript", "MongoDB", "React", "Tailwind CSS", "Framer Motion"],
-    category: "landing",
-    status: "Live",
-    year: "2025",
-    link: "https://js.shrid.site",
-    code: "https://github.com/shridmishra/practicejs",
-    imageSrc: "/projects/js.webp",
-    video: "/projects/video/practicejs.mp4",
   },
   {
     title: "Landing Page",

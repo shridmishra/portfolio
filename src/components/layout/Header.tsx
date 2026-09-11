@@ -8,8 +8,8 @@ import { ThemeToggle } from "@/src/components/ui/theme-toggle";
 import { cn } from "@/src/lib/utils";
 
 export function Header() {
-  const navItems = [
-    { title: "Components", href: "https://gsap-ui.shrid.site/", external: true },
+  const navItems: { title: string; href: string; external?: boolean }[] = [
+    { title: "Components", href: "/ui" },
     { title: "Projects", href: "/projects" },
   ];
 
@@ -112,13 +112,13 @@ export function Header() {
             )
           ))}
 
-          <div className="pl-2 bg-background/10">
+          <div className="pl-2 flex items-center">
             <motion.div
               animate={{ scale: 1 }}
               whileHover={{ scale: 1.08 }}
               transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
             >
-              <ThemeToggle />
+              <ThemeToggle className="border border-border/40 hover:bg-muted/50 rounded-full" />
             </motion.div>
           </div>
         </div>

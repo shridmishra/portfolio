@@ -1,62 +1,147 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-import { flushSync } from "react-dom"
+import * as React from "react";
+import { useTheme } from "next-themes";
+import { flushSync } from "react-dom";
+import { Button } from "@/src/components/ui/button";
+import { ThemeToggleIcon } from "@/src/components/ui/icons";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/src/components/ui/tooltip";
+import { cn } from "@/src/lib/utils";
 
-import { Button } from "@/src/components/ui/button"
+export function useThemeTransition() {
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const toggleTheme = React.useCallback(
+    async (
+      customOrigin?: { x: number; y: number } | React.MouseEvent<HTMLElement> | null
+    ) => {
+      // Play tactile click sound
+      try {
+        const audio = new Audio("/click.wav");
+        audio.play().catch(() => {});
+      } catch {
+        // Audio error ignored
+      }
 
-  const toggleTheme = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    // Play click sound
-    const audio = new Audio('/click.wav')
-    audio.play().catch(error => console.log('Audio play failed:', error))
-    
-    const newTheme = theme === "light" ? "dark" : "light"
+      const current = resolvedTheme ?? theme;
+      const nextTheme = current === "dark" ? "light" : "dark";
 
-    if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTheme(newTheme)
-      return
-    }
+      // If View Transitions API is not supported or reduced motion is preferred
+      if (
+        typeof document === "undefined" ||
+        !document.startViewTransition ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        setTheme(nextTheme);
+        return;
+      }
 
-    const transition = document.startViewTransition(() => {
-      flushSync(() => {
-        setTheme(newTheme)
-      })
-    })
+      // Origin precisely from the top right corner (window width - 40px, 40px)
+      let x = typeof window !== "undefined" ? window.innerWidth - 40 : 0;
+      let y = typeof window !== "undefined" ? 40 : 0;
 
-    const x = e.clientX
-    const y = e.clientY
-    const endRadius = Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y)
-    )
+      if (
+        customOrigin &&
+        "x" in customOrigin &&
+        typeof customOrigin.x === "number" &&
+        typeof customOrigin.y === "number"
+      ) {
+        x = customOrigin.x;
+        y = customOrigin.y;
+      }
 
-    transition.ready.then(() => {
-      document.documentElement.animate(
-        {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${endRadius}px at ${x}px ${y}px)`,
-          ],
-        },
-        {
-          duration: 500,
-          easing: "ease-in-out",
-          pseudoElement: "::view-transition-new(root)",
-        }
-      )
-    })
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      const transition = document.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme);
+        });
+        // Synchronously toggle the 'dark' class on root so the snapshot immediately reflects the new theme
+        document.documentElement.classList.toggle("dark", nextTheme === "dark");
+      });
+
+      try {
+        await transition.ready;
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 500,
+            easing: "ease-in-out",
+            pseudoElement: "::view-transition-new(root)",
+          }
+        );
+      } catch {
+        // Animation fallback
+      }
+    },
+    [theme, setTheme, resolvedTheme]
+  );
+
+  return { toggleTheme, theme, resolvedTheme };
+}
+
+export interface ThemeToggleProps extends React.ComponentProps<typeof Button> {
+  iconSize?: number;
+  showTooltip?: boolean;
+  tooltipSide?: "top" | "bottom" | "left" | "right";
+}
+
+export function ThemeToggle({
+  className,
+  size = "icon",
+  variant = "ghost",
+  iconSize,
+  showTooltip = true,
+  tooltipSide = "bottom",
+  onClick,
+  ...props
+}: ThemeToggleProps) {
+  const { toggleTheme } = useThemeTransition();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Triggers circular transition cleanly from the top right corner
+    toggleTheme();
+    onClick?.(e);
+  };
+
+  const calculatedIconSize =
+    iconSize ?? (size === "icon-xs" ? 16 : size === "icon-sm" ? 16 : 18);
+
+  const buttonElement = (
+    <Button
+      variant={variant}
+      size={size}
+      onClick={handleClick}
+      data-slot="theme-toggle"
+      className={cn("rounded-full cursor-pointer", className)}
+      {...props}
+    >
+      <ThemeToggleIcon
+        size={calculatedIconSize}
+        className="text-foreground shrink-0 transition-transform duration-300 active:scale-90"
+      />
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  );
+
+  if (!showTooltip) {
+    return buttonElement;
   }
 
   return (
-    <Button variant="ghost" size="icon" onClick={toggleTheme} className="bg-background/20 backdrop-blur-lg border border-border hover:bg-background/40 rounded-full">
-      <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-      <span className="sr-only">Toggle theme</span>
-    </Button>
-  )
+    <Tooltip>
+      <TooltipTrigger asChild>{buttonElement}</TooltipTrigger>
+      <TooltipContent side={tooltipSide} className="text-xs">
+        Toggle theme
+      </TooltipContent>
+    </Tooltip>
+  );
 }

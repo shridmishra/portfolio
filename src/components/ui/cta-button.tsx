@@ -22,14 +22,14 @@ export function CtaButton({
       <button
         className={cn(
           "group relative rounded-full cursor-pointer w-full text-left",
-          "shadow-md active:scale-[0.98] transition-all duration-200"
+          "shadow-[0_8px_20px_-2px_rgba(0,0,0,0.12),0_3px_8px_-2px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.6),0_2px_6px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_28px_-2px_rgba(0,0,0,0.18),0_4px_10px_rgba(0,0,0,0.08)] active:scale-[0.98] transition-all duration-200"
         )}
         onClick={onClick}
         {...props}
       >
-        {/* Hover Border Background: multi-color gradient */}
+        {/* Ambient Glow / Hover Border Background: visible in idle, blooms on hover */}
         <div
-          className="absolute inset-[-1.5px] group-hover:inset-[-5px] opacity-0 group-hover:opacity-100 rounded-full overflow-hidden transition-all duration-300 z-0"
+          className="absolute inset-[-1.5px] group-hover:inset-[-5px] opacity-30 group-hover:opacity-100 rounded-full overflow-hidden transition-all duration-300 z-0"
           style={{
             background:
               "linear-gradient(to top right, #60a5fa, #60a5fa 25%, #f472b6 60%, #ffccd5 75%, #ffba00)",

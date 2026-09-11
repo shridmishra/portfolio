@@ -23,9 +23,12 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-11 min-h-[44px] min-w-[44px] px-5 py-2.5 has-[>svg]:px-4",
-        sm: "h-11 min-h-[44px] min-w-[44px] px-5 py-2.5 has-[>svg]:px-4",
+        sm: "h-9 min-h-[36px] px-3.5 py-1.5 text-xs has-[>svg]:px-2.5",
+        xs: "h-7 min-h-[28px] px-2.5 py-1 text-xs has-[>svg]:px-2",
         lg: "h-12 min-h-[48px] min-w-[48px] px-6 py-3 text-base has-[>svg]:px-5",
-        icon: "size-11 min-h-[44px] min-w-[44px] p-0 flex items-center justify-center",
+        icon: "size-10 min-h-[40px] min-w-[40px] p-0 flex items-center justify-center",
+        "icon-sm": "size-8 min-h-[32px] min-w-[32px] p-0 flex items-center justify-center",
+        "icon-xs": "size-7 min-h-[28px] min-w-[28px] p-0 flex items-center justify-center",
       },
     },
     defaultVariants: {

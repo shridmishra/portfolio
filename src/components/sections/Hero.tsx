@@ -5,7 +5,7 @@ import { FlipWords } from "@/src/components/ui/flip-words";
 import { words } from "@/src/lib/constants";
 import { Button } from "@/src/components/ui/button";
 import { Mail, Calendar, ArrowRight } from "lucide-react";
-import { FaLinkedin, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
+import { FaPinterest, FaXTwitter, FaGithub, FaPaperclip } from "react-icons/fa6";
 import { SeparatorLine } from "@/src/components/ui/separator-line";
 import {
   Tooltip,
@@ -77,10 +77,16 @@ export const Hero = () => {
                   words={words}
                   className="text-md sm:text-lg hidden sm:block text-muted-foreground/80 font-thin"
                 />
-                <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-1 sm:gap-1.5">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=shridmishra00@gmail.com" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
+                      <Link
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=shridmishra00@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center"
+                        aria-label="Email"
+                      >
                         <Mail className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -90,17 +96,29 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://linkedin.com/in/shridmishra" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
-                        <FaLinkedin className="w-5 h-5" />
+                      <Link
+                        href="https://in.pinterest.com/shridmishra/_created/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center"
+                        aria-label="Pinterest"
+                      >
+                        <FaPinterest className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>LinkedIn</p>
+                      <p>Pinterest</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://twitter.com/shridmishra" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
+                      <Link
+                        href="https://twitter.com/shridmishra"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center"
+                        aria-label="Twitter"
+                      >
                         <FaXTwitter className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>
@@ -110,7 +128,13 @@ export const Hero = () => {
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link href="https://github.com/shridmishra" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] p-2.5 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center">
+                      <Link
+                        href="https://github.com/shridmishra"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 p-2 rounded-full hover:bg-foreground/5 hover:text-muted-foreground text-foreground transition-all duration-200 inline-flex items-center justify-center"
+                        aria-label="GitHub"
+                      >
                         <FaGithub className="w-5 h-5" />
                       </Link>
                     </TooltipTrigger>

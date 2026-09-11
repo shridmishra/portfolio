@@ -26,7 +26,7 @@ const jsonLd = {
       "image": `${info.url}/assets/me.jpg`,
       "sameAs": [
         "https://twitter.com/shridmishra",
-        "https://linkedin.com/in/shridmishra",
+        "https://in.pinterest.com/shridmishra/_created/",
         "https://github.com/shridmishra"
       ],
       "knowsAbout": [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     "Shrid Mishra",
     "Design Engineer",
     "Frontend Engineer",
-    "LinkedIn shridmishra",
+    "Pinterest shridmishra",
     "Full-Stack Developer",
     "Next.js",
     "TypeScript",
