@@ -17,6 +17,7 @@ export interface CreditInfo {
   url: string;
   handle?: string;
   label?: string;
+  role?: string;
 }
 
 export interface ComponentItem {
@@ -33,6 +34,7 @@ export interface ComponentItem {
   howToUse?: string;
   sourceCode: string;
   credit?: CreditInfo;
+  defaultZoom?: number;
 }
 
 export const COMPONENTS_REGISTRY: ComponentItem[] = [
@@ -43,7 +45,7 @@ export const COMPONENTS_REGISTRY: ComponentItem[] = [
     tag: "PRODUCT CARDS",
     title: "Two mango product cards: a compact preview and an expanded immersive version.",
     description: "Two mango product cards: a compact preview and an expanded immersive version.",
-    dependencies: ["framer-motion"],
+    dependencies: ["motion"],
     interactionType: "Swipe or drag horizontally across the carousel images in either card with spring physics.",
     props: [
       { prop: "accent?", type: "string", description: "Color theme accent for highlights." },
@@ -124,17 +126,20 @@ export function Demo() {
     tag: "INTERACTIVE FOLDER",
     title: "An archival green postage stamp folder with tactile 3D flap physics, hover peek elevation, and presentation modes.",
     description: "An archival green postage stamp folder with tactile 3D flap physics, hover peek elevation, and presentation modes.",
-    dependencies: ["framer-motion"],
+    dependencies: ["motion"],
+    defaultZoom: 0.75,
     interactionType: "Hover to swing open the flaps and peek stamps out of the pocket. Click to present stamps in full view. Hover or click stamps to inspect them.",
     props: [
       { prop: "className?", type: "string", description: "Optional container class name." },
       { prop: "embedded?", type: "boolean", description: "Whether to render in embedded showcase mode." },
+      { prop: "defaultScale?", type: "number", description: "Default zoom scale factor (e.g. 0.75)." },
     ],
     credit: {
       name: "Aditya Sur",
       handle: "@AdityaSur11",
       url: "https://x.com/AdityaSur11/status/2098328193660833874",
       label: "Original concept & interaction design on 𝕏",
+      role: "concept",
     },
     installCommand: "npx shadcn@latest add https://shrid.site/r/stamp-collection.json",
     howToUse: `import { StampCollectionPreview as StampCollection } from "@/components/ui/stamp-collection";

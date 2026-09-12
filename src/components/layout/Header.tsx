@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { ThemeToggle } from "@/src/components/ui/theme-toggle";
 import { cn } from "@/src/lib/utils";
 

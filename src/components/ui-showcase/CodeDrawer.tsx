@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import { Button } from "@/src/components/ui/button";
-import { Badge } from "@/src/components/ui/badge";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/src/components/ui/tooltip";
 import { Icons } from "@/src/components/ui/icons";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/src/components/ui/collapsible";
@@ -80,15 +79,6 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
     setTimeout(() => setCopiedCode(false), 2000);
   };
 
-  const getDepIcon = (dep: string) => {
-    const d = dep.toLowerCase();
-    if (d.includes("motion")) return <Icons.Motion className="size-3 text-foreground shrink-0" />;
-    if (d.includes("radix")) return <Icons.Radix className="size-3 text-foreground shrink-0" />;
-    if (d.includes("lucide")) return <Icons.Lucide className="size-3 text-foreground shrink-0" />;
-    if (d.includes("tailwind")) return <Icons.Tailwind className="size-3 shrink-0" />;
-    return <Icons.Layers className="size-3 text-muted-foreground shrink-0" />;
-  };
-
   if (!mounted) return null;
 
   return createPortal(
@@ -112,125 +102,115 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 320 }}
-            className="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[500px] md:w-[560px] lg:w-[620px] max-w-full bg-card border-l border-border shadow-2xl flex flex-col h-full overflow-hidden"
+            className="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[480px] md:w-[520px] lg:w-[560px] max-w-full bg-card border-l border-border/40 shadow-2xl flex flex-col h-full overflow-hidden"
             role="dialog"
             aria-modal="true"
             aria-label={component.title}
           >
-            {/* Drawer Header */}
-            <div className="flex items-center justify-between p-5 pb-4 border-b border-border/40 shrink-0">
-              <div className="space-y-1 min-w-0 pr-4">
-                <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wider rounded-md bg-muted/60 text-muted-foreground border-0"
-                  >
-                    {component.tag}
-                  </Badge>
+            {/* Drawer Header & Tabs with Muted Background */}
+            <div className="bg-muted/60 shrink-0">
+              <div className="p-6 pb-4 space-y-2">
+                <div className="flex items-start justify-between gap-3">
+                  <h2 className="text-xl font-semibold tracking-tight text-foreground">
+                    {component.name}
+                  </h2>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon-xs"
+                        onClick={onClose}
+                        className="size-7 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted p-0 cursor-pointer -mt-0.5 -mr-1 shrink-0"
+                        aria-label="Close drawer"
+                      >
+                        <Icons.Close className="size-3.5" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="left" className="text-xs">
+                      Close (Esc)
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
-                <h2 className="text-base font-bold tracking-tight text-foreground truncate">
-                  {component.name}
-                </h2>
+
+                {/* Subheading / Description */}
+                <p className="text-[13px] text-muted-foreground leading-relaxed">
+                  {component.title}
+                </p>
               </div>
 
-              {/* Close Button */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon-xs"
-                    onClick={onClose}
-                    className="size-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted p-0 cursor-pointer shrink-0"
-                    aria-label="Close drawer"
-                  >
-                    <Icons.Close className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="left" className="text-xs">
-                  Close (Esc)
-                </TooltipContent>
-              </Tooltip>
-            </div>
-
-            {/* Segmented Two Tabs Control: Usage & Code */}
-            <div className="px-5 pt-3 shrink-0">
-              <div className="flex items-center p-1 rounded-xl bg-muted/50 border border-border/40">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setActiveTab("usage")}
-                  className={cn(
-                    "flex-1 h-8 rounded-lg text-xs font-medium transition-all cursor-pointer gap-2",
-                    activeTab === "usage"
-                      ? "bg-card text-foreground shadow-xs font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  <Icons.Terminal className="size-3.5" />
-                  <span>Usage</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setActiveTab("code")}
-                  className={cn(
-                    "flex-1 h-8 rounded-lg text-xs font-medium transition-all cursor-pointer gap-2",
-                    activeTab === "code"
-                      ? "bg-card text-foreground shadow-xs font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  <Icons.Code className="size-3.5" />
-                  <span>Code</span>
-                </Button>
-              </div>
+              {/* Clean Underline Tabs: Usage & Code */}
+              <LayoutGroup id="drawer-tabs">
+                <div className="flex items-center gap-6 px-6">
+                  {(["usage", "code"] as const).map((tab) => {
+                    const isActive = activeTab === tab;
+                    return (
+                      <button
+                        key={tab}
+                        type="button"
+                        onClick={() => setActiveTab(tab)}
+                        className={cn(
+                          "pb-3 pt-1 text-[13px] font-medium transition-colors relative cursor-pointer select-none",
+                          isActive
+                            ? "text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        <span className="capitalize">{tab}</span>
+                        {isActive && (
+                          <motion.div
+                            layoutId="drawer-tab-underline"
+                            className="absolute bottom-0 inset-x-0 h-[2px] bg-foreground rounded-full"
+                            transition={{
+                              type: "spring",
+                              bounce: 0.15,
+                              duration: 0.35,
+                            }}
+                          />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </LayoutGroup>
             </div>
 
             {/* Drawer Body - Scrollable */}
-            <div className="flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden p-5 space-y-6">
+            <div className="flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden p-6 space-y-6">
               <AnimatePresence mode="wait">
                 {activeTab === "usage" ? (
                   <motion.div
                     key="usage-tab"
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.15 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
                     className="space-y-6"
                   >
-                    {/* Component Title Description */}
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {component.title}
-                    </p>
-
-                    {/* Unified Compact Install Bar */}
+                    {/* Clean Installation Bar with Muted Background */}
                     <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold">
-                          Installation
-                        </span>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="font-medium text-foreground">Installation</span>
                         {/* Package Manager Selector */}
-                        <div className="flex items-center gap-0.5 bg-muted/50 p-0.5 rounded-lg border border-border/30">
+                        <div className="flex items-center gap-1">
                           {(["npm", "pnpm", "yarn", "bun"] as const).map((pm) => (
-                            <Button
+                            <button
                               key={pm}
-                              variant="ghost"
-                              size="xs"
+                              type="button"
                               onClick={() => setPackageManager(pm)}
                               className={cn(
-                                "h-5 px-1.5 text-[10.5px] font-mono rounded-md transition-colors cursor-pointer",
+                                "px-2 py-0.5 text-[11px] font-mono rounded-md transition-colors cursor-pointer",
                                 packageManager === pm
-                                  ? "bg-card text-foreground shadow-xs font-semibold"
-                                  : "text-muted-foreground hover:text-foreground"
+                                  ? "text-foreground font-semibold bg-background shadow-xs"
+                                  : "text-muted-foreground hover:text-foreground hover:bg-background/40"
                               )}
                             >
                               {pm}
-                            </Button>
+                            </button>
                           ))}
                         </div>
                       </div>
 
-                      <div className="relative flex items-center justify-between rounded-xl bg-muted/40 dark:bg-card/70 border border-border/40 px-3 py-2 font-mono text-xs text-foreground/90 group">
+                      <div className="flex items-center justify-between rounded-xl bg-muted px-3.5 py-2.5 text-xs font-mono text-foreground/90 group">
                         <span className="truncate pr-2 select-text text-[11.5px]">
                           {getInstallCommand()}
                         </span>
@@ -240,7 +220,7 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                               variant="ghost"
                               size="icon-xs"
                               onClick={handleInstallCopy}
-                              className="size-6 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted p-0 shrink-0 cursor-pointer"
+                              className="size-6 text-muted-foreground hover:text-foreground hover:bg-background/60 p-0 shrink-0 cursor-pointer"
                               aria-label="Copy install command"
                             >
                               {copiedInstall ? (
@@ -257,47 +237,24 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                       </div>
                     </div>
 
-                    {/* Dependencies */}
-                    {visibleDependencies.length > 0 && (
-                      <div className="space-y-2">
-                        <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
-                          Dependencies
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {visibleDependencies.map((dep) => (
-                            <Badge
-                              key={dep}
-                              variant="secondary"
-                              className="px-2.5 py-1 text-xs font-medium rounded-full bg-muted/60 text-foreground border border-border/30 flex items-center gap-1.5"
-                            >
-                              {getDepIcon(dep)}
-                              <span>{dep}</span>
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* How to Use Code Section */}
+                    {/* How to Use Code Section with Muted Background */}
                     {component.howToUse && (
-                      <div className="space-y-2.5">
+                      <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
-                            How to Use
-                          </span>
+                          <span className="text-xs font-medium text-foreground">How to use</span>
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button
                                 variant="ghost"
                                 size="icon-xs"
                                 onClick={() => handleCodeCopy(component.howToUse!)}
-                                className="size-7 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted p-0 cursor-pointer"
+                                className="size-6 text-muted-foreground hover:text-foreground hover:bg-muted p-0 cursor-pointer"
                                 aria-label="Copy usage code"
                               >
                                 {copiedCode ? (
-                                  <Icons.Check className="size-3.5 text-success" />
+                                  <Icons.Check className="size-3 text-success" />
                                 ) : (
-                                  <Icons.Copy className="size-3.5" />
+                                  <Icons.Copy className="size-3" />
                                 )}
                               </Button>
                             </TooltipTrigger>
@@ -307,87 +264,95 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                           </Tooltip>
                         </div>
 
-                        <CodeBlock
-                          code={component.howToUse}
-                          language="tsx"
-                          filename="Demo.tsx"
-                          showFrame={true}
-                          showHeader={false}
-                          showLineNumbers={false}
-                          showCopyButton={false}
-                          className="rounded-xl max-h-[300px] overflow-auto border border-border/40 bg-card/60"
-                        />
-                      </div>
-                    )}
-
-                    {/* Interaction Note */}
-                    {component.interactionType && (
-                      <div className="p-3.5 rounded-xl bg-muted/30 border border-border/30 space-y-1.5">
-                        <div className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
-                          <Icons.Compass className="size-3.5 text-foreground" />
-                          <span>Interaction</span>
+                        <div className="rounded-xl bg-muted p-3.5 overflow-hidden">
+                          <CodeBlock
+                            code={component.howToUse}
+                            language="tsx"
+                            filename="Demo.tsx"
+                            showFrame={false}
+                            showHeader={false}
+                            showLineNumbers={false}
+                            showCopyButton={false}
+                            className="max-h-[260px] overflow-auto text-xs"
+                          />
                         </div>
-                        <p className="text-xs text-foreground/80 leading-relaxed">
-                          {component.interactionType}
-                        </p>
                       </div>
                     )}
 
-                    {/* Inspiration Section */}
-                    {component.credit && (
-                      <div className="space-y-2">
-                        <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
-                          Inspiration
-                        </span>
-                        <a
-                          href={component.credit.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-between p-3 rounded-xl bg-muted/40 hover:bg-muted/70 border border-border/40 transition-colors group cursor-pointer"
-                        >
-                          <div className="flex items-center gap-2.5 min-w-0">
-                            <div className="size-8 rounded-lg bg-card border border-border/40 flex items-center justify-center shrink-0">
-                              <Icons.Twitter className="size-3.5 text-foreground" />
-                            </div>
-                            <div className="min-w-0">
-                              <div className="text-xs font-medium text-foreground group-hover:text-primary transition-colors flex items-center gap-1.5">
-                                <span>{component.credit.name}</span>
-                                {component.credit.handle && (
-                                  <span className="text-muted-foreground font-normal">
-                                    {component.credit.handle}
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-[11px] text-muted-foreground truncate">
-                                {component.credit.label ?? "Original concept & interaction design on 𝕏"}
-                              </p>
-                            </div>
+                    {/* Details Card (Interaction, Dependencies, Inspiration on unified muted surface) */}
+                    <div className="rounded-xl bg-muted p-4 space-y-3.5">
+                      {component.interactionType && (
+                        <div className="space-y-1">
+                          <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block">
+                            Interaction
+                          </span>
+                          <p className="text-xs text-foreground/80 leading-relaxed">
+                            {component.interactionType}
+                          </p>
+                        </div>
+                      )}
+
+                      {visibleDependencies.length > 0 && (
+                        <div className="flex items-center justify-between text-xs pt-1">
+                          <span className="text-muted-foreground">Dependencies</span>
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {visibleDependencies.map((dep) => (
+                              <span
+                                key={dep}
+                                className="px-2 py-0.5 text-[11px] font-mono rounded bg-background/80 text-foreground"
+                              >
+                                {dep}
+                              </span>
+                            ))}
                           </div>
-                          <div className="text-muted-foreground group-hover:text-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 pr-1">
-                            <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        </div>
+                      )}
+
+                      {component.credit && (
+                        <div className="flex items-center justify-between text-xs pt-1">
+                          <span className="text-muted-foreground">Inspiration</span>
+                          <a
+                            href={component.credit.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary transition-colors group cursor-pointer"
+                          >
+                            <span>{component.credit.name}</span>
+                            {component.credit.handle && (
+                              <span className="text-muted-foreground font-normal">
+                                {component.credit.handle}
+                              </span>
+                            )}
+                            <svg
+                              className="size-3 text-muted-foreground group-hover:text-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
                               <path d="M7 17l10-10M7 7h10v10" />
                             </svg>
-                          </div>
-                        </a>
-                      </div>
-                    )}
+                          </a>
+                        </div>
+                      )}
+                    </div>
                   </motion.div>
                 ) : (
                   <motion.div
                     key="code-tab"
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.15 }}
-                    className="space-y-3"
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="space-y-2.5"
                   >
                     {/* Source Code Header */}
                     <div className="flex items-center justify-between pb-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
-                          Source Code
-                        </span>
-                        <span className="text-[11.5px] text-muted-foreground font-mono">
+                      <div className="flex items-center gap-2 text-xs">
+                        <span className="font-medium text-foreground">Source code</span>
+                        <span className="text-[11px] text-muted-foreground font-mono">
                           • {component.sourceCode.split("\n").length} lines
                         </span>
                       </div>
@@ -398,13 +363,13 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                             variant="ghost"
                             size="icon-xs"
                             onClick={() => handleCodeCopy(component.sourceCode)}
-                            className="size-7 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted p-0 cursor-pointer"
+                            className="size-6 text-muted-foreground hover:text-foreground hover:bg-muted/60 p-0 cursor-pointer"
                             aria-label="Copy source code"
                           >
                             {copiedCode ? (
-                              <Icons.Check className="size-3.5 text-success" />
+                              <Icons.Check className="size-3 text-success" />
                             ) : (
-                              <Icons.Copy className="size-3.5" />
+                              <Icons.Copy className="size-3" />
                             )}
                           </Button>
                         </TooltipTrigger>
@@ -414,29 +379,31 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                       </Tooltip>
                     </div>
 
-                    {/* Full Source Code Block */}
-                    <CodeBlock
-                      code={component.sourceCode}
-                      language="tsx"
-                      filename={`${component.id}.tsx`}
-                      showFrame={true}
-                      showHeader={true}
-                      showLineNumbers={true}
-                      showCopyButton={false}
-                      className="rounded-xl max-h-[600px] overflow-auto border border-border/40 bg-card/60"
-                    />
+                    {/* Full Source Code Block with Muted Background */}
+                    <div className="rounded-xl bg-muted p-3.5 overflow-hidden">
+                      <CodeBlock
+                        code={component.sourceCode}
+                        language="tsx"
+                        filename={`${component.id}.tsx`}
+                        showFrame={false}
+                        showHeader={false}
+                        showLineNumbers={true}
+                        showCopyButton={false}
+                        className="max-h-[620px] overflow-auto text-xs"
+                      />
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              {/* Collapsible Info & License Footer */}
-              <div className="pt-4 border-t border-border/30 space-y-2.5 pb-4">
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
+              {/* Minimal Footer */}
+              <div className="pt-4 space-y-2 pb-4 text-[11.5px] text-muted-foreground">
+                <div className="flex items-center justify-between">
                   <span>Shrid Mishra</span>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <a
                       href="mailto:contact@shrid.site"
-                      className="hover:text-foreground transition-colors p-1 rounded hover:bg-muted"
+                      className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center"
                       aria-label="Email"
                     >
                       <Icons.Mail className="size-3.5" />
@@ -445,7 +412,7 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                       href="https://twitter.com/shridmishra"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-foreground transition-colors p-1 rounded hover:bg-muted font-bold text-xs"
+                      className="text-muted-foreground hover:text-foreground transition-colors font-bold text-[11.5px] leading-none inline-flex items-center"
                       aria-label="Twitter"
                     >
                       𝕏
@@ -458,12 +425,12 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                     <Button
                       variant="ghost"
                       size="xs"
-                      className="w-full justify-between text-[11px] text-muted-foreground hover:text-foreground px-1 h-6 font-normal cursor-pointer"
+                      className="w-full justify-between text-[11.5px] text-muted-foreground/80 hover:text-foreground px-0 py-0 h-auto min-h-0 has-[>svg]:px-0 font-normal cursor-pointer hover:bg-transparent shadow-none"
                     >
                       <span>About & License Details</span>
                       <Icons.ChevronDown
                         className={cn(
-                          "size-3 text-muted-foreground transition-transform duration-200",
+                          "size-3.5 text-muted-foreground transition-transform duration-200",
                           isAboutExpanded && "rotate-180"
                         )}
                       />
@@ -480,7 +447,7 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                       <li>Please do not redistribute or resell as a component kit.</li>
                     </ul>
                     {component.credit && (
-                      <p className="pt-2 border-t border-border/30 text-[11.5px]">
+                      <p className="pt-1.5 text-[11.5px]">
                         Inspired by{" "}
                         <a
                           href={component.credit.url}

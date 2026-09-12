@@ -3,7 +3,7 @@
 export const mangoCardsCode = `"use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/src/components/ui/button";
 
 const mango = "/assets/showcase/cards/mango.jpg";
@@ -1857,7 +1857,7 @@ export function GuitarStringPreview({
 export const stampCollectionCode = `"use client"
 
 import * as React from "react"
-import { motion, useReducedMotion, type Transition } from "framer-motion"
+import { motion, useReducedMotion, type Transition } from "motion/react"
 import { Chivo_Mono } from "next/font/google"
 import { cn } from "@/src/lib/utils"
 
@@ -2127,11 +2127,13 @@ export type CardState = "closed" | "open" | "presented" | "closing"
 export interface StampCollectionCardProps {
   className?: string
   embedded?: boolean
+  defaultScale?: number
 }
 
 export function StampCollectionPreview({
   className,
   embedded = false,
+  defaultScale,
 }: StampCollectionCardProps) {
   const shouldReduceMotion = useReducedMotion()
 
@@ -2715,6 +2717,7 @@ export function StampCollectionPreview({
         "w-full h-full flex items-center justify-center p-4 select-none",
         className
       )}
+      style={defaultScale !== undefined ? { transform: \`scale(\${defaultScale})\` } : undefined}
     >
       {card}
     </div>

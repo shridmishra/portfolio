@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { Hero, ExperienceSection, ProjectsSection, BentoGrid } from "@/src/components/sections";
 import { Footer } from "@/src/components/layout";
 import { OnekoCat } from "@/src/components/common";

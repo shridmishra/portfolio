@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { X, Github, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "./button";
 import Image from "next/image";

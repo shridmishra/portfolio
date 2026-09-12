@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useTheme } from "next-themes";
 import { Button } from "@/src/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/src/components/ui/tooltip";
@@ -25,11 +25,6 @@ import { CodeDrawer } from "@/src/components/ui-showcase/CodeDrawer";
 const CATEGORIES = ["CARDS", "MEDIA", "INTERACTIVE"] as const;
 
 const DEFAULT_COMPONENT = "stamp-collection";
-
-const ZOOM_CONFIG: Record<string, { default: number; min: number; max: number; step: number }> = {
-  "stamp-collection":       { default: 0.75, min: 0.4,  max: 1.2,  step: 0.1  },
-  "color-palette-showcase": { default: 1.0,  min: 0.35, max: 1.25, step: 0.15 },
-};
 
 export default function ShowcasePage() {
   return (
@@ -58,31 +53,6 @@ function ShowcaseContent() {
   const [isCodeDrawerOpen, setIsCodeDrawerOpen] = React.useState(false);
   const [hoveredId, setHoveredId] = React.useState<string | null>(null);
 
-  // Zoom state — shared action-island controls for zoomable components
-  const [zoomScale, setZoomScale] = React.useState<number>(
-    ZOOM_CONFIG[searchParams.get("c") ?? DEFAULT_COMPONENT]?.default ?? 1
-  );
-
-  const activeZoomConfig = ZOOM_CONFIG[activeId];
-  const supportsZoom = !!activeZoomConfig;
-  const canZoomOut = supportsZoom && zoomScale > (activeZoomConfig.min + 0.001);
-  const canZoomIn  = supportsZoom && zoomScale < (activeZoomConfig.max - 0.001);
-
-  // Reset zoom to per-component default when switching
-  React.useEffect(() => {
-    setZoomScale(ZOOM_CONFIG[activeId]?.default ?? 1);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeId]);
-
-  const handleZoomOut = () => {
-    if (!activeZoomConfig) return;
-    setZoomScale((s) => Math.max(activeZoomConfig.min, +(s - activeZoomConfig.step).toFixed(2)));
-  };
-  const handleZoomIn = () => {
-    if (!activeZoomConfig) return;
-    setZoomScale((s) => Math.min(activeZoomConfig.max, +(s + activeZoomConfig.step).toFixed(2)));
-  };
-
   React.useEffect(() => {
     setMounted(true);
   }, []);
@@ -104,10 +74,7 @@ function ShowcaseContent() {
         return (
           <ColorPalettePreview
             isSidebarOpen={isSidebarOpen}
-            scale={zoomScale}
-            onZoomIn={handleZoomIn}
-            onZoomOut={handleZoomOut}
-            onScaleChange={setZoomScale}
+            scale={activeComponent.defaultZoom ?? 1.0}
           />
         );
       case "guitar-string":
@@ -304,65 +271,7 @@ function ShowcaseContent() {
             {/* Floating Action Island (Anchored inside the Center Stage) */}
           <div className="absolute top-5 right-5 z-30 select-none">
             <div className="flex items-center gap-1.5 p-1 rounded-full bg-stage-action-pill/95 backdrop-blur-md border border-border/50 shadow-xs">
-              {/* Zoom Controls — only visible for zoomable components */}
-              <AnimatePresence>
-                {supportsZoom && (
-                  <motion.div
-                    key="zoom-controls"
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "auto" }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                    className="flex items-center gap-0.5 overflow-hidden"
-                  >
-                    {/* Zoom Out */}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon-xs"
-                          onClick={handleZoomOut}
-                          disabled={!canZoomOut}
-                          className="rounded-full size-7 p-0 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted disabled:opacity-35 disabled:cursor-not-allowed"
-                          aria-label="Zoom out"
-                        >
-                          <Icons.Minus className="size-3.5" />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom" className="text-xs">
-                        Zoom out
-                      </TooltipContent>
-                    </Tooltip>
 
-                    {/* Zoom label */}
-                    <span className="text-[11px] font-medium tabular-nums text-muted-foreground w-9 text-center">
-                      {Math.round(zoomScale * 100)}%
-                    </span>
-
-                    {/* Zoom In */}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon-xs"
-                          onClick={handleZoomIn}
-                          disabled={!canZoomIn}
-                          className="rounded-full size-7 p-0 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted disabled:opacity-35 disabled:cursor-not-allowed"
-                          aria-label="Zoom in"
-                        >
-                          <Icons.Plus className="size-3.5" />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom" className="text-xs">
-                        Zoom in
-                      </TooltipContent>
-                    </Tooltip>
-
-                    {/* Divider */}
-                    <div className="w-px h-4 bg-border/60 mx-0.5 shrink-0" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
 
               {/* Home Link */}
               <Tooltip>
@@ -431,9 +340,14 @@ function ShowcaseContent() {
                 transition={{ duration: 0.2 }}
                 className="w-full h-full flex items-center justify-center"
               >
-                {/* Zoom wrapper — CSS scale for stamp-collection; color-palette manages its own GSAP scale */}
+                {/* Scale wrapper — uses component defaultZoom declarative prop (color-palette manages its own GSAP scale) */}
                 <motion.div
-                  animate={{ scale: activeId === "stamp-collection" ? zoomScale : 1 }}
+                  animate={{
+                    scale:
+                      activeComponent.id === "color-palette-showcase"
+                        ? 1
+                        : (activeComponent.defaultZoom ?? 1),
+                  }}
                   transition={{ type: "spring", stiffness: 320, damping: 28 }}
                   className="w-full h-full flex items-center justify-center"
                 >
@@ -443,7 +357,7 @@ function ShowcaseContent() {
             </AnimatePresence>
           </div>
 
-          {/* Bottom Left Credit Pill (visible if component has credit metadata) */}
+          {/* Bottom Left Author/Inspiration Pill */}
           <AnimatePresence>
             {activeComponent.credit && (
               <motion.div
@@ -454,29 +368,37 @@ function ShowcaseContent() {
                 transition={{ duration: 0.2 }}
                 className="absolute bottom-5 left-5 z-20 select-none"
               >
-                <a
-                  href={activeComponent.credit.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stage-action-pill/90 hover:bg-stage-action-pill backdrop-blur-md border border-border/50 text-[11px] text-muted-foreground hover:text-foreground transition-all shadow-xs group cursor-pointer"
-                >
-                  <Icons.Twitter className="size-3 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <span className="text-muted-foreground">:</span>
-                  <span className="font-medium text-foreground">
-                    {activeComponent.credit.name}
-                  </span>
-                  <svg
-                    className="size-3 text-muted-foreground group-hover:text-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M7 17l10-10M7 7h10v10" />
-                  </svg>
-                </a>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={activeComponent.credit.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stage-action-pill/95 hover:bg-muted/80 backdrop-blur-md border border-border/50 text-xs shadow-xs hover:border-border transition-all duration-200 group cursor-pointer"
+                    >
+                      <span className="text-muted-foreground font-normal text-[11.5px] leading-none">
+                        Inspired by
+                      </span>
+                      <span className="font-medium text-foreground group-hover:text-primary transition-colors text-[11.5px] leading-none">
+                        {activeComponent.credit.name}
+                      </span>
+                      <svg
+                        className="size-3 text-muted-foreground/60 group-hover:text-foreground transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ml-0.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M7 17l10-10M7 7h10v10" />
+                      </svg>
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent side="top" className="text-xs">
+                    View on 𝕏 {activeComponent.credit.handle ? `(${activeComponent.credit.handle})` : ""}
+                  </TooltipContent>
+                </Tooltip>
               </motion.div>
             )}
           </AnimatePresence>

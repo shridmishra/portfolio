@@ -356,9 +356,9 @@ html {
     --secondary-foreground: oklch(0.98 0 0);
 
     /* Utility colors */
-    --muted: oklch(0.15 0 0);
+    --muted: oklch(0.20 0 0);
     --muted-foreground: oklch(0.70 0 0);
-    --accent: oklch(0.15 0 0);
+    --accent: oklch(0.20 0 0);
     --accent-foreground: oklch(0.98 0 0);
 
     /* Borders and separators */

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion } from "motion/react";
 
 export const Timeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
