@@ -12,6 +12,13 @@ export interface PropDefinition {
   description: string;
 }
 
+export interface CreditInfo {
+  name: string;
+  url: string;
+  handle?: string;
+  label?: string;
+}
+
 export interface ComponentItem {
   id: string;
   name: string;
@@ -25,6 +32,7 @@ export interface ComponentItem {
   installCommand: string;
   howToUse?: string;
   sourceCode: string;
+  credit?: CreditInfo;
 }
 
 export const COMPONENTS_REGISTRY: ComponentItem[] = [
@@ -122,6 +130,12 @@ export function Demo() {
       { prop: "className?", type: "string", description: "Optional container class name." },
       { prop: "embedded?", type: "boolean", description: "Whether to render in embedded showcase mode." },
     ],
+    credit: {
+      name: "Aditya Sur",
+      handle: "@AdityaSur11",
+      url: "https://x.com/AdityaSur11/status/2098328193660833874",
+      label: "Original concept & interaction design on 𝕏",
+    },
     installCommand: "npx shadcn@latest add https://shrid.site/r/stamp-collection.json",
     howToUse: `import { StampCollectionPreview as StampCollection } from "@/components/ui/stamp-collection";
 

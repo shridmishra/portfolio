@@ -442,6 +442,44 @@ function ShowcaseContent() {
               </motion.div>
             </AnimatePresence>
           </div>
+
+          {/* Bottom Left Credit Pill (visible if component has credit metadata) */}
+          <AnimatePresence>
+            {activeComponent.credit && (
+              <motion.div
+                key={`credit-${activeComponent.id}`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.2 }}
+                className="absolute bottom-5 left-5 z-20 select-none"
+              >
+                <a
+                  href={activeComponent.credit.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stage-action-pill/90 hover:bg-stage-action-pill backdrop-blur-md border border-border/50 text-[11px] text-muted-foreground hover:text-foreground transition-all shadow-xs group cursor-pointer"
+                >
+                  <Icons.Twitter className="size-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <span className="text-muted-foreground">:</span>
+                  <span className="font-medium text-foreground">
+                    {activeComponent.credit.name}
+                  </span>
+                  <svg
+                    className="size-3 text-muted-foreground group-hover:text-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17l10-10M7 7h10v10" />
+                  </svg>
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </main>
 

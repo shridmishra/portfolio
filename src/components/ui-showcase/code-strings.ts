@@ -1868,6 +1868,12 @@ const chivoMono = Chivo_Mono({
 })
 
 // ============================================================================
+// Stamp Collection
+// An archival postage stamp folder with 3D flap physics and presentation modes.
+//
+// Concept and interaction design by Aditya Sur (@AdityaSur11)
+// https://x.com/AdityaSur11/status/2098328193660833874
+// ============================================================================
 // Palette — hardcoded light-theme values so the artifact never reacts to the
 // host app's color scheme.
 // ============================================================================

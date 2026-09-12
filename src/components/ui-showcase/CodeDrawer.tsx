@@ -332,6 +332,45 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                         </p>
                       </div>
                     )}
+
+                    {/* Inspiration Section */}
+                    {component.credit && (
+                      <div className="space-y-2">
+                        <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
+                          Inspiration
+                        </span>
+                        <a
+                          href={component.credit.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between p-3 rounded-xl bg-muted/40 hover:bg-muted/70 border border-border/40 transition-colors group cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <div className="size-8 rounded-lg bg-card border border-border/40 flex items-center justify-center shrink-0">
+                              <Icons.Twitter className="size-3.5 text-foreground" />
+                            </div>
+                            <div className="min-w-0">
+                              <div className="text-xs font-medium text-foreground group-hover:text-primary transition-colors flex items-center gap-1.5">
+                                <span>{component.credit.name}</span>
+                                {component.credit.handle && (
+                                  <span className="text-muted-foreground font-normal">
+                                    {component.credit.handle}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-[11px] text-muted-foreground truncate">
+                                {component.credit.label ?? "Original concept & interaction design on 𝕏"}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-muted-foreground group-hover:text-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 pr-1">
+                            <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M7 17l10-10M7 7h10v10" />
+                            </svg>
+                          </div>
+                        </a>
+                      </div>
+                    )}
                   </motion.div>
                 ) : (
                   <motion.div
@@ -440,6 +479,20 @@ export function CodeDrawer({ isOpen, onClose, component }: CodeDrawerProps) {
                       <li>Attribution is appreciated.</li>
                       <li>Please do not redistribute or resell as a component kit.</li>
                     </ul>
+                    {component.credit && (
+                      <p className="pt-2 border-t border-border/30 text-[11.5px]">
+                        Inspired by{" "}
+                        <a
+                          href={component.credit.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-foreground underline underline-offset-2 hover:opacity-80 transition-opacity"
+                        >
+                          {component.credit.name} {component.credit.handle && `(${component.credit.handle})`}
+                        </a>{" "}
+                        for the original design & concept.
+                      </p>
+                    )}
                   </CollapsibleContent>
                 </Collapsible>
               </div>
