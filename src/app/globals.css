@@ -177,6 +177,31 @@
   --guitar-pearl-shade: #ded5c0;
   --guitar-pearl-sheen: #ffffff;
   --guitar-pearl-edge: #26150e;
+
+  /* Itinerary & Ticket Material Tokens */
+  --itinerary-card: #f7f4ee;
+  --itinerary-card-back: #e6dcc6;
+  --itinerary-text: #5c4a2f;
+  --itinerary-accent: #e8843c;
+  --itinerary-rope: #3f2a15;
+  --itinerary-pin: #5a3c20;
+  --itinerary-frame-start: #9a6a3a;
+  --itinerary-frame-mid: #734c26;
+  --itinerary-frame-end: #5a3c20;
+  --itinerary-cork: #c9a56e;
+  --itinerary-bg: #ece5d7;
+  --itinerary-bg-gradient-start: #f3ede0;
+  --itinerary-bg-gradient-mid: #e7ddca;
+  --itinerary-bg-gradient-end: #ddd0b6;
+
+  --ticket-bg: #1c1917;
+  --ticket-foreground: #fafaf9;
+  --ticket-muted: #a8a29e;
+  --ticket-border: #383531;
+  --ticket-stamp: #ef4444;
+  --ticket-stamp-alt: #60a5fa;
+  --ticket-perforation: #44403c;
+  --ticket-stub: #141210;
 }
 
 * {
@@ -400,11 +425,57 @@ html {
       0 2px 6px 0 rgba(0, 0, 0, 0.60),
       inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
       inset 0 -1.5px 0 0 rgba(0, 0, 0, 0.55);
+
+    /* Itinerary & Ticket Material Tokens */
+    --itinerary-card: #f7f4ee;
+    --itinerary-card-back: #e6dcc6;
+    --itinerary-text: #5c4a2f;
+    --itinerary-accent: #e8843c;
+    --itinerary-rope: #3f2a15;
+    --itinerary-pin: #5a3c20;
+    --itinerary-frame-start: #9a6a3a;
+    --itinerary-frame-mid: #734c26;
+    --itinerary-frame-end: #5a3c20;
+    --itinerary-cork: #c9a56e;
+    --itinerary-bg: #ece5d7;
+    --itinerary-bg-gradient-start: #f3ede0;
+    --itinerary-bg-gradient-mid: #e7ddca;
+    --itinerary-bg-gradient-end: #ddd0b6;
+
+    --ticket-bg: #1c1917;
+    --ticket-foreground: #fafaf9;
+    --ticket-muted: #a8a29e;
+    --ticket-border: #383531;
+    --ticket-stamp: #ef4444;
+    --ticket-stamp-alt: #60a5fa;
+    --ticket-perforation: #44403c;
+    --ticket-stub: #141210;
   }
 }
 
 /* 7. Inline theme tokens for Tailwind usage */
 @theme inline {
+  /* Itinerary & Ticket tokens */
+  --color-itinerary-card: var(--itinerary-card);
+  --color-itinerary-card-back: var(--itinerary-card-back);
+  --color-itinerary-text: var(--itinerary-text);
+  --color-itinerary-accent: var(--itinerary-accent);
+  --color-itinerary-rope: var(--itinerary-rope);
+  --color-itinerary-pin: var(--itinerary-pin);
+  --color-itinerary-frame-start: var(--itinerary-frame-start);
+  --color-itinerary-frame-mid: var(--itinerary-frame-mid);
+  --color-itinerary-frame-end: var(--itinerary-frame-end);
+  --color-itinerary-cork: var(--itinerary-cork);
+  --color-itinerary-bg: var(--itinerary-bg);
+  --color-ticket-bg: var(--ticket-bg);
+  --color-ticket-foreground: var(--ticket-foreground);
+  --color-ticket-muted: var(--ticket-muted);
+  --color-ticket-border: var(--ticket-border);
+  --color-ticket-stamp: var(--ticket-stamp);
+  --color-ticket-stamp-alt: var(--ticket-stamp-alt);
+  --color-ticket-perforation: var(--ticket-perforation);
+  --color-ticket-stub: var(--ticket-stub);
+
   /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);

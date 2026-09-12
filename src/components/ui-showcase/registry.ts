@@ -4,6 +4,8 @@ import {
   colorPaletteCode,
   guitarStringCode,
   stampCollectionCode,
+  fabricButtonSwitchCode,
+  itineraryCarouselCode,
 } from "./code-strings";
 
 export interface PropDefinition {
@@ -148,5 +150,55 @@ export function Demo() {
   return <StampCollection />;
 }`,
     sourceCode: stampCollectionCode,
+  },
+  {
+    id: "fabric-button-switch",
+    name: "Fabric button switch",
+    category: "INTERACTIVE",
+    tag: "THEME SWITCH",
+    title: "A tactile skeuomorphic denim fabric Dark/Light mode switch with stitched teardrop keyhole track, rotating antique bronze sun and pewter moon medallions, and debossed leather label.",
+    description: "A tactile skeuomorphic denim fabric Dark/Light mode switch with stitched teardrop keyhole track, rotating antique bronze sun and pewter moon medallions, and debossed leather label.",
+    dependencies: ["motion"],
+    defaultZoom: 1.0,
+    interactionType: "Click or press Space/Enter to toggle theme with physical rolling medallion rotation, synthetic metallic clack audio, and debossed leather label transition.",
+    props: [
+      { prop: "checked?", type: "boolean", description: "Controlled checked state (true for dark, false for light)." },
+      { prop: "defaultChecked?", type: "boolean", description: "Default checked state for uncontrolled usage (default: true)." },
+      { prop: "onCheckedChange?", type: "(checked: boolean) => void", description: "Callback invoked when checked state changes." },
+      { prop: "soundEnabled?", type: "boolean", description: "Whether to play tactile metallic click sound (default: true)." },
+      { prop: "className?", type: "string", description: "Optional container class name." },
+    ],
+    installCommand: "npx shadcn@latest add https://shrid.site/r/fabric-button-switch.json",
+    howToUse: `import { FabricButtonSwitch } from "@/components/ui/fabric-button-switch";
+
+export function Demo() {
+  return <FabricButtonSwitch />;
+}`,
+    sourceCode: fabricButtonSwitchCode,
+  },
+  {
+    id: "itinerary-carousel",
+    name: "Itinerary carousel",
+    category: "CARDS",
+    tag: "TRAVEL CARDS",
+    title: "A tactile analog travel itinerary carousel with clothesline rope physics, reorderable pegboard cards, 3D card flip reveals, perforated boarding pass tear, and Web Audio haptic acoustics.",
+    description: "A tactile analog travel itinerary carousel with clothesline rope physics, reorderable pegboard cards, 3D card flip reveals, perforated boarding pass tear, and Web Audio haptic acoustics.",
+    dependencies: ["motion", "lucide-react"],
+    defaultZoom: 0.85,
+    interactionType: "Swipe or tap the card stack to reveal and peg stops onto the clothesline. Drag pegs to reorder. Tap pegged cards to inspect in 3D. Tear the boarding pass to reset.",
+    props: [
+      { prop: "embedded?", type: "boolean", description: "Whether to render within an embedded showcase container." },
+      { prop: "className?", type: "string", description: "Optional container class name." },
+      { prop: "soundEnabled?", type: "boolean", description: "Default audio state (default: true)." },
+      { prop: "showHeader?", type: "boolean", description: "Whether to show the section header (default: true)." },
+      { prop: "stops?", type: "Stop[]", description: "Custom itinerary stops array." },
+    ],
+    installCommand: "npx shadcn@latest add https://shrid.site/r/itinerary-carousel.json",
+    howToUse: `import { ItineraryCarousel } from "@/components/ui/itinerary-carousel";
+
+export function Demo() {
+  return <ItineraryCarousel />;
+}`,
+    sourceCode: itineraryCarouselCode,
   },
 ];

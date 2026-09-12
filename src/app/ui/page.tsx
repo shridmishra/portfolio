@@ -20,6 +20,8 @@ import { MediaPlayerPreview } from "@/src/components/ui-showcase/MediaPlayerPrev
 import { ColorPalettePreview } from "@/src/components/ui-showcase/ColorPalettePreview";
 import { GuitarStringPreview } from "@/src/components/ui-showcase/GuitarStringPreview";
 import { StampCollectionPreview } from "@/src/components/ui-showcase/StampCollectionPreview";
+import { FabricButtonSwitchPreview } from "@/src/components/ui-showcase/FabricButtonSwitchPreview";
+import { ItineraryCarouselPreview } from "@/src/components/ui-showcase/ItineraryCarouselPreview";
 import { CodeDrawer } from "@/src/components/ui-showcase/CodeDrawer";
 
 const CATEGORIES = ["CARDS", "MEDIA", "INTERACTIVE"] as const;
@@ -81,6 +83,10 @@ function ShowcaseContent() {
         return <GuitarStringPreview />;
       case "stamp-collection":
         return <StampCollectionPreview embedded />;
+      case "fabric-button-switch":
+        return <FabricButtonSwitchPreview embedded />;
+      case "itinerary-carousel":
+        return <ItineraryCarouselPreview embedded />;
       default:
         return <MangoCardsPreview />;
     }
@@ -250,9 +256,6 @@ function ShowcaseContent() {
                   </div>
                 );
               })}
-
-              {/* Bottom Subtle Gradient Fade */}
-              <div className="pointer-events-none sticky bottom-0 inset-x-0 h-10 bg-gradient-to-t from-background to-transparent shrink-0" />
             </div>
           </motion.aside>
         )}
@@ -263,7 +266,8 @@ function ShowcaseContent() {
         <div
           className={cn(
             "relative w-full max-w-5xl lg:max-w-6xl xl:max-w-7xl h-full rounded-[32px] md:rounded-[36px] bg-stage-slab flex flex-col items-center justify-center transition-all duration-300 overflow-hidden",
-            activeComponent.id === "color-palette-showcase"
+            activeComponent.id === "color-palette-showcase" ||
+            activeComponent.id === "itinerary-carousel"
               ? "p-0"
               : "p-4 sm:p-6 md:p-8"
           )}
@@ -328,7 +332,9 @@ function ShowcaseContent() {
           <div
             className={cn(
               "w-full h-full flex-1 flex items-center justify-center relative z-10",
-              activeComponent.id === "color-palette-showcase" && "absolute inset-0"
+              (activeComponent.id === "color-palette-showcase" ||
+                activeComponent.id === "itinerary-carousel") &&
+                "absolute inset-0"
             )}
           >
             <AnimatePresence mode="wait">
@@ -340,11 +346,12 @@ function ShowcaseContent() {
                 transition={{ duration: 0.2 }}
                 className="w-full h-full flex items-center justify-center"
               >
-                {/* Scale wrapper — uses component defaultZoom declarative prop (color-palette manages its own GSAP scale) */}
+                {/* Scale wrapper — uses component defaultZoom declarative prop (color-palette and itinerary-carousel manage full inset) */}
                 <motion.div
                   animate={{
                     scale:
-                      activeComponent.id === "color-palette-showcase"
+                      activeComponent.id === "color-palette-showcase" ||
+                      activeComponent.id === "itinerary-carousel"
                         ? 1
                         : (activeComponent.defaultZoom ?? 1),
                   }}
