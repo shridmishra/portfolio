@@ -166,6 +166,7 @@ interface DesktopButtonProps {
 
 export function DesktopButton({ mode, className, hasShadow = true }: DesktopButtonProps) {
   const isLight = mode === "light"
+  const [hasError, setHasError] = React.useState(false)
   const src = isLight
     ? "/textures/button-sun-opt.png"
     : "/textures/button-star-opt.png"
@@ -176,7 +177,7 @@ export function DesktopButton({ mode, className, hasShadow = true }: DesktopButt
   return (
     <div
       className={cn(
-        "size-full w-full h-full select-none pointer-events-none relative flex items-center justify-center",
+        "size-full w-full h-full select-none pointer-events-none relative flex items-center justify-center rounded-full overflow-hidden",
         className
       )}
       style={{
@@ -185,12 +186,46 @@ export function DesktopButton({ mode, className, hasShadow = true }: DesktopButt
           : undefined,
       }}
     >
-      <img
-        src={src}
-        alt={alt}
-        className="size-full w-full h-full object-contain select-none pointer-events-none"
-        draggable={false}
-      />
+      {!hasError ? (
+        <img
+          src={src}
+          alt={alt}
+          width={70}
+          height={70}
+          onError={() => setHasError(true)}
+          className="size-full w-full h-full object-contain select-none pointer-events-none"
+          draggable={false}
+        />
+      ) : (
+        <div
+          className="size-full rounded-full flex items-center justify-center border-2"
+          style={{
+            background: isLight
+              ? "radial-gradient(circle at 35% 30%, #D49B5A 0%, #A46C32 50%, #6E431B 100%)"
+              : "radial-gradient(circle at 35% 30%, #BAC4D0 0%, #707A86 50%, #3B424C 100%)",
+            borderColor: isLight ? "#F59E0B" : "#94A3B8",
+            boxShadow: isLight
+              ? "inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.6)"
+              : "inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.7)",
+          }}
+        >
+          <div
+            className="w-8 h-8 rounded-full border border-black/30 flex items-center justify-center"
+            style={{
+              background: isLight ? "#8A5420" : "#4F5762",
+              boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.6)",
+            }}
+          >
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{
+                background: isLight ? "#FDE68A" : "#E2E8F0",
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.5)",
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
